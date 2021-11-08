@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 ^\.Renviron
 ^README\.Rmd$
+^.*\.key$
+^LICENSE\.md$

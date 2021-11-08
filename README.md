@@ -29,7 +29,7 @@ devtools::install_github("searchdiscovery/cjar")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-#library(cjar)
+library(cjar)
 ## basic example code
 ```
 
