@@ -1,16 +1,16 @@
 Package: cjar
-Title: What the Package Does (One Line, Title Case)
+Title: CJA API R Client
 Version: 0.0.0.9001
-Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Authors@R: c( 
+    person(given = "Ben", family = "Woodard", role = c("aut", "cre"), email = "ben.woodard@searchdiscovery.com"),
+    person(given = "Charles", family = "Gallagher", role = c("ctb"), email = "charlesjgallagher15@gmail.com")
+    )
+Description: Connect to the CJA API, which powers CJA Workspace. The package was developed with the analyst in mind and will continue to be developed with the guiding principles of iterative, repeatable, timely analysis. New features are actively being developed and we value your feedback and contribution to the process. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends:
+    R (>= 3.2.0)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports: 

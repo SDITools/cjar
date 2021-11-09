@@ -13,6 +13,11 @@ continue to be developed with the guiding principles of iterative,
 repeatable, timely analysis.
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Ben Woodard \email{ben.woodard@searchdiscovery.com}
+
+Other contributors:
+\itemize{
+  \item Charles Gallagher \email{charlesjgallagher15@gmail.com} [contributor]
+}
 
 }
