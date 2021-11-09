@@ -61,19 +61,22 @@ only need an Adobe Console API project for each. The following
     <https://console.adobe.io/integrations>.
 2.  Click the **Create New Project** button.
 3.  Click the **Add API** button.
-4.  Select the Experience Cloud product icon and then choose **Customer
+4.  Select the Adobe Experience Platform product icon and then choose
+    **Adobe Experience Platform** and click **Next**. (need to fill in
+    the rest of this process…)
+5.  Select the Experience Cloud product icon and then choose **Customer
     Journey Analytics** and click **Next**.
-5.  Select **Option 1** and then click **Generate keypair**
-6.  A config.zip file will automatically download on your system. Note
+6.  Select **Option 1** and then click **Generate keypair**
+7.  A config.zip file will automatically download on your system. Note
     what directory this was downloaded into, we will need this file
     alter.
-7.  Click the **Next** button.
-8.  Select the Product Profiles you want to access to. Click **Save
+8.  Click the **Next** button.
+9.  Select the Product Profiles you want to access to. Click **Save
     configured API**.
-9.  Copy and paste the Client ID, Client Secret (click “Retrieve client
+10. Copy and paste the Client ID, Client Secret (click “Retrieve client
     secret”), Technical Account ID, and Organization ID and paste them
     into a .Renviron file in the project or user directory.  
-10. Locate the config.zip file that automatically downloaded in step 6.
+11. Locate the config.zip file that automatically downloaded in step 6.
     Unzip the file and move the ‘private.zip’ file into your working
     directory. The location of this file will be needed as the value of
     the **CJA\_PRIVATE\_KEY** variable.
