@@ -21,8 +21,7 @@ contribution to the process. Please submit bugs, questions, and
 enhancement requests as [issues in this Github
 repository](https://github.com/searchdiscovery/cjar/issues).
 
-### Install the package (recommended)
-
+<!-- ### Install the package (recommended) -->
 <!-- ``` -->
 <!-- # Install from CRAN -->
 <!-- install.packages('adobeanalyticsr') -->

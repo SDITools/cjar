@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 
 Connect to the CJA API, which powers CJA Workspace. The package was developed with the analyst in mind and will continue to be developed with the guiding principles of iterative, repeatable, timely analysis. New features are actively being developed and we value your feedback and contribution to the process. Please submit bugs, questions, and enhancement requests as [issues in this Github repository](https://github.com/searchdiscovery/cjar/issues).
   
-### Install the package (recommended)
+<!-- ### Install the package (recommended) -->
 
 <!-- ``` -->
 <!-- # Install from CRAN -->
