@@ -16,6 +16,8 @@
 #' }
 #' @export
 #' @import assertthat httr
+#' @importFrom purrr flatten_df
+#'
 cja_get_me <- function(expansion = 'admin',
                        useCache = TRUE,
                        debug = FALSE,
@@ -65,7 +67,7 @@ cja_get_me <- function(expansion = 'admin',
 
     httr::stop_for_status(req)
 
-    res <- httr::content(req, as = "text",encoding = "UTF-8")
+    res <- httr::content(req)
 
-    return(res)
+    return(purrr::flatten_df(res) )
 }

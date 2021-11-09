@@ -27,7 +27,7 @@ cja_get_me(
 \item{org_id}{The organization ID the data should be pulled from}
 }
 \value{
-A data frame of company ids and company names
+A list of the current user metadata
 }
 \description{
 This function will quickly pull the list of company ids that you have access to.

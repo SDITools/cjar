@@ -127,16 +127,12 @@ cja_get_filters <- function(expansion = 'definition',
                        ))
 
     httr::stop_for_status(req)
-    return(req)
-   # purrr::map_df(httr::content(req)$content, unlist)
 
-    #TODO change output to include definitions as lists
-    # res <- httr::content(req, as = "text",encoding = "UTF-8")
-    #
-    # res <- jsonlite::fromJSON(res)
-    #
-    # #Just need the content of the returned json
-    # res <- res$content
-    #
-    # req
+
+    res <- httr::content(req)$content
+
+    res1 <- tibble::as_tibble(do.call(rbind, res))
+
+    res1 %>%
+        mutate(across(.cols = everything(), as.character))
 }
