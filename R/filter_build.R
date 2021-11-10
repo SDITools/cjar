@@ -11,6 +11,7 @@
 #' @param conjunction This will tell how the different containers and predicates should be compared. Use either 'and' or 'or' at this time. Sequential 'then' will be added in a future update.
 #' @param exclude excludes the main container which will include all predicates. Only used when the predicate arguments are used.
 #' @param version This is the default version. Only used if updating an existing filter. Not to be edited at this time.
+#' @param internal Determines if the segment will be seen in the UI or not. If ad-hock analysis, this should be left to default (FALSE) to prevent confusion in the UI.
 #' @param debug Helps in troubleshooting function issues
 #' @param client_id This is the report suite that the filter will be referenced to.
 #' @param client_secret This is the report suite that the filter will be referenced to.
@@ -32,6 +33,7 @@ filter_build <- function(dataId = NULL,
                          conjunction = 'and',
                          exclude = FALSE, #only used if the 'predicates' argument is used
                          version = list(1, 0, 0),
+                         internal = TRUE,
                          debug = FALSE,
                          client_id = Sys.getenv("CJA_CLIENT_ID"),
                          client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
@@ -60,7 +62,8 @@ filter_build <- function(dataId = NULL,
             func = 'segment',
             version = version
           ),
-          dataId = dataId
+          dataId = dataId,
+          internal = internal
         ))
       } else {
         seg <- structure(list(
@@ -78,7 +81,8 @@ filter_build <- function(dataId = NULL,
             func = 'segment',
             version = version
           ),
-          dataId = dataId
+          dataId = dataId,
+          internal = internal
         ))
       }
     } #/exclude FALSE
@@ -103,7 +107,8 @@ filter_build <- function(dataId = NULL,
             func = 'segment',
             version = version
           ),
-          dataId = dataId
+          dataId = dataId,
+          internal = internal
         ))
 
       } else {
@@ -129,7 +134,8 @@ filter_build <- function(dataId = NULL,
             func = 'segment',
             version = version
           ),
-          dataId = dataId
+          dataId = dataId,
+          internal = internal
         ))
       }
     } #/exclude TRUE
@@ -165,7 +171,8 @@ filter_build <- function(dataId = NULL,
               )
             )
           ),
-          dataId = dataId
+          dataId = dataId,
+          internal = internal
         ))
       }
   } else if(is.null(predicates) & is.null(containers)){

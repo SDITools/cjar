@@ -14,6 +14,7 @@ filter_build(
   conjunction = "and",
   exclude = FALSE,
   version = list(1, 0, 0),
+  internal = TRUE,
   debug = FALSE,
   client_id = Sys.getenv("CJA_CLIENT_ID"),
   client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
@@ -38,6 +39,8 @@ filter_build(
 \item{exclude}{excludes the main container which will include all predicates. Only used when the predicate arguments are used.}
 
 \item{version}{This is the default version. Only used if updating an existing filter. Not to be edited at this time.}
+
+\item{internal}{Determines if the segment will be seen in the UI or not. If ad-hock analysis, this should be left to default (FALSE) to prevent confusion in the UI.}
 
 \item{debug}{Helps in troubleshooting function issues}
 
