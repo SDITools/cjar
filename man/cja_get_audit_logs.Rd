@@ -5,12 +5,45 @@
 \title{CJA Get Audit Logs}
 \usage{
 cja_get_audit_logs(
+  startDate = NA,
+  endDate = NA,
+  action = NA,
+  component = NA,
+  componentId = NA,
+  userType = NA,
+  userId = NA,
+  userEmail = NA,
+  description = NA,
+  pageSize = 100,
+  pageNumber = 0,
   client_id = Sys.getenv("CJA_CLIENT_ID"),
   client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
   org_id = Sys.getenv("CJA_ORGANIZATION_ID")
 )
 }
 \arguments{
+\item{startDate}{Date is not required, but if you filter by date, both start & end date must be set.}
+
+\item{endDate}{Date is not required, but if you filter by date, both start & end date must be set.}
+
+\item{action}{The action you want to filter by.}
+
+\item{component}{The type of component you want to filter by.}
+
+\item{componentId}{The ID of the component.}
+
+\item{userType}{The type of user.}
+
+\item{userId}{The ID of the user.}
+
+\item{userEmail}{The email address of the user.}
+
+\item{description}{The log description you want to filter by.}
+
+\item{pageSize}{Number of results per page. If left null, the default size will be set to 100.}
+
+\item{pageNumber}{Page number (base 0 - first page is "0")}
+
 \item{client_id}{Set in environment args, or pass directly in the function}
 
 \item{client_secret}{Set in environment args, or pass directly in the function}
