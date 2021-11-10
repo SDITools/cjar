@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate an access token for Adobe Analytics 2.0 — cja_auth • cjar</title>
+<title>Get a paginated list of projects in CJA — cja_get_projects • cjar</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Generate an access token for Adobe Analytics 2.0 — cja_auth" />
-<meta property="og:description" content="auth_oauth and auth_jwt should not be called directly, as these do not cache
-the token." />
+<meta property="og:title" content="Get a paginated list of projects in CJA — cja_get_projects" />
+<meta property="og:description" content="Retrieves a paginated list of projects, also known as Workspace." />
 
 
 
@@ -104,90 +103,98 @@ the token." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate an access token for Adobe Analytics 2.0</h1>
+    <h1>Get a paginated list of projects in CJA</h1>
     
-    <div class="hidden name"><code>cja_auth.Rd</code></div>
+    <div class="hidden name"><code>cja_get_projects.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>auth_oauth</code> and <code>auth_jwt</code> should not be called directly, as these do not cache
-the token.</p>
+    <p>Retrieves a paginated list of projects, also known as <code>Workspace</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cja_auth</span><span class='op'>(</span>type <span class='op'>=</span> <span class='fu'><a href='cja_auth_with.html'>cja_auth_with</a></span><span class='op'>(</span><span class='st'>"jwt"</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='fu'>auth_jwt</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>cja_get_projects</span><span class='op'>(</span>
+  includeType <span class='op'>=</span> <span class='st'>"all"</span>,
+  expansion <span class='op'>=</span> <span class='st'>"definition"</span>,
+  locale <span class='op'>=</span> <span class='st'>"en_US"</span>,
+  filterByIds <span class='op'>=</span> <span class='cn'>NULL</span>,
+  pagination <span class='op'>=</span> <span class='st'>"true"</span>,
+  ownerId <span class='op'>=</span> <span class='cn'>NULL</span>,
+  limit <span class='op'>=</span> <span class='fl'>10</span>,
+  page <span class='op'>=</span> <span class='fl'>0</span>,
+  debug <span class='op'>=</span> <span class='cn'>FALSE</span>,
   client_id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"CJA_CLIENT_ID"</span><span class='op'>)</span>,
   client_secret <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"CJA_CLIENT_SECRET"</span><span class='op'>)</span>,
-  private_key <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"CJA_PRIVATE_KEY"</span><span class='op'>)</span>,
-  org_id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"CJA_ORGANIZATION_ID"</span><span class='op'>)</span>,
-  tech_id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"CJA_TECHNICAL_ID"</span><span class='op'>)</span>,
-  jwt_token <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span>
-
-<span class='fu'>auth_oauth</span><span class='op'>(</span>
-  client_id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"CJA_CLIENT_ID"</span><span class='op'>)</span>,
-  client_secret <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"CJA_CLIENT_SECRET"</span><span class='op'>)</span>,
-  use_oob <span class='op'>=</span> <span class='cn'>TRUE</span>
+  org_id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"CJA_ORGANIZATION_ID"</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>type</th>
-      <td><p>Either 'jwt' or 'oauth'. Defaults to 'oauth'.</p></td>
+      <th>includeType</th>
+      <td><p>Include additional filters not owned by user. Default is "all". Options include: "all" (default) "shared"</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Arguments passed to auth functions.</p></td>
+      <th>expansion</th>
+      <td><p>Comma-delimited list of additional segment metadata fields to include on response. See Details for all options available</p></td>
+    </tr>
+    <tr>
+      <th>locale</th>
+      <td><p>Locale - Default: "en_US"</p></td>
+    </tr>
+    <tr>
+      <th>filterByIds</th>
+      <td><p>Filter list to only include filters in the specified list (comma-delimited list of IDs). This has filtered Ids from tags, approved, favorites and user specified Ids list.</p></td>
+    </tr>
+    <tr>
+      <th>pagination</th>
+      <td><p>Return paginated results</p></td>
+    </tr>
+    <tr>
+      <th>ownerId</th>
+      <td><p>Filter list to only include filters owned by the specified imsUserId</p></td>
+    </tr>
+    <tr>
+      <th>limit</th>
+      <td><p>Number of results per page</p></td>
+    </tr>
+    <tr>
+      <th>page</th>
+      <td><p>Page number (base 0 - first page is "0")</p></td>
+    </tr>
+    <tr>
+      <th>debug</th>
+      <td><p>Used to help troubleshoot api call issues. Shows the call and result in the console</p></td>
     </tr>
     <tr>
       <th>client_id</th>
-      <td><p>Client ID</p></td>
+      <td><p>Set in environment args, or pass directly here</p></td>
     </tr>
     <tr>
       <th>client_secret</th>
-      <td><p>Client secret</p></td>
-    </tr>
-    <tr>
-      <th>private_key</th>
-      <td><p>File path to private key for token signature</p></td>
+      <td><p>Set in environment args, or pass directly here</p></td>
     </tr>
     <tr>
       <th>org_id</th>
-      <td><p>Organization ID from integration console</p></td>
-    </tr>
-    <tr>
-      <th>tech_id</th>
-      <td><p>Technical account ID from integration console</p></td>
-    </tr>
-    <tr>
-      <th>jwt_token</th>
-      <td><p>Optional, a custom, encoded, signed JWT claim. If used,
-only <code>client_id</code> and <code>client_secret</code> are required.</p></td>
-    </tr>
-    <tr>
-      <th>use_oob</th>
-      <td><p>if <code>FALSE</code>, use a local webserver for the OAuth dance.
-Otherwise, provide a URL to the user and prompt for a validation code.
-Defaults to the value of the <code>httr_oob_default</code> default, or TRUE if
-<code>httpuv</code> is not installed.</p></td>
+      <td><p>Set in environment args or pass directly here</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The path of the cached token, invisibly</p>
-    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+    <p>A data frame of company ids and company names</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-<ul>
-<li><p><code>auth_jwt</code>: Authenticate with JWT token</p></li>
-<li><p><code>auth_oauth</code>: Authorize via OAuth 2.0</p></li>
-</ul>
+    <p><em>expansion</em> options can include any of the following:
+"shares" "tags" "accessLevel" "modified" "externalReferences" "definition"</p>
+<p><em>includeType</em> options can include any of the following:
+"all", "shared"</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>cja_get_projects</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
