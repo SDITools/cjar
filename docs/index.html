@@ -69,16 +69,13 @@
 <h2 class="hasAnchor">
 <a href="#an-r-client-for-cja-api" class="anchor"></a>An R Client for CJA API</h2>
 <p>Connect to the CJA API, which powers CJA Workspace. The package was developed with the analyst in mind and will continue to be developed with the guiding principles of iterative, repeatable, timely analysis. New features are actively being developed and we value your feedback and contribution to the process. Please submit bugs, questions, and enhancement requests as <a href="https://github.com/searchdiscovery/cjar/issues">issues in this Github repository</a>.</p>
-<div id="install-the-package-recommended" class="section level3">
-<h3 class="hasAnchor">
-<a href="#install-the-package-recommended" class="anchor"></a>Install the package (recommended)</h3>
+<!-- ### Install the package (recommended) -->
 <!-- ``` -->
 <!-- # Install from CRAN -->
 <!-- install.packages('adobeanalyticsr') -->
 <!-- # Load the package -->
 <!-- library(adobeanalyticsr)  -->
 <!-- ``` -->
-</div>
 <div id="install-the-development-version-of-the-package" class="section level3">
 <h3 class="hasAnchor">
 <a href="#install-the-development-version-of-the-package" class="anchor"></a>Install the development version of the package</h3>
@@ -94,7 +91,7 @@
 <div id="current-setup-process-overview" class="section level3">
 <h3 class="hasAnchor">
 <a href="#current-setup-process-overview" class="anchor"></a>Current setup process overview</h3>
-<p>There are four setup steps required to start accessing your Adobe Analytics data. The following steps are each outlined in greater detail in the following sections:</p>
+<p>There are four setup steps required to start accessing your Customer Journey Analytics data. The following steps are each outlined in greater detail in the following sections:</p>
 <ol>
 <li>Create an Adobe Console API Project</li>
 <li>Create and add the JWT arguments to your <code>.Renviron</code> file.</li>
@@ -127,25 +124,37 @@
 <p>This file is essential to keeping your information secure. It also speeds up analysis by limiting the number of arguments you need to add to every function call.</p>
 <ol>
 <li><p>If you do not have an <code>.Renviron</code> file (if you have never heard of this file you almost certainly don’t have one!), then create a new file and save it with the name <code>.Renviron</code>. You can do this from within the RStudio environment and save the file either in your <code>Home</code> directory (which is recommended; click on the <strong>Home</strong> button in the file navigator in RStudio and save it to that location) <em>or</em> within your project’s working directory.</p></li>
-<li><p>Get the following variables from the CJA project and add them to the file* (see <em>Creating an Adobe Console API Project</em> above) The format of variables in the <code>.Renviron</code> file is straightforward. If you add all four of the variables above, they would simply each be their own line in the file:</p></li>
+<li><p>Get the following variables from the CJA project and config.zip file and then add them to the file (see <em>Creating an Adobe Console API Project</em> above) The format of variables in the <code>.Renviron</code> file is straightforward.</p></li>
 </ol>
 <!-- --><div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## JWT creds ##</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>CJA_PRIVATE_KEY<span class="ot">=</span>private.key</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>CJA_ORGANIZATION_ID<span class="ot">=</span>XXXXXXXXXXXXX<span class="sc">@</span>AdobeOrg</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>CJA_CLIENT_ID<span class="ot">=</span>XXXXXXXXXXXXXXXXXXXX</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>CJA_CLIENT_SECRET<span class="ot">=</span>XXX<span class="sc">-</span>XXXXXXXXXXXXXXXXXXXXXXX</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>CJA_TECHNICAL_ID<span class="ot">=</span>XXXXXXXXXXXXXXXXXXXX<span class="sc">@</span>techacct.adobe.com</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>CJA_CLIENT_ID<span class="ot">=</span>XXXXXXXXXXXXXXXXXXXX</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>CJA_CLIENT_SECRET<span class="ot">=</span>XXX<span class="sc">-</span>XXXXXXXXXXXXXXXXXXXXXXX</span></code></pre></div>
-<p>After adding these 5 variables to the <code>.Renviron</code> file and saving it, restart your R session (<strong>Session &gt; Restart R</strong> in RStudio) and reload <code>cjar</code> (<code><a href="https://rdrr.io/r/base/library.html">library(cjar)</a></code>).</p>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>CJA_ORGANIZATION_ID<span class="ot">=</span>XXXXXXXXXXXXX<span class="sc">@</span>AdobeOrg</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>CJA_PRIVATE_KEY<span class="ot">=</span>private.key</span></code></pre></div>
+<p>After adding all 5 variables to the <code>.Renviron</code> file and saving it, restart your R session (<strong>Session &gt; Restart R</strong> in RStudio) and reload <code>cjar</code> (<code><a href="https://rdrr.io/r/base/library.html">library(cjar)</a></code>).</p>
 </div>
 <div id="3-get-your-access-token" class="section level4">
 <h4 class="hasAnchor">
 <a href="#3-get-your-access-token" class="anchor"></a>3. Get your access token</h4>
 <p>The token is actually a lonnnnng alphanumeric string that is the what ultimately enables you to access your data:</p>
 <ol>
-<li>In the console, enter <code>aw_auth()</code> and press <em><enter></enter></em>.</li>
+<li>In the console, enter <code>aw_auth()</code> and press <em>Enter</em>.</li>
 <li>In the Console window you should see “Successfully authenticated with JWT: access token valid until ….”</li>
-<li>If you do not see this message then go back and repeat the previous steps to make sure you didn’t miss something.</li>
+<li>If you do not see this message then go back and repeat the previous steps to make sure you did not miss something.</li>
 </ol>
+</div>
+<div id="4-get-the-data-view-id" class="section level4">
+<h4 class="hasAnchor">
+<a href="#4-get-the-data-view-id" class="anchor"></a>4. Get the Data View ID</h4>
+<p>All data in CJA is located in Data Views, similar to Report Suites in Adobe Analytics. Before pulling data it is advisable to locate the data view id of the data you are attempting to pull from.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pull a list of available data views</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dv <span class="ot">&lt;-</span> <span class="fu">cja_get_dataviews</span>(<span class="at">expansion =</span> <span class="fu">c</span>(<span class="st">'name'</span>, <span class="st">'description'</span>)) </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#note: see function documentation for all availabe expansion metadata is available.</span></span></code></pre></div>
+<p>Once you have the data view ID you want then you can begin pulling data using all the different functions.</p>
 </div>
 </div>
 </div>

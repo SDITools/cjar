@@ -42,9 +42,9 @@ repository](https://github.com/searchdiscovery/cjar/issues).
 
 ### Current setup process overview
 
-There are four setup steps required to start accessing your Adobe
-Analytics data. The following steps are each outlined in greater detail
-in the following sections:
+There are four setup steps required to start accessing your Customer
+Journey Analytics data. The following steps are each outlined in greater
+detail in the following sections:
 
 1.  Create an Adobe Console API Project
 2.  Create and add the JWT arguments to your `.Renviron` file.
@@ -94,22 +94,22 @@ to every function call.
     in the file navigator in RStudio and save it to that location) *or*
     within your project’s working directory.
 
-2.  Get the following variables from the CJA project and add them to the
-    file\* (see *Creating an Adobe Console API Project* above) The
-    format of variables in the `.Renviron` file is straightforward. If
-    you add all four of the variables above, they would simply each be
-    their own line in the file:
+2.  Get the following variables from the CJA project and config.zip file
+    and then add them to the file (see *Creating an Adobe Console API
+    Project* above) The format of variables in the `.Renviron` file is
+    straightforward.
 
 <!-- -->
 
     ## JWT creds ##
-    CJA_PRIVATE_KEY=private.key
-    CJA_ORGANIZATION_ID=XXXXXXXXXXXXX@AdobeOrg
-    CJA_TECHNICAL_ID=XXXXXXXXXXXXXXXXXXXX@techacct.adobe.com
     CJA_CLIENT_ID=XXXXXXXXXXXXXXXXXXXX
     CJA_CLIENT_SECRET=XXX-XXXXXXXXXXXXXXXXXXXXXXX
+    CJA_TECHNICAL_ID=XXXXXXXXXXXXXXXXXXXX@techacct.adobe.com
+    CJA_ORGANIZATION_ID=XXXXXXXXXXXXX@AdobeOrg
 
-After adding these 5 variables to the `.Renviron` file and saving it,
+    CJA_PRIVATE_KEY=private.key
+
+After adding all 5 variables to the `.Renviron` file and saving it,
 restart your R session (**Session &gt; Restart R** in RStudio) and
 reload `cjar` (`library(cjar)`).
 
@@ -118,8 +118,23 @@ reload `cjar` (`library(cjar)`).
 The token is actually a lonnnnng alphanumeric string that is the what
 ultimately enables you to access your data:
 
-1.  In the console, enter `aw_auth()` and press *<Enter>*.
+1.  In the console, enter `aw_auth()` and press *Enter*.
 2.  In the Console window you should see “Successfully authenticated
     with JWT: access token valid until ….”
 3.  If you do not see this message then go back and repeat the previous
-    steps to make sure you didn’t miss something.
+    steps to make sure you did not miss something.
+
+#### 4. Get the Data View ID
+
+All data in CJA is located in Data Views, similar to Report Suites in
+Adobe Analytics. Before pulling data it is advisable to locate the data
+view id of the data you are attempting to pull from.
+
+    #Pull a list of available data views
+
+    dv <- cja_get_dataviews(expansion = c('name', 'description')) 
+
+    #note: see function documentation for all availabe expansion metadata is available.
+
+Once you have the data view ID you want then you can begin pulling data
+using all the different functions.
