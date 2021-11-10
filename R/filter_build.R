@@ -171,9 +171,6 @@ filter_build <- function(dataId = NULL,
   } else if(is.null(predicates) & is.null(containers)){
     stop('Either a predicate(s) or containers must be provided.')
   }
-  #defined parts of the post request
-  req_path = 'filters'
-  body = seg
 
   #verify that the account has been authorized to make the post request
   token_config <- get_token_config(client_id = client_id, client_secret = client_secret)
@@ -184,14 +181,15 @@ filter_build <- function(dataId = NULL,
     debug_call <- httr::verbose(data_out = TRUE, data_in = TRUE, info = TRUE)
   }
 
-
+  #validate the new segment
+  req_path <- 'filters/validate'
 
   request_url <- sprintf("https://cja.adobe.io/%s?locale=en_US",
-                        req_path)
+                         req_path)
 
   req <- httr::RETRY("POST",
                      url = request_url,
-                     body = body,
+                     body = seg,
                      encode = "json",
                      debug_call,
                      token_config,
@@ -200,6 +198,28 @@ filter_build <- function(dataId = NULL,
                        `x-api-key` = client_id,
                        `x-gw-ims-org-id` = org_id
                      ))
+  if(!httr::content(req)$valid){
+    stop(httr::content(req))
+  } else {
 
- dplyr::bind_rows(unlist(httr::content(req)))
+    #defined parts of the post request
+    req_path = 'filters'
+    body = seg
+    request_url <- sprintf("https://cja.adobe.io/%s?locale=en_US",
+                        req_path)
+
+    req <- httr::RETRY("POST",
+                       url = request_url,
+                       body = body,
+                       encode = "json",
+                       debug_call,
+                       token_config,
+                       httr::verbose(data_out = TRUE),
+                       httr::add_headers(
+                         `x-api-key` = client_id,
+                         `x-gw-ims-org-id` = org_id
+                       ))
+
+    dplyr::bind_rows(unlist(httr::content(req)))
+  }
 }
