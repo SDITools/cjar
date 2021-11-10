@@ -54,7 +54,7 @@ cja_get_audit_logs(
 A data frame of company ids and company names
 }
 \description{
-This function will pull a list of company ids that you have access to.
+This function will pull a list of audit logs defined by the different defined parameters.
 }
 \examples{
 \dontrun{

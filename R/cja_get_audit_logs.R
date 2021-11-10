@@ -1,6 +1,6 @@
 #' CJA Get Audit Logs
 #'
-#' This function will pull a list of company ids that you have access to.
+#' This function will pull a list of audit logs defined by the different defined parameters.
 #'
 #' @param startDate Date is not required, but if you filter by date, both start & end date must be set.
 #' @param endDate Date is not required, but if you filter by date, both start & end date must be set.

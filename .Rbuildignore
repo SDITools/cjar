@@ -5,3 +5,4 @@
 ^.*\.key$
 ^LICENSE\.md$
 ^docs
+^testingdocs
