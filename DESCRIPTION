@@ -1,6 +1,6 @@
 Package: cjar
 Title: CJA API R Client
-Version: 0.0.0.9002
+Version: 0.0.0.9003
 Authors@R: c( 
     person(given = "Ben", family = "Woodard", role = c("aut", "cre"), email = "ben.woodard@searchdiscovery.com"),
     person(given = "Charles", family = "Gallagher", role = c("ctb"), email = "charlesjgallagher15@gmail.com")
