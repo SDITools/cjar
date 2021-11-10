@@ -193,7 +193,6 @@ filter_build <- function(dataId = NULL,
                      encode = "json",
                      debug_call,
                      token_config,
-                     httr::verbose(data_out = TRUE),
                      httr::add_headers(
                        `x-api-key` = client_id,
                        `x-gw-ims-org-id` = org_id
