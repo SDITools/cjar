@@ -101,18 +101,22 @@
 <div id="1-create-an-adobe-console-api-project" class="section level4">
 <h4 class="hasAnchor">
 <a href="#1-create-an-adobe-console-api-project" class="anchor"></a>1. Create an Adobe Console API Project</h4>
-<p>Regardless of how many different CJA accounts you will be accessing, you only need an Adobe Console API project for each. The following</p>
+<p>When using JWT authentication, you only need an Adobe Console API project for each organization you are needing to access.</p>
+<p>Once you are a developer for a CJA product profile, you can create an API client in the Adobe Developer Console.</p>
 <ol>
-<li>Navigate to the following URL: <a href="https://console.adobe.io/integrations" class="uri">https://console.adobe.io/integrations</a>.</li>
-<li>Click the <strong>Create New Project</strong> button.</li>
-<li>Click the <strong>Add API</strong> button.</li>
-<li>Select the Adobe Experience Platform product icon and then choose <strong>Adobe Experience Platform</strong> and click <strong>Next</strong>. (need to fill in the rest of this process…)</li>
-<li>Select the Experience Cloud product icon and then choose <strong>Customer Journey Analytics</strong> and click <strong>Next</strong>.</li>
-<li>Select <strong>Option 1</strong> and then click <strong>Generate keypair</strong>
-</li>
-<li>A config.zip file will automatically download on your system. Note what directory this was downloaded into, we will need this file alter.</li>
-<li>Click the <strong>Next</strong> button.</li>
-<li>Select the Product Profiles you want to access to. Click <strong>Save configured API</strong>.</li>
+<li>Navigate to console.adobe.io.</li>
+<li>Check the organization name in the top right to make sure that you are logged in to the correct company.</li>
+<li>Click Create new project.</li>
+<li>Click Add API.</li>
+<li>Click Customer Journey Analytics, then click Next.</li>
+<li>Click Generate Keypair.</li>
+<li>A config.zip file is automatically downloaded to your local machine. Keep this config folder in a secure location, as it contains your only copy of your private key. See steps … for what to do with the private.key file.</li>
+<li>Click Next.</li>
+<li>Select the desired product profiles for the service account. Make sure that it contains the right permissions to access the API. Click Save configured API.</li>
+<li>Back on the project’s home page, click Add to project &gt; API.</li>
+<li>Click Adobe Experience Platform, then click Next.</li>
+<li>You already generated a keypair when creating the Adobe Analytics API, so you do not need to create another. Click Next.</li>
+<li>Select the desired product profiles for the service account. Make sure that it contains the right permissions to access the API. Click Save configured API.</li>
 <li>Copy and paste the Client ID, Client Secret (click “Retrieve client secret”), Technical Account ID, and Organization ID and paste them into a .Renviron file in the project or user directory.<br>
 </li>
 <li>Locate the config.zip file that automatically downloaded in step 6. Unzip the file and move the ‘private.zip’ file into your working directory. The location of this file will be needed as the value of the <strong>CJA_PRIVATE_KEY</strong> variable.</li>
@@ -123,8 +127,8 @@
 <a href="#2-set-up-the-renviron-file" class="anchor"></a>2. Set up the .Renviron file</h4>
 <p>This file is essential to keeping your information secure. It also speeds up analysis by limiting the number of arguments you need to add to every function call.</p>
 <ol>
-<li><p>If you do not have an <code>.Renviron</code> file (if you have never heard of this file you almost certainly don’t have one!), then create a new file and save it with the name <code>.Renviron</code>. You can do this from within the RStudio environment and save the file either in your <code>Home</code> directory (which is recommended; click on the <strong>Home</strong> button in the file navigator in RStudio and save it to that location) <em>or</em> within your project’s working directory.</p></li>
-<li><p>Get the following variables from the CJA project and config.zip file and then add them to the file (see <em>Creating an Adobe Console API Project</em> above) The format of variables in the <code>.Renviron</code> file is straightforward.</p></li>
+<li>If you do not have an <code>.Renviron</code> file (if you have never heard of this file you almost certainly don’t have one!), then create a new file and save it with the name <code>.Renviron</code>. You can do this from within the RStudio environment and save the file either in your <code>Home</code> directory (which is recommended; click on the <strong>Home</strong> button in the file navigator in RStudio and save it to that location) <em>or</em> within your project’s working directory.</li>
+<li>Get the following variables from the CJA project and config.zip file and then add them to the file (see <em>Creating an Adobe Console API Project</em> above) The format of variables in the <code>.Renviron</code> file is straightforward.</li>
 </ol>
 <!-- --><div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## JWT creds ##</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>CJA_CLIENT_ID<span class="ot">=</span>XXXXXXXXXXXXXXXXXXXX</span>
@@ -153,8 +157,8 @@
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dv <span class="ot">&lt;-</span> <span class="fu">cja_get_dataviews</span>(<span class="at">expansion =</span> <span class="fu">c</span>(<span class="st">'name'</span>, <span class="st">'description'</span>)) </span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#note: see function documentation for all availabe expansion metadata is available.</span></span></code></pre></div>
-<p>Once you have the data view ID you want then you can begin pulling data using all the different functions.</p>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#note: see function documentation for all availabe expansion metadata available.</span></span></code></pre></div>
+<p>Once you have the data view ID you want then you can begin pulling data using the different functions.</p>
 </div>
 </div>
 </div>

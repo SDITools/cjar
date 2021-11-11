@@ -53,29 +53,38 @@ detail in the following sections:
 
 #### 1. Create an Adobe Console API Project
 
-Regardless of how many different CJA accounts you will be accessing, you
-only need an Adobe Console API project for each. The following
+When using JWT authentication, you only need an Adobe Console API
+project for each organization you are needing to access.
 
-1.  Navigate to the following URL:
-    <https://console.adobe.io/integrations>.
-2.  Click the **Create New Project** button.
-3.  Click the **Add API** button.
-4.  Select the Adobe Experience Platform product icon and then choose
-    **Adobe Experience Platform** and click **Next**. (need to fill in
-    the rest of this process…)
-5.  Select the Experience Cloud product icon and then choose **Customer
-    Journey Analytics** and click **Next**.
-6.  Select **Option 1** and then click **Generate keypair**
-7.  A config.zip file will automatically download on your system. Note
-    what directory this was downloaded into, we will need this file
-    alter.
-8.  Click the **Next** button.
-9.  Select the Product Profiles you want to access to. Click **Save
-    configured API**.
-10. Copy and paste the Client ID, Client Secret (click “Retrieve client
+Once you are a developer for a CJA product profile, you can create an
+API client in the Adobe Developer Console.
+
+1.  Navigate to console.adobe.io.
+2.  Check the organization name in the top right to make sure that you
+    are logged in to the correct company.
+3.  Click Create new project.
+4.  Click Add API.
+5.  Click Customer Journey Analytics, then click Next.
+6.  Click Generate Keypair.
+7.  A config.zip file is automatically downloaded to your local machine.
+    Keep this config folder in a secure location, as it contains your
+    only copy of your private key. See steps … for what to do with the
+    private.key file.
+8.  Click Next.
+9.  Select the desired product profiles for the service account. Make
+    sure that it contains the right permissions to access the API. Click
+    Save configured API.
+10. Back on the project’s home page, click Add to project &gt; API.
+11. Click Adobe Experience Platform, then click Next.
+12. You already generated a keypair when creating the Adobe Analytics
+    API, so you do not need to create another. Click Next.
+13. Select the desired product profiles for the service account. Make
+    sure that it contains the right permissions to access the API. Click
+    Save configured API.
+14. Copy and paste the Client ID, Client Secret (click “Retrieve client
     secret”), Technical Account ID, and Organization ID and paste them
     into a .Renviron file in the project or user directory.  
-11. Locate the config.zip file that automatically downloaded in step 6.
+15. Locate the config.zip file that automatically downloaded in step 6.
     Unzip the file and move the ‘private.zip’ file into your working
     directory. The location of this file will be needed as the value of
     the **CJA\_PRIVATE\_KEY** variable.
@@ -93,7 +102,6 @@ to every function call.
     `Home` directory (which is recommended; click on the **Home** button
     in the file navigator in RStudio and save it to that location) *or*
     within your project’s working directory.
-
 2.  Get the following variables from the CJA project and config.zip file
     and then add them to the file (see *Creating an Adobe Console API
     Project* above) The format of variables in the `.Renviron` file is
@@ -134,7 +142,7 @@ view id of the data you are attempting to pull from.
 
     dv <- cja_get_dataviews(expansion = c('name', 'description')) 
 
-    #note: see function documentation for all availabe expansion metadata is available.
+    #note: see function documentation for all availabe expansion metadata available.
 
 Once you have the data view ID you want then you can begin pulling data
-using all the different functions.
+using the different functions.
