@@ -7,6 +7,8 @@
 #' @param is_distinct count the distinct items to compare against instead of dimension number
 #' @param dataid This is the data view id that the filter will be referencing.
 #'
+#' @return A list object to be used to build a filter
+#'
 #' @import dplyr
 #' @import assertthat
 #' @import stringr

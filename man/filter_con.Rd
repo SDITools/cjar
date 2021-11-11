@@ -20,6 +20,9 @@ filter_con(
 
 \item{exclude}{Exclude the entire container}
 }
+\value{
+A list object for containers that will be used to build a new filter
+}
 \description{
 This function combines predicates into a container.
 }

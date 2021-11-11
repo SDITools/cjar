@@ -17,6 +17,7 @@
 #' @param client_secret This is the report suite that the filter will be referenced to.
 #' @param org_id This is the organization id from the Adobe console project associated with your authentication project.
 #'
+#' @return A data frame of a newly created filter and corresponding metadata such as ID
 #'
 #' @import dplyr
 #' @import assertthat

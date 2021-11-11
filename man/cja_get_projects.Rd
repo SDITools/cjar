@@ -45,10 +45,10 @@ cja_get_projects(
 \item{org_id}{Set in environment args or pass directly here}
 }
 \value{
-A data frame of company ids and company names
+A data frame of projects and corresponding metadata
 }
 \description{
-Retrieves a paginated list of projects, also known as \code{Workspace}.
+Retrieves a paginated list of projects, also known as \verb{Workspace Projects}.
 }
 \details{
 \emph{expansion} options can include any of the following:

@@ -51,7 +51,7 @@ cja_get_audit_logs(
 \item{org_id}{Set in environment args or pass directly in the function}
 }
 \value{
-A data frame of company ids and company names
+A data frame of audit logs and corresponding metadata
 }
 \description{
 This function will pull a list of audit logs defined by the different defined parameters.

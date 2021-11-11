@@ -50,6 +50,9 @@ filter_build(
 
 \item{org_id}{This is the organization id from the Adobe console project associated with your authentication project.}
 }
+\value{
+A data frame of a newly created filter and corresponding metadata such as ID
+}
 \description{
 This function combines predicates into a container.
 }

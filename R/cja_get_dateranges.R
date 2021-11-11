@@ -1,15 +1,13 @@
-#' Get a paginated list of projects in CJA
+#' Get a paginated list of dateranges in CJA
 #'
-#' Retrieves a paginated list of projects, also known as `Workspace Projects`.
+#' This function allows users to pull a list of stored date ranges so that they can be reused in an analysis.
 #'
-#' @param includeType Include additional filters not owned by user. Default is "all". Options include: "all" (default) "shared"
-#' @param expansion Comma-delimited list of additional segment metadata fields to include on response. See Details for all options available
 #' @param locale Locale - Default: "en_US"
-#' @param filterByIds Filter list to only include filters in the specified list (comma-delimited list of IDs). This has filtered Ids from tags, approved, favorites and user specified Ids list.
-#' @param pagination Return paginated results
-#' @param ownerId Filter list to only include filters owned by the specified imsUserId
-#' @param limit Number of results per page
+#' @param filterByIds Filter list to only include date ranges in the specified list (comma-delimited list of IDs). This has filtered Ids from tags, approved, favorites and user specified Ids list.
+#' @param limit Number of results per page. default is 10
 #' @param page Page number (base 0 - first page is "0")
+#' @param expansion Comma-delimited list of additional date range metadata fields to include on response.
+#' @param includeType Include additional filters not owned by user. Default is "all". Options include: "all" (default), "shared", "templates"
 #' @param debug Used to help troubleshoot api call issues. Shows the call and result in the console
 #' @param client_id Set in environment args, or pass directly here
 #' @param client_secret Set in environment args, or pass directly here
@@ -18,32 +16,30 @@
 #' @details
 #'
 #' *expansion* options can include any of the following:
-#' "shares" "tags" "accessLevel" "modified" "externalReferences" "definition"
+#' "definition" "modified" "ownerFullName" "sharesFullName" "shares" "tags"
 #'
 #' *includeType* options can include any of the following:
-#' "all", "shared"
+#' "all", "shared", "templates"
 #'
-#' @return A data frame of projects and corresponding metadata
+#' @return A data frame of dateranges and their corresponding metadata
 #' @examples
 #' \dontrun{
-#' cja_get_projects()
+#' cja_get_dateranges()
 #' }
 #' @export
 #' @import assertthat httr
 #' @importFrom purrr map_df
 #'
-cja_get_projects <- function(includeType = 'all',
-                             expansion = 'definition',
-                             locale = "en_US",
-                             filterByIds = NULL,
-                             pagination = 'true',
-                             ownerId = NULL,
-                             limit = 10,
-                             page = 0,
-                             debug = FALSE,
-                             client_id = Sys.getenv("CJA_CLIENT_ID"),
-                             client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-                             org_id = Sys.getenv('CJA_ORGANIZATION_ID')) {
+cja_get_dateranges <- function(locale = "en_US",
+                               filterByIds = NULL,
+                               limit = 10,
+                               page = 0,
+                               expansion = 'definition',
+                               includeType = 'all',
+                               debug = FALSE,
+                               client_id = Sys.getenv("CJA_CLIENT_ID"),
+                               client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
+                               org_id = Sys.getenv('CJA_ORGANIZATION_ID')) {
     assertthat::assert_that(
         assertthat::is.string(client_id),
         assertthat::is.string(client_secret),
@@ -58,14 +54,12 @@ cja_get_projects <- function(includeType = 'all',
         includeType <- paste(includeType,collapse=",")
     }
 
-    vars <- tibble::tibble(includeType,
-                           expansion,
-                           locale,
+    vars <- tibble::tibble(locale,
                            filterByIds,
-                           pagination,
-                           ownerId,
                            limit,
-                           page)
+                           page,
+                           expansion,
+                           includeType)
 
 
     #Turn the list into a string to create the query
@@ -73,7 +67,7 @@ cja_get_projects <- function(includeType = 'all',
     #remove the extra parts of the string and replace it with the query parameter breaks
     query_param <-  paste(names(prequery), prequery, sep = '=', collapse = '&')
 
-    req_path <- 'projects'
+    req_path <- 'dateranges'
 
     request_url <- sprintf("https://cja.adobe.io/%s?%s",
                            req_path, query_param)

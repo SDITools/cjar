@@ -21,7 +21,7 @@ cja_get_audit_logs_search(
 \item{debug}{Set to TRUE if needed to help troubleshoot api call errors}
 }
 \value{
-A data frame of company ids and company names
+A data frame of audit logs and corresponding metadata
 }
 \description{
 This function will pull a list of audit logs.

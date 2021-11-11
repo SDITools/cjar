@@ -7,6 +7,8 @@
 #' @param predicates List of predicates created using `seg_pred()` function. Must wrapped in a list() function.
 #' @param exclude Exclude the entire container
 #'
+#' @return A list object for containers that will be used to build a new filter
+#'
 #' @import dplyr assertthat stringr
 #'
 #' @export

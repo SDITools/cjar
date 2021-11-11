@@ -18,7 +18,7 @@
 #' @param client_secret Set in the global environment using "AW_CLIENT_SECRET" or pass directly here
 #' @param org_id Set in the global environment using "AW_ORGANIZATION_ID" or pass directly here
 #'
-#' @return A data frame of dataview ids
+#' @return A data frame of dataview ids and their corresponding metadata
 #' @examples
 #' \dontrun{
 #' cja_get_dataviews()

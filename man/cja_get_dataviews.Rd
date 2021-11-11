@@ -54,7 +54,7 @@ cja_get_dataviews(
 \item{org_id}{Set in the global environment using "AW_ORGANIZATION_ID" or pass directly here}
 }
 \value{
-A data frame of dataview ids
+A data frame of dataview ids and their corresponding metadata
 }
 \description{
 This function will pull a list of data views ids that you have access to. These are similar to report suites in Adobe Analytics.

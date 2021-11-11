@@ -24,6 +24,9 @@ filter_pred(
 
 \item{dataid}{This is the data view id that the filter will be referencing.}
 }
+\value{
+A list object to be used to build a filter
+}
 \description{
 Create the Filter Predicate
 This function creates the simple predicate of a filter.

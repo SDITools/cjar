@@ -1,7 +1,7 @@
 #' Convert dates to API (ISO 8601) format
 #'
 #' @description
-#' Adobe Analytics dates have a timezone set by the implementation, so all
+#' CJA dates have a timezone set by the implementation, so all
 #' dates are given in local time by default. This function converts dates
 #' to a generic ISO 8601 format for the API. POSIX times are left unchanged.
 #'

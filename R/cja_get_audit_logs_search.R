@@ -7,7 +7,7 @@
 #' @param org_id Set in environment args or pass directly in the function
 #' @param debug Set to TRUE if needed to help troubleshoot api call errors
 #'
-#' @return A data frame of company ids and company names
+#' @return A data frame of audit logs and corresponding metadata
 #' @examples
 #' \dontrun{
 #' get_me()

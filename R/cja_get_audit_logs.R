@@ -17,7 +17,7 @@
 #' @param client_secret Set in environment args, or pass directly in the function
 #' @param org_id Set in environment args or pass directly in the function
 #'
-#' @return A data frame of company ids and company names
+#' @return A data frame of audit logs and corresponding metadata
 #' @examples
 #' \dontrun{
 #' get_me()
