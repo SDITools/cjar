@@ -1,6 +1,6 @@
-#' Gets the data from Adobe Analytics API v2 - Internal Function
+#' Gets the data from CJA API - Internal Function
 #'
-#' This gives a raw call to the API, but it is intended other functions call this one
+#' This gives a raw call to the API, but it is intended other functions to call this one
 #'
 #' @noRd
 #'
