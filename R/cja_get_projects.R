@@ -49,60 +49,28 @@ cja_get_projects <- function(includeType = 'all',
         assertthat::is.string(client_secret),
         assertthat::is.string(org_id)
     )
-    #remove spaces from the list of expansion items
-    if(!is.na(paste(expansion,collapse=","))) {
-        expansion <- paste(expansion,collapse=",")
-    }
-    #remove spaces from the list of includeType items
-    if(!is.na(paste(includeType,collapse=","))) {
-        includeType <- paste(includeType,collapse=",")
-    }
 
-    vars <- tibble::tibble(includeType,
-                           expansion,
-                           locale,
-                           filterByIds,
-                           pagination,
-                           ownerId,
-                           limit,
-                           page)
-
-
-    #Turn the list into a string to create the query
-    prequery <- vars %>% purrr::discard(~all(is.na(.) | . ==""))
-    #remove the extra parts of the string and replace it with the query parameter breaks
-    query_param <-  paste(names(prequery), prequery, sep = '=', collapse = '&')
+    query_params <- list(includeType = includeType,
+                         expansion = expansion,
+                         locale = locale,
+                         filterByIds = filterByIds,
+                         pagination = pagination,
+                         ownerId = ownerId,
+                         limit = limit,
+                         page = page)
 
     req_path <- 'projects'
 
-    request_url <- sprintf("https://cja.adobe.io/%s?%s",
-                           req_path, query_param)
-    token_config <- get_token_config(client_id = client_id, client_secret = client_secret)
+    urlstructure <- paste(req_path, format_URL_parameters(query_params), sep = "?")
 
-    debug_call <- NULL
+    req <- cja_call_api(req_path = urlstructure,
+                        body = NULL,
+                        debug = debug,
+                        client_id = client_id,
+                        client_secret = client_secret,
+                        org_id = org_id)
 
-    if (debug) {
-        debug_call <- httr::verbose(data_out = TRUE, data_in = TRUE, info = TRUE)
-    }
+    res <- httr::content(req, as= 'text', encoding = 'UTF-8')
 
-    req <- httr::RETRY("GET",
-                       url = request_url,
-                       encode = "json",
-                       body = FALSE,
-                       token_config,
-                       debug_call,
-                       httr::add_headers(
-                           `x-api-key` = client_id,
-                           `x-gw-ims-org-id` = org_id
-                       ))
-
-    httr::stop_for_status(req)
-
-
-    res <- httr::content(req)$content
-
-    res1 <- tibble::as_tibble(do.call(rbind, res))
-
-    res1 %>%
-        mutate(across(.cols = everything(), as.character))
+    jsonlite::fromJSON(res)
 }

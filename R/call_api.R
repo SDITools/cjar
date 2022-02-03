@@ -5,6 +5,7 @@
 #' @noRd
 #'
 #' @param req_path The endpoint for that particular report
+#' @param body The body contained in the call
 #' @param debug Default `FALSE`. Set this to TRUE to see the information about the api calls as they happen.
 #' @param client_id Set in environment args, or pass directly here
 #' @param client_secret Set in environment args, or pass directly here
@@ -20,10 +21,11 @@
 #'
 #' @import assertthat httr
 cja_call_api <- function(req_path,
-                        debug = FALSE,
-                        client_id = Sys.getenv("CJA_CLIENT_ID"),
-                        client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-                        org_id = Sys.getenv("CJA_ORGANIZATION_ID")) {
+                         body = NULL,
+                         debug = FALSE,
+                         client_id = Sys.getenv("CJA_CLIENT_ID"),
+                         client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
+                         org_id = Sys.getenv("CJA_ORGANIZATION_ID")) {
 
     assertthat::assert_that(
         assertthat::is.string(req_path),
@@ -54,7 +56,6 @@ cja_call_api <- function(req_path,
                        ))
 
     httr::stop_for_status(req)
-
-    httr::content(req, as = "text",encoding = "UTF-8")
+    req
 }
 

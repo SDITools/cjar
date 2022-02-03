@@ -22,12 +22,12 @@
 #' @import assertthat httr
 #'
 cja_call_data <- function(req_path,
-                         body = NULL,
-                         debug = FALSE,
-                         query_param = NULL,
-                         client_id = Sys.getenv("CJA_CLIENT_ID"),
-                         client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-                         org_id = Sys.getenv("CJA_ORGANIZATION_ID") ){
+                          body = NULL,
+                          debug = FALSE,
+                          query_param = NULL,
+                          client_id = Sys.getenv("CJA_CLIENT_ID"),
+                          client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
+                          org_id = Sys.getenv("CJA_ORGANIZATION_ID") ){
     assert_that(
         is.string(req_path),
         is.list(body),

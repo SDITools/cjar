@@ -4,8 +4,8 @@
 #'
 #' @param startDate Date is not required, but if you filter by date, both start & end date must be set.
 #' @param endDate Date is not required, but if you filter by date, both start & end date must be set.
-#' @param action The action you want to filter by.
-#' @param component The type of component you want to filter by.
+#' @param action The action you want to filter by.See details section for options
+#' @param component The type of component you want to filter by. See details section for options
 #' @param componentId The ID of the component.
 #' @param userType The type of user.
 #' @param userId The ID of the user.
@@ -13,80 +13,88 @@
 #' @param description The log description you want to filter by.
 #' @param pageSize Number of results per page. If left null, the default size will be set to 100.
 #' @param pageNumber Page number (base 0 - first page is "0")
+#' @param debug Used to help troubleshoot api call issues. Shows the call and result in the console
 #' @param client_id Set in environment args, or pass directly in the function
 #' @param client_secret Set in environment args, or pass directly in the function
 #' @param org_id Set in environment args or pass directly in the function
 #'
+#' @details
+#'
+#' *startDate/endDate* format must be in datetime format
+#'
+#' *Action* available values are: 'CREATE', 'EDIT', 'DELETE', 'LOGIN_FAILED',
+#' 'LOGIN_SUCCESSFUL', 'API_REQUEST', 'LOGOUT', 'APPROVE', 'UNAPPROVE', 'SHARE', 'UNSHARE',
+#' 'TRANSFER', 'ORG_CHANGE'
+#'
+#' *Component* available values are: 'ANNOTATION', 'CALCULATED_METRIC', 'CONNECTION',
+#' 'DATA_GROUP', 'DATA_VIEW', 'DATE_RANGE', 'FILTER', 'MOBILE', 'PROJECT',
+#' 'REPORT', 'SCHEDULED_PROJECT', 'USER', 'USER_GROUP', 'IMS_ORG',
+#' 'FEATURE_ACCESS'
+#'
 #' @return A data frame of audit logs and corresponding metadata
 #' @examples
 #' \dontrun{
-#' get_me()
+#' cja_get_audit_logs()
 #' }
 #' @export
 #' @import assertthat httr dplyr
 #'
-cja_get_audit_logs <- function(startDate = NA,
-                               endDate = NA,
-                               action = NA,
-                               component = NA,
-                               componentId = NA,
-                               userType = NA,
-                               userId = NA,
-                               userEmail = NA,
-                               description = NA,
+cja_get_audit_logs <- function(startDate = NULL,
+                               endDate = NULL,
+                               action = NULL,
+                               component = NULL,
+                               componentId = NULL,
+                               userType = NULL,
+                               userId = NULL,
+                               userEmail = NULL,
+                               description = NULL,
                                pageSize = 100,
                                pageNumber = 0,
+                               debug = FALSE,
                                client_id = Sys.getenv("CJA_CLIENT_ID"),
                                client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
                                org_id = Sys.getenv('CJA_ORGANIZATION_ID')) {
-    assertthat::assert_that(
-        assertthat::is.string(client_id),
-        assertthat::is.string(client_secret),
-        assertthat::is.string(org_id)
-    )
-    if(pageSize > 1000){
-        stop("The argument `pageSize` can not be more than 1,000. Use `pageNumber` to get the next set of results if more than 1,000 results are needed.")
-    }
-    vars <- tibble::tibble(startDate,
-                           endDate,
-                           action,
-                           component,
-                           componentId,
-                           userType,
-                           userId,
-                           userEmail,
-                           description,
-                           pageSize,
-                           pageNumber)
+  assertthat::assert_that(
+    assertthat::is.string(client_id),
+    assertthat::is.string(client_secret),
+    assertthat::is.string(org_id)
+  )
+  if (pageSize > 1000) {
+    stop("The argument `pageSize` can not be more than 1000. Use `pageNumber` to get the next set of results if more than 1000 results are needed.")
+  }
 
+  #modify the startDate and endDate
+  if (!is.null(startDate) & !is.null(endDate) & !grepl('t|T', startDate)) {
+    date_time <- make_startDate_endDate(startDate, endDate)
+    startDate <- date_time[[1]]
+    endDate <- date_time[[2]]
+  }
+  query_params <- list(startDate = startDate,
+                       endDate = endDate,
+                       action = action,
+                       component = component,
+                       componentId = componentId,
+                       userType = userType,
+                       userId = userId,
+                       userEmail = userEmail,
+                       description = description,
+                       pageSize = pageSize,
+                       pageNumber = pageNumber)
 
-    #Turn the list into a string to create the query
-    prequery <- vars %>% purrr::discard(~all(is.na(.) | . ==""))
-    #remove the extra parts of the string and replace it with the query parameter breaks
-    query_param <-  paste(names(prequery), prequery, sep = '=', collapse = '&')
+  req_path = 'auditlogs/api/v1/auditlogs'
 
-    req_path = 'auditlogs/api/v1/auditlogs'
+  urlstructure <- paste(req_path, format_URL_parameters(query_params), sep = "?")
 
-    request_url <- sprintf("https://cja.adobe.io/%s?%s",
-                           req_path, query_param)
+  req <- cja_call_api(req_path = urlstructure,
+                      body = NULL,
+                      debug = debug,
+                      client_id = client_id,
+                      client_secret = client_secret,
+                      org_id = org_id)
 
-    token_config <- get_token_config(client_id = client_id, client_secret = client_secret)
+  res <- httr::content(req, as = "text",encoding = "UTF-8")
 
-    req <- httr::RETRY("GET",
-                       url = request_url,
-                       encode = "json",
-                       body = FALSE,
-                       token_config,
-                       httr::add_headers(
-                           `x-api-key` = client_id,
-                           `x-gw-ims-org-id` = org_id
-                       ))
+  logs <- jsonlite::fromJSON(res)$content
 
-    httr::stop_for_status(req)
-
-    res <- httr::content(req, as = "text",encoding = "UTF-8")
-
-    logs <- jsonlite::fromJSON(res)$content
-
-    logs
+  logs
 }

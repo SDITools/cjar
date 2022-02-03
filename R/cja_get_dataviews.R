@@ -18,6 +18,12 @@
 #' @param client_secret Set in the global environment using "AW_CLIENT_SECRET" or pass directly here
 #' @param org_id Set in the global environment using "AW_ORGANIZATION_ID" or pass directly here
 #'
+#' @details
+#' **Expansion** available items: "name" "description" "owner" "isDeleted"
+#' "parentDataGroupId" "segmentList" "currentTimezoneOffset" "timezoneDesignator"
+#' "modified" "createdDate" "organization" "curationEnabled" "recentRecordedAccess"
+#' "sessionDefinition" "externalData" "containerNames"
+#'
 #' @return A data frame of dataview ids and their corresponding metadata
 #' @examples
 #' \dontrun{
@@ -54,44 +60,28 @@ cja_get_dataviews <- function(expansion = c('name'),
         expansion <- paste(expansion,collapse=",")
     }
 
-    vars <- tibble::tibble(expansion,
-                           parentDataGroupId,
-                           externalIds,
-                           externalParentIds,
-                           dataViewIds,
-                           includeType,
-                           cached,
-                           limit,
-                           page,
-                           sortDirection,
-                           sortProperty)
-    #Turn the list into a string to create the query
-    prequery <- vars %>% purrr::discard(~all(is.na(.) | . ==""))
-    #remove the extra parts of the string and replace it with the query parameter breaks
-    query_param <-  paste(names(prequery), prequery, sep = '=', collapse = '&')
+    query_params <- list(expansion = expansion,
+                         parentDataGroupId = parentDataGroupId,
+                         externalIds = externalIds,
+                         externalParentIds = externalParentIds,
+                         dataViewIds = dataViewIds,
+                         includeType = includeType,
+                         cached = cached,
+                         limit = limit,
+                         page = page,
+                         sortDirection = sortDirection,
+                         sortProperty = sortProperty)
+
     req_path <- 'datagroups/dataviews'
-    request_url <- sprintf("https://cja.adobe.io/%s?%s",
-                           req_path, query_param)
-    token_config <- get_token_config(client_id = client_id, client_secret = client_secret)
 
-    debug_call <- NULL
+    urlstructure <- paste(req_path, format_URL_parameters(query_params), sep = "?")
 
-    if (debug) {
-        debug_call <- httr::verbose(data_out = TRUE, data_in = TRUE, info = TRUE)
-    }
-
-    req <- httr::RETRY("GET",
-                       url = request_url,
-                       encode = "json",
-                       body = FALSE,
-                       token_config,
-                       debug_call,
-                       httr::add_headers(
-                           `x-api-key` = client_id,
-                           `x-gw-ims-org-id` = org_id
-                       ))
-
-    httr::stop_for_status(req)
+    req <- cja_call_api(req_path = urlstructure,
+                        body = NULL,
+                        debug = debug,
+                        client_id = client_id,
+                        client_secret = client_secret,
+                        org_id = org_id)
 
     res <- httr::content(req, as = "text",encoding = "UTF-8")
 

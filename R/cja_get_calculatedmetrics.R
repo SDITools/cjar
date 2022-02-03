@@ -32,6 +32,11 @@
 #' associated with the calculated metric. This can be a bit messy to work with, but the information
 #' is, at least, there.
 #'
+#' Other Expansion options that are available: "dataName", "approved", "favorite",
+#' "shares", "sharesFullName", "usageSummary", "usageSummaryWithRelevancyScore",
+#' "siteTitle", "migratedIds", "isDeleted", "authorization", "legacyId",
+#' "internal", "dataGroup", "categories"
+#'
 #' Multiple values for `expansion` can be included in the argument as a vector. For instance,
 #' `expansion = c("tags", "modified")` will add both a `tags` column and a `modified` column to the output.
 #'
@@ -59,6 +64,7 @@
 #' value of `FALSE` will return all calculated metrics, including those that are favorites.
 #' @param approved Set to `TRUE` to only include calculated metrics that are approved in the results. A
 #' value of `FALSE` will return all calculated metrics, including those that are approved and those that are not.
+#' @param pagination return paginated results. Set to 'TRUE' by default
 #' @param limit Number of results per page. Default is 10
 #' @param page The "page" of results to display. This works in conjunction with the `limit` argument and is
 #' zero-based. For instance, if `limit = 10` and `page = 1`, the results returned would be 11 through 20.
@@ -69,6 +75,9 @@
 #' `modified`, which is the last date the calculated metric was modified. When using this value for `sortProperty`,
 #' though, the name of the argument is `modified_date`.
 #' @param debug Include the output and input of the api call in the console for debugging. Default is FALSE
+#' @param client_id Set in environment args, or pass directly here
+#' @param client_secret Set in environment args, or pass directly here
+#' @param org_id Set in environment args or pass directly here
 #'
 #' @return A data frame of calculated metrics and their metadata.
 #'
@@ -76,49 +85,55 @@
 #' @importFrom utils URLencode
 #' @export
 #'
-cja_get_calculatedmetrics <- function(expansion = NA,
+cja_get_calculatedmetrics <- function(expansion = NULL,
                                       includeType = 'all',
-                                      dataIds = NA,
-                                      ownerId = NA,
-                                      filterByIds = NA,
-                                      toBeUsedInRsid = NA,
+                                      dataIds = NULL,
+                                      ownerId = NULL,
+                                      filterByIds = NULL,
+                                      toBeUsedInRsid = NULL,
                                       locale = "en_US",
-                                      favorite = NA,
-                                      approved = NA,
+                                      favorite = NULL,
+                                      approved = NULL,
+                                      pagination = TRUE,
                                       limit = 10,
                                       page = 0,
                                       sortDirection = 'DESC',
-                                      sortProperty = NA,
-                                      debug = FALSE)
+                                      sortProperty = NULL,
+                                      debug = FALSE,
+                                      client_id = Sys.getenv("CJA_CLIENT_ID"),
+                                      client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
+                                      org_id = Sys.getenv('CJA_ORGANIZATION_ID'))
 {
-  #edit the character vectors to the string they need to be
-  if(length(expansion) > 1) {expansion = paste(expansion, collapse = ',', sep = '') }
-  if(length(dataIds) > 1) {dataIds = paste0(dataIds, collapse = ',') }
-  if(length(filterByIds) > 1) {filterByIds = paste0(filterByIds, collapse = ',') }
-
 
   #includeType is case senstative
   includeType <- tolower(includeType)
 
-  vars <- tibble::tibble(expansion, includeType, dataIds, ownerId, filterByIds, toBeUsedInRsid, locale, favorite, approved,
-                         limit, page, sortDirection, sortProperty)
-  #Turn the list into a string to create the query
-  prequery <- vars %>% dplyr::select_if(~ !any(is.na(.)))
-  #remove the extra parts of the string and replace it with the query parameter breaks
-  query_param <-  paste(names(prequery), prequery, sep = '=', collapse = '&')
+  query_params <- list(expansion = expansion,
+                       includeType = includeType,
+                       dataIds = dataIds,
+                       ownerId = ownerId,
+                       filterByIds = filterByIds,
+                       toBeUsedInRsid = toBeUsedInRsid,
+                       locale = locale,
+                       favorite = favorite,
+                       approved = approved,
+                       pagination = pagination,
+                       limit = limit,
+                       page = page,
+                       sortDirection = sortDirection,
+                       sortProperty = sortProperty)
 
-  #create the url to send with the query
-  urlstructure <- paste0('calculatedmetrics?',query_param)
+  req_path <- 'calculatedmetrics'
 
-  #urlstructure <- 'segments?locale=en_US&filterByPublishedSegments=all&limit=1000&page=0&sortDirection=ASC&sortProperty=id&includeType=all'
-  res <- cja_call_api(req_path = urlstructure[1], debug = debug)
+  urlstructure <- paste(req_path, format_URL_parameters(query_params), sep = "?")
 
-  res <- jsonlite::fromJSON(res)
+  req <- cja_call_api(req_path = urlstructure,
+                      body = NULL,
+                      debug = debug,
+                      client_id = client_id,
+                      client_secret = client_secret,
+                      org_id = org_id)
 
-  #Just need the content of the returned json
-  res <- res$content
-
-  res
-
+  jsonlite::fromJSON(httr::content(req, as = 'text', encoding = "UTF-8"))[[1]]
 }
 

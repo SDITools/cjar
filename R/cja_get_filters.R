@@ -25,7 +25,11 @@
 #' @details
 #'
 #' *Expansion* options can include the following:
-#' "compatibility", "definition", "internal", "modified", "isDeleted", "definitionLastModified", "createdDate", "recentRecordedAccess", "performanceScore", "owner", "dataId", "ownerFullName", "dataName", "sharesFullName", "approved", "favorite", "shares", "tags", "usageSummary", "usageSummaryWithRelevancyScore"
+#' "compatibility", "definition", "internal", "modified", "isDeleted",
+#' "definitionLastModified", "createdDate", "recentRecordedAccess",
+#' "performanceScore", "owner", "dataId", "ownerFullName", "dataName",
+#' "sharesFullName", "approved", "favorite", "shares", "tags", "usageSummary",
+#' "usageSummaryWithRelevancyScore"
 #'
 #' @return A data frame of company ids and company names
 #' @examples
@@ -36,7 +40,7 @@
 #' @import assertthat httr
 #' @importFrom purrr map_df
 #'
-cja_get_filters <- function(expansion = 'definition',
+cja_get_filters <- function(expansion = NULL,
                             includeType = 'all',
                             dataIds = NULL,
                             ownerId = NULL,
@@ -46,7 +50,7 @@ cja_get_filters <- function(expansion = 'definition',
                             name = NULL,
                             filterByModifiedAfter = NULL,
                             cached = TRUE,
-                            pagination = 'true',
+                            pagination = TRUE,
                             limit = 10,
                             page = 0,
                             sortDirection = 'ASC',
@@ -60,79 +64,35 @@ cja_get_filters <- function(expansion = 'definition',
         assertthat::is.string(client_secret),
         assertthat::is.string(org_id)
     )
-    #remove spaces from the list of expansion items
-    if(!is.na(paste(expansion,collapse=","))) {
-        expansion <- paste(expansion,collapse=",")
-    }
-    #remove spaces from the list of includeType items
-    if(!is.na(paste(includeType,collapse=","))) {
-        includeType <- paste(includeType,collapse=",")
-    }
-    #remove spaces from the list of dataIds items
-    if(!is.na(paste(dataIds,collapse=","))) {
-        dataIds <- paste(dataIds,collapse=",")
-    }
-    #remove spaces from the list of filterByIds items
-    if(!is.na(paste(filterByIds,collapse=","))) {
-        filterByIds <- paste(filterByIds,collapse=",")
-    }
-    #remove spaces from the list of filterByIds items
-    if(!is.na(paste(filterByIds,collapse=","))) {
-        filterByIds <- paste(filterByIds,collapse=",")
-    }
 
-    vars <- tibble::tibble(expansion,
-                           includeType,
-                           dataIds,
-                           ownerId,
-                           filterByIds,
-                           toBeUsedInRsid,
-                           locale,
-                           name,
-                           filterByModifiedAfter,
-                           cached,
-                           pagination,
-                           limit,
-                           page,
-                           sortDirection,
-                           sortProperty)
-
-
-    #Turn the list into a string to create the query
-    prequery <- vars %>% purrr::discard(~all(is.na(.) | . ==""))
-    #remove the extra parts of the string and replace it with the query parameter breaks
-    query_param <-  paste(names(prequery), prequery, sep = '=', collapse = '&')
+  query_params <- list(expansion = expansion,
+                       includeType = includeType,
+                       dataIds = dataIds,
+                       ownerId = ownerId,
+                       filterByIds = filterByIds,
+                       toBeUsedInRsid = toBeUsedInRsid,
+                       locale = locale,
+                       name = name,
+                       filterByModifiedAfter = filterByModifiedAfter,
+                       cached = cached,
+                       pagination = pagination,
+                       limit = limit,
+                       page = page,
+                       sortDirection = sortDirection,
+                       sortProperty = sortProperty)
 
     req_path <- 'filters'
 
-    request_url <- sprintf("https://cja.adobe.io/%s?%s",
-                           req_path, query_param)
-    token_config <- get_token_config(client_id = client_id, client_secret = client_secret)
+    urlstructure <- paste(req_path, format_URL_parameters(query_params), sep = "?")
 
-    debug_call <- NULL
+    req <- cja_call_api(req_path = urlstructure,
+                        body = NULL,
+                        debug = debug,
+                        client_id = client_id,
+                        client_secret = client_secret,
+                        org_id = org_id)
 
-    if (debug) {
-        debug_call <- httr::verbose(data_out = TRUE, data_in = TRUE, info = TRUE)
-    }
+    res <- httr::content(req, as= 'text', encoding = 'UTF-8')
 
-    req <- httr::RETRY("GET",
-                       url = request_url,
-                       encode = "json",
-                       body = FALSE,
-                       token_config,
-                       debug_call,
-                       httr::add_headers(
-                           `x-api-key` = client_id,
-                           `x-gw-ims-org-id` = org_id
-                       ))
-
-    httr::stop_for_status(req)
-
-
-    res <- httr::content(req)$content
-
-    res1 <- tibble::as_tibble(do.call(rbind, res))
-
-    res1 %>%
-        mutate(across(.cols = everything(), as.character))
+    jsonlite::fromJSON(res)
 }
