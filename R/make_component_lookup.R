@@ -11,15 +11,15 @@ is_calculated_metric <- function(metric) {
 
 #' Make a component lookup table
 #'
-#' @param dataId Data View ID
+#' @param dataviewId Data View ID
 #' @param calculated_metrics Vector of calculated metric IDs. Defaults to NULL.
 #'
 #' @return `data.frame`
 #' @noRd
-make_component_lookup <- function(dataId, calculated_metrics = NULL) {
+make_component_lookup <- function(dataviewId, calculated_metrics = NULL) {
   # Get dimension and metric lookup tables
-  dims <- cja_get_dimensions(dataviewid = dataId)
-  mets <- cja_get_metrics(dataviewid = dataId)
+  dims <- cja_get_dimensions(dataviewId = dataviewId)
+  mets <- cja_get_metrics(dataviewId = dataviewId)
 
   # pull out the calculated metrics
   if (length(calculated_metrics) > 0) {

@@ -59,6 +59,12 @@ A data frame of dataview ids and their corresponding metadata
 \description{
 This function will pull a list of data views ids that you have access to. These are similar to report suites in Adobe Analytics.
 }
+\details{
+\strong{Expansion} available items: "name" "description" "owner" "isDeleted"
+"parentDataGroupId" "segmentList" "currentTimezoneOffset" "timezoneDesignator"
+"modified" "createdDate" "organization" "curationEnabled" "recentRecordedAccess"
+"sessionDefinition" "externalData" "containerNames"
+}
 \examples{
 \dontrun{
 cja_get_dataviews()

@@ -5,8 +5,8 @@
 \title{Get a list of dimensions in CJA}
 \usage{
 cja_get_dimensions(
-  dataviewid = "dv_5f3ee3975e5ace0e679ef480",
-  expansion = "definition",
+  dataviewId = NULL,
+  expansion = "description",
   includeType = NULL,
   locale = "en_US",
   debug = FALSE,
@@ -16,7 +16,7 @@ cja_get_dimensions(
 )
 }
 \arguments{
-\item{dataviewid}{\emph{Required} The id of the dataview for which to retrieve Dimensions}
+\item{dataviewId}{\emph{Required} The id of the dataview for which to retrieve Dimensions}
 
 \item{expansion}{Comma-delimited list of additional segment metadata fields to include on response. See Details for all options available.}
 
@@ -40,10 +40,16 @@ Retrieves a list of dimensions available in a specified dataview
 }
 \details{
 \emph{Expansion} options can include the following:
-"approved" "favorite" "tags" "usageSummary" "usageSummaryWithRelevancyScore" "description" "sourceFieldId" "segmentable" "required" "hideFromReporting" "hidden" "includeExcludeSetting" "fieldDefinition" "bucketingSetting" "noValueOptionsSetting" "defaultDimensionSort" "persistenceSetting" "storageId" "tableName" "dataSetIds" "dataSetType" "type" "schemaPath" "hasData" "sourceFieldName" "schemaType" "sourceFieldType" "fromGlobalLookup" "multiValued" "precision"
+"approved" "favorite" "tags" "usageSummary" "usageSummaryWithRelevancyScore"
+"description" "sourceFieldId" "segmentable" "required" "hideFromReporting"
+"hidden" "includeExcludeSetting" "fieldDefinition" "bucketingSetting"
+"noValueOptionsSetting" "defaultDimensionSort" "persistenceSetting"
+"storageId" "tableName" "dataSetIds" "dataSetType" "type" "schemaPath"
+"hasData" "sourceFieldName" "schemaType" "sourceFieldType" "fromGlobalLookup"
+"multiValued" "precision"
 }
 \examples{
 \dontrun{
-cja_get_dimensions()
+cja_get_dimensions(dataviewId = "dv_5f4f1e2572ea0000003ce262")
 }
 }

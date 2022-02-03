@@ -5,8 +5,8 @@
 \title{Get a list of metrics in CJA}
 \usage{
 cja_get_metrics(
-  dataviewid = NULL,
-  expansion = "definition",
+  dataviewId = NULL,
+  expansion = "description",
   includeType = NULL,
   locale = "en_US",
   debug = FALSE,
@@ -16,7 +16,7 @@ cja_get_metrics(
 )
 }
 \arguments{
-\item{dataviewid}{\emph{Required} The id of the dataview for which to retrieve metrics}
+\item{dataviewId}{\emph{Required} The id of the dataview for which to retrieve metrics}
 
 \item{expansion}{Comma-delimited list of additional segment metadata fields to include on response. See Details for all options available.}
 
@@ -40,10 +40,16 @@ Retrieves a list of metrics available in a specified dataview
 }
 \details{
 \emph{Expansion} options can include the following:
-"approved" "favorite" "tags" "usageSummary" "usageSummaryWithRelevancyScore" "description" "sourceFieldId" "segmentable" "required" "hideFromReporting" "hidden" "includeExcludeSetting" "fieldDefinition" "bucketingSetting" "noValueOptionsSetting" "defaultmetricsort" "persistenceSetting" "storageId" "tableName" "dataSetIds" "dataSetType" "type" "schemaPath" "hasData" "sourceFieldName" "schemaType" "sourceFieldType" "fromGlobalLookup" "multiValued" "precision"
+"approved" "favorite" "tags" "usageSummary" "usageSummaryWithRelevancyScore"
+"description" "sourceFieldId" "segmentable" "required" "hideFromReporting"
+"hidden" "includeExcludeSetting" "fieldDefinition" "bucketingSetting"
+"noValueOptionsSetting" "defaultmetricsort" "persistenceSetting" "storageId"
+"tableName" "dataSetIds" "dataSetType" "type" "schemaPath" "hasData"
+"sourceFieldName" "schemaType" "sourceFieldType" "fromGlobalLookup"
+"multiValued" "precision"
 }
 \examples{
 \dontrun{
-cja_get_metrics()
+cja_get_metrics(dataviewId = "dv_5f4f1e2572ea0000003ce262")
 }
 }

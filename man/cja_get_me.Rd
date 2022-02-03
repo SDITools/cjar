@@ -5,7 +5,7 @@
 \title{CJA Get My Information}
 \usage{
 cja_get_me(
-  expansion = "admin",
+  expansion = NULL,
   useCache = TRUE,
   debug = FALSE,
   client_id = Sys.getenv("CJA_CLIENT_ID"),

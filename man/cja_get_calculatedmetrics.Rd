@@ -5,20 +5,24 @@
 \title{Get a list of calculated metrics.}
 \usage{
 cja_get_calculatedmetrics(
-  expansion = NA,
+  expansion = NULL,
   includeType = "all",
-  dataIds = NA,
-  ownerId = NA,
-  filterByIds = NA,
-  toBeUsedInRsid = NA,
+  dataIds = NULL,
+  ownerId = NULL,
+  filterByIds = NULL,
+  toBeUsedInRsid = NULL,
   locale = "en_US",
-  favorite = NA,
-  approved = NA,
+  favorite = NULL,
+  approved = NULL,
+  pagination = TRUE,
   limit = 10,
   page = 0,
   sortDirection = "DESC",
-  sortProperty = NA,
-  debug = FALSE
+  sortProperty = NULL,
+  debug = FALSE,
+  client_id = Sys.getenv("CJA_CLIENT_ID"),
+  client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
+  org_id = Sys.getenv("CJA_ORGANIZATION_ID")
 )
 }
 \arguments{
@@ -53,6 +57,8 @@ value of \code{FALSE} will return all calculated metrics, including those that a
 \item{approved}{Set to \code{TRUE} to only include calculated metrics that are approved in the results. A
 value of \code{FALSE} will return all calculated metrics, including those that are approved and those that are not.}
 
+\item{pagination}{return paginated results. Set to 'TRUE' by default}
+
 \item{limit}{Number of results per page. Default is 10}
 
 \item{page}{The "page" of results to display. This works in conjunction with the \code{limit} argument and is
@@ -67,6 +73,12 @@ and \code{modified_date}. Note that setting \code{expansion = modified} returns 
 though, the name of the argument is \code{modified_date}.}
 
 \item{debug}{Include the output and input of the api call in the console for debugging. Default is FALSE}
+
+\item{client_id}{Set in environment args, or pass directly here}
+
+\item{client_secret}{Set in environment args, or pass directly here}
+
+\item{org_id}{Set in environment args or pass directly here}
 }
 \value{
 A data frame of calculated metrics and their metadata.
@@ -99,6 +111,11 @@ suite name for the RSID.
 associated with the calculated metric. This can be a bit messy to work with, but the information
 is, at least, there.
 }
+
+Other Expansion options that are available: "dataName", "approved", "favorite",
+"shares", "sharesFullName", "usageSummary", "usageSummaryWithRelevancyScore",
+"siteTitle", "migratedIds", "isDeleted", "authorization", "legacyId",
+"internal", "dataGroup", "categories"
 
 Multiple values for \code{expansion} can be included in the argument as a vector. For instance,
 \code{expansion = c("tags", "modified")} will add both a \code{tags} column and a \code{modified} column to the output.
