@@ -36,7 +36,7 @@ Numeric values are automatically converted to dates.}
 \item{dimensions}{A character vector of dimensions. There is currently a limit of 20 dimension
 breakdowns. Each dimension value that gets broken down by another dimension requires an additional API
 call, so the more dimensions that are included, the longer the function will take to return results.
-This is how the Adobe Analytics API works. Use \code{\link[=cja_get_dimensions]{cja_get_dimensions()}} to get a list of available
+This is how the CJA API works. Use \code{\link[=cja_get_dimensions]{cja_get_dimensions()}} to get a list of available
 \code{dimensions} IDs.}
 
 \item{metrics}{A character vector of metrics. Use \code{\link[=cja_get_metrics]{cja_get_metrics()}} and \code{\link[=cja_get_calculatedmetrics]{cja_get_calculatedmetrics()}}
@@ -104,7 +104,7 @@ A data frame with dimensions and metrics.
 }
 \description{
 Get a report analogous to a \strong{Freeform Table} visualization in CJA Workspace. The function uses
-the arguments to construct and execute a JSON-based query to the Adobe Analytics API and then returns
+the arguments to construct and execute a JSON-based query to the CJA API and then returns
 the results as a data frame.
 }
 \details{
@@ -112,7 +112,7 @@ This function is based on the \strong{Freeform Table} visualization in Analysis 
 the same API call type that is used to generate those visualizations.
 \subsection{Dimension Ordering}{
 
-Adobe Analytics only queries one dimension at a time, even though the results get returned in a single data
+CJA only queries one dimension at a time, even though the results get returned in a single data
 frame (or table in the case of Analysis Workspace). The more dimensions are included in the report--the more
 breakdowns of the data--the more queries are required. As a result, the \emph{order} of the dimensions \emph{can}
 have a dramatic impact on the total query time, even if the resulting data is essentially identical.
@@ -161,7 +161,7 @@ same level in the \code{top} argument specification will return all of the value
 
 There are powerful filtering abilities within the function. However, to support that power requires a
 syntax that can feel a bit cumbersome for simple queries. \strong{\emph{Note:}} search filters are case-insensitive.
-This is Adobe Analytics API functionality and can not be specified otherwise in queries.
+This is CJA API functionality and can not be specified otherwise in queries.
 
 The \code{search} argument takes a vector of search strings, with each value in the vector corresponding to
 the \code{dimension} value that is at the same position. These search strings support a range of operators,

@@ -1,7 +1,7 @@
 #' Get a freeform table
 #'
 #' Get a report analogous to a **Freeform Table** visualization in CJA Workspace. The function uses
-#' the arguments to construct and execute a JSON-based query to the Adobe Analytics API and then returns
+#' the arguments to construct and execute a JSON-based query to the CJA API and then returns
 #' the results as a data frame.
 #'
 #' @details
@@ -11,7 +11,7 @@
 #'
 #' ## Dimension Ordering
 #'
-#' Adobe Analytics only queries one dimension at a time, even though the results get returned in a single data
+#' CJA only queries one dimension at a time, even though the results get returned in a single data
 #' frame (or table in the case of Analysis Workspace). The more dimensions are included in the report--the more
 #' breakdowns of the data--the more queries are required. As a result, the _order_ of the dimensions _can_
 #' have a dramatic impact on the total query time, even if the resulting data is essentially identical.
@@ -56,7 +56,7 @@
 #'
 #' There are powerful filtering abilities within the function. However, to support that power requires a
 #' syntax that can feel a bit cumbersome for simple queries. **_Note:_** search filters are case-insensitive.
-#' This is Adobe Analytics API functionality and can not be specified otherwise in queries.
+#' This is CJA API functionality and can not be specified otherwise in queries.
 #'
 #' The `search` argument takes a vector of search strings, with each value in the vector corresponding to
 #' the `dimension` value that is at the same position. These search strings support a range of operators,
@@ -83,7 +83,7 @@
 #' @param dimensions A character vector of dimensions. There is currently a limit of 20 dimension
 #' breakdowns. Each dimension value that gets broken down by another dimension requires an additional API
 #' call, so the more dimensions that are included, the longer the function will take to return results.
-#' This is how the Adobe Analytics API works. Use [cja_get_dimensions()] to get a list of available
+#' This is how the CJA API works. Use [cja_get_dimensions()] to get a list of available
 #' `dimensions` IDs.
 #' @param top The number of values to be pulled for each dimension. The default is 5 and the "top" is based on
 #' the first `metric` value (along with `metricSort`). If there are multiple dimensions, then this argument can
