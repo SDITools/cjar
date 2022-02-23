@@ -20,10 +20,7 @@ cja_get_filters(
   page = 0,
   sortDirection = "ASC",
   sortProperty = "id",
-  debug = FALSE,
-  client_id = Sys.getenv("CJA_CLIENT_ID"),
-  client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-  org_id = Sys.getenv("CJA_ORGANIZATION_ID")
+  debug = FALSE
 )
 }
 \arguments{
@@ -58,12 +55,6 @@ cja_get_filters(
 \item{sortProperty}{Property to sort by (name, modified_date, performanceScore, id is currently allowed). 'id' is default}
 
 \item{debug}{Used to help troubleshoot api call issues. Shows the call and result in the console}
-
-\item{client_id}{Set in environment args, or pass directly here}
-
-\item{client_secret}{Set in environment args, or pass directly here}
-
-\item{org_id}{Set in environment args or pass directly here}
 }
 \value{
 A data frame of company ids and company names

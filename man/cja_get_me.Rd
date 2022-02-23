@@ -4,27 +4,12 @@
 \alias{cja_get_me}
 \title{CJA Get My Information}
 \usage{
-cja_get_me(
-  expansion = NULL,
-  useCache = TRUE,
-  debug = FALSE,
-  client_id = Sys.getenv("CJA_CLIENT_ID"),
-  client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-  org_id = Sys.getenv("CJA_ORGANIZATION_ID")
-)
+cja_get_me(expansion = NULL, debug = FALSE)
 }
 \arguments{
-\item{expansion}{The endpoint for that particular report}
-
-\item{useCache}{cache the response for faster recall}
+\item{expansion}{Comma-delimited list of additional metada fields to include in the response. Options are 'admin'}
 
 \item{debug}{Used to help troubleshoot api call issues. Shows the call and result in the console}
-
-\item{client_id}{Set in environment args, or pass directly here}
-
-\item{client_secret}{Set in environment args, or pass directly here}
-
-\item{org_id}{The organization ID the data should be pulled from}
 }
 \value{
 A list of the current user metadata

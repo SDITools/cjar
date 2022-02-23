@@ -6,16 +6,13 @@
 #' @param expansion Comma-delimited list of additional segment metadata fields to include on response. See Details for all options available
 #' @param locale Locale - Default: "en_US"
 #' @param debug Used to help troubleshoot api call issues. Shows the call and result in the console
-#' @param client_id Set in environment args, or pass directly here
-#' @param client_secret Set in environment args, or pass directly here
-#' @param org_id Set in environment args or pass directly here
 #'
 #' @details
 #'
 #' *expansion* options can include any of the following:
 #' "shares" "tags" "accessLevel" "modified" "externalReferences" "definition"
 #'
-#' @return A data frame of projects and corresponding metadata
+#' @return A project configuration list
 #' @examples
 #' \dontrun{
 #' cja_get_project_config(id = '6047e0a3de6aaaaac7c3accb')
@@ -27,16 +24,10 @@
 cja_get_project_config <- function(id = NULL,
                                    expansion = 'definition',
                                    locale = "en_US",
-                                   debug = FALSE,
-                                   client_id = Sys.getenv("CJA_CLIENT_ID"),
-                                   client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-                                   org_id = Sys.getenv('CJA_ORGANIZATION_ID')) {
+                                   debug = FALSE) {
     assertthat::assert_that(
-        assertthat::is.string(client_id),
-        assertthat::is.string(client_secret),
-        assertthat::is.string(org_id)
+      assertthat::is.string(id)
     )
-
     query_params <- list(expansion = expansion,
                          locale = locale)
 
@@ -46,10 +37,7 @@ cja_get_project_config <- function(id = NULL,
 
     req <- cja_call_api(req_path = urlstructure,
                         body = NULL,
-                        debug = debug,
-                        client_id = client_id,
-                        client_secret = client_secret,
-                        org_id = org_id)
+                        debug = debug)
 
     res <- httr::content(req, as= 'text', encoding = 'UTF-8')
 

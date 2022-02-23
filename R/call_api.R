@@ -22,21 +22,18 @@
 #' @import assertthat httr
 cja_call_api <- function(req_path,
                          body = NULL,
-                         debug = FALSE,
-                         client_id = Sys.getenv("CJA_CLIENT_ID"),
-                         client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-                         org_id = Sys.getenv("CJA_ORGANIZATION_ID")) {
+                         debug = FALSE) {
 
     assertthat::assert_that(
-        assertthat::is.string(req_path),
-        assertthat::is.string(client_id),
-        assertthat::is.string(client_secret)
+        assertthat::is.string(req_path)
     )
 
     request_url <- sprintf("https://cja.adobe.io/%s",
                            req_path)
 
-    token_config <- get_token_config(client_id = client_id, client_secret = client_secret)
+    env_vars <- get_env_vars()
+    token_config <- get_token_config(client_id = env_vars$client_id,
+                                     client_secret = env_vars$client_secret)
 
     debug_call <- NULL
 
@@ -51,8 +48,8 @@ cja_call_api <- function(req_path,
                        token_config,
                        debug_call,
                        httr::add_headers(
-                           `x-api-key` = client_id,
-                           `x-gw-ims-org-id` = org_id
+                           `x-api-key` = env_vars$client_id,
+                           `x-gw-ims-org-id` = env_vars$org_id
                        ))
 
     httr::stop_for_status(req)

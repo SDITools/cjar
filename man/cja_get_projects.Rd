@@ -13,10 +13,7 @@ cja_get_projects(
   ownerId = NULL,
   limit = 10,
   page = 0,
-  debug = FALSE,
-  client_id = Sys.getenv("CJA_CLIENT_ID"),
-  client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-  org_id = Sys.getenv("CJA_ORGANIZATION_ID")
+  debug = FALSE
 )
 }
 \arguments{
@@ -37,12 +34,6 @@ cja_get_projects(
 \item{page}{Page number (base 0 - first page is "0")}
 
 \item{debug}{Used to help troubleshoot api call issues. Shows the call and result in the console}
-
-\item{client_id}{Set in environment args, or pass directly here}
-
-\item{client_secret}{Set in environment args, or pass directly here}
-
-\item{org_id}{Set in environment args or pass directly here}
 }
 \value{
 A data frame of projects and corresponding metadata

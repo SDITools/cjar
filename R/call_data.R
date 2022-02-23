@@ -24,15 +24,9 @@
 cja_call_data <- function(req_path,
                           body = NULL,
                           debug = FALSE,
-                          query_param = NULL,
-                          client_id = Sys.getenv("CJA_CLIENT_ID"),
-                          client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-                          org_id = Sys.getenv("CJA_ORGANIZATION_ID") ){
+                          query_param = NULL ){
     assert_that(
-        is.string(req_path),
-        is.list(body),
-        is.string(client_id),
-        is.string(client_secret)
+        is.string(req_path)
     )
     if(!is.null(query_param)) {
         request_url <- sprintf("https://cja.adobe.io/%s?%s",
@@ -42,7 +36,9 @@ cja_call_data <- function(req_path,
                            req_path)
     }
 
-    token_config <- get_token_config(client_id = client_id, client_secret = client_secret)
+    env_vars <- get_env_vars()
+    token_config <- get_token_config(client_id = env_vars$client_id,
+                                   client_secret = env_vars$client_secret)
 
     debug_call <- NULL
 
@@ -57,8 +53,8 @@ cja_call_data <- function(req_path,
                        token_config,
                        debug_call,
                        httr::add_headers(
-                           `x-api-key` = client_id,
-                           `x-gw-ims-org-id` = org_id
+                           `x-api-key` = env_vars$client_id,
+                           `x-gw-ims-org-id` = env_vars$org_id
                        ))
 
     stop_for_status(req)

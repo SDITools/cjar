@@ -9,10 +9,7 @@ cja_get_metrics(
   expansion = "description",
   includeType = NULL,
   locale = "en_US",
-  debug = FALSE,
-  client_id = Sys.getenv("CJA_CLIENT_ID"),
-  client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-  org_id = Sys.getenv("CJA_ORGANIZATION_ID")
+  debug = FALSE
 )
 }
 \arguments{
@@ -25,12 +22,6 @@ cja_get_metrics(
 \item{locale}{Locale - Default: "en_US"}
 
 \item{debug}{Used to help troubleshoot api call issues. Shows the call and result in the console}
-
-\item{client_id}{Set in the global environment using "AW_CLIENT_ID" or pass directly here}
-
-\item{client_secret}{Set in the global environment using "AW_CLIENT_SECRET" or pass directly here}
-
-\item{org_id}{Set in the global environment using "AW_ORGANIZATION_ID" or pass directly here}
 }
 \value{
 A data frame of metrics in a specified dataview

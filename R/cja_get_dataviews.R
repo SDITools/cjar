@@ -14,9 +14,6 @@
 #' @param sortDirection Sort direction ('ASC' (default) or DESC)
 #' @param sortProperty property to sort by (only modifiedDate and id are currently allowed). 'id' is default
 #' @param debug Used to help troubleshoot api call issues. Shows the call and result in the console
-#' @param client_id Set in the global environment using "AW_CLIENT_ID" or pass directly here
-#' @param client_secret Set in the global environment using "AW_CLIENT_SECRET" or pass directly here
-#' @param org_id Set in the global environment using "AW_ORGANIZATION_ID" or pass directly here
 #'
 #' @details
 #' **Expansion** available items: "name" "description" "owner" "isDeleted"
@@ -46,15 +43,7 @@ cja_get_dataviews <- function(expansion = c('name'),
                               page = 0,
                               sortDirection = 'ASC',
                               sortProperty = 'id',
-                              debug = FALSE,
-                              client_id = Sys.getenv("CJA_CLIENT_ID"),
-                              client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-                              org_id = Sys.getenv('CJA_ORGANIZATION_ID')) {
-    assertthat::assert_that(
-        assertthat::is.string(client_id),
-        assertthat::is.string(client_secret),
-        assertthat::is.string(org_id)
-    )
+                              debug = FALSE) {
     #remove spaces from the list of expansion tags
     if(!is.na(paste(expansion,collapse=","))) {
         expansion <- paste(expansion,collapse=",")
@@ -78,10 +67,7 @@ cja_get_dataviews <- function(expansion = c('name'),
 
     req <- cja_call_api(req_path = urlstructure,
                         body = NULL,
-                        debug = debug,
-                        client_id = client_id,
-                        client_secret = client_secret,
-                        org_id = org_id)
+                        debug = debug)
 
     res <- httr::content(req, as = "text",encoding = "UTF-8")
 

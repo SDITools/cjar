@@ -43,8 +43,10 @@
 #' @seealso \code{\link{cja_get_metrics}}
 #'
 #' @param expansion Additional calculated metric metadata fields to include in the results:
-#' `reportSuiteName`, `modified`, `tags`, `definition`, `compatability`.
-#' See **Details** for more information about the quirks of this argument.
+#' "dataName" "approved" "favorite" "shares" "tags" "sharesFullName" "usageSummary"
+#' "usageSummaryWithRelevancyScore" "reportSuiteName" "siteTitle" "ownerFullName"
+#' "modified" "migratedIds" "isDeleted" "definition" "authorization" "compatibility"
+#' "legacyId" "internal" "dataGroup" "categories".
 #' @param includeType Include additional calculated metrics not owned by user. Available values are `all` (default),
 #' `shared`, `templates`, `unauthorized`, `deleted`, `internal`, and `curatedItem`. The `all` option takes precedence over `shared`
 #' @param dataIds Filter the list to only include calculated metrics tied to a specified RSID or
@@ -75,9 +77,6 @@
 #' `modified`, which is the last date the calculated metric was modified. When using this value for `sortProperty`,
 #' though, the name of the argument is `modified_date`.
 #' @param debug Include the output and input of the api call in the console for debugging. Default is FALSE
-#' @param client_id Set in environment args, or pass directly here
-#' @param client_secret Set in environment args, or pass directly here
-#' @param org_id Set in environment args or pass directly here
 #'
 #' @return A data frame of calculated metrics and their metadata.
 #'
@@ -99,10 +98,7 @@ cja_get_calculatedmetrics <- function(expansion = NULL,
                                       page = 0,
                                       sortDirection = 'DESC',
                                       sortProperty = NULL,
-                                      debug = FALSE,
-                                      client_id = Sys.getenv("CJA_CLIENT_ID"),
-                                      client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-                                      org_id = Sys.getenv('CJA_ORGANIZATION_ID'))
+                                      debug = FALSE)
 {
 
   #includeType is case senstative
@@ -129,11 +125,8 @@ cja_get_calculatedmetrics <- function(expansion = NULL,
 
   req <- cja_call_api(req_path = urlstructure,
                       body = NULL,
-                      debug = debug,
-                      client_id = client_id,
-                      client_secret = client_secret,
-                      org_id = org_id)
+                      debug = debug)
 
-  jsonlite::fromJSON(httr::content(req, as = 'text', encoding = "UTF-8"))[[1]]
+  tibble::as_tibble(jsonlite::fromJSON(httr::content(req, as = 'text', encoding = "UTF-8"))$content)
 }
 

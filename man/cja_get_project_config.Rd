@@ -8,10 +8,7 @@ cja_get_project_config(
   id = NULL,
   expansion = "definition",
   locale = "en_US",
-  debug = FALSE,
-  client_id = Sys.getenv("CJA_CLIENT_ID"),
-  client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-  org_id = Sys.getenv("CJA_ORGANIZATION_ID")
+  debug = FALSE
 )
 }
 \arguments{
@@ -22,15 +19,9 @@ cja_get_project_config(
 \item{locale}{Locale - Default: "en_US"}
 
 \item{debug}{Used to help troubleshoot api call issues. Shows the call and result in the console}
-
-\item{client_id}{Set in environment args, or pass directly here}
-
-\item{client_secret}{Set in environment args, or pass directly here}
-
-\item{org_id}{Set in environment args or pass directly here}
 }
 \value{
-A data frame of projects and corresponding metadata
+A project configuration list
 }
 \description{
 Retrieves a project configuration JSON string.

@@ -4,19 +4,10 @@
 \alias{cja_get_audit_logs_search}
 \title{CJA Get Audit Logs Search}
 \usage{
-cja_get_audit_logs_search(
-  client_id = Sys.getenv("CJA_CLIENT_ID"),
-  client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-  org_id = Sys.getenv("CJA_ORGANIZATION_ID"),
-  debug = FALSE
-)
+cja_get_audit_logs_search(body = NULL, debug = FALSE)
 }
 \arguments{
-\item{client_id}{Set in environment args, or pass directly in the function}
-
-\item{client_secret}{Set in environment args, or pass directly in the function}
-
-\item{org_id}{Set in environment args or pass directly in the function}
+\item{body}{The json string with the search functions included}
 
 \item{debug}{Set to TRUE if needed to help troubleshoot api call errors}
 }
@@ -28,6 +19,6 @@ This function will pull a list of audit logs.
 }
 \examples{
 \dontrun{
-get_me()
+cja_get_audit_logs_search(body = jsonrequest)
 }
 }

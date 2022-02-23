@@ -11,9 +11,6 @@
 #' @param limit Number of results per page
 #' @param page Page number (base 0 - first page is "0")
 #' @param debug Used to help troubleshoot api call issues. Shows the call and result in the console
-#' @param client_id Set in environment args, or pass directly here
-#' @param client_secret Set in environment args, or pass directly here
-#' @param org_id Set in environment args or pass directly here
 #'
 #' @details
 #'
@@ -40,15 +37,7 @@ cja_get_projects <- function(includeType = 'all',
                              ownerId = NULL,
                              limit = 10,
                              page = 0,
-                             debug = FALSE,
-                             client_id = Sys.getenv("CJA_CLIENT_ID"),
-                             client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-                             org_id = Sys.getenv('CJA_ORGANIZATION_ID')) {
-    assertthat::assert_that(
-        assertthat::is.string(client_id),
-        assertthat::is.string(client_secret),
-        assertthat::is.string(org_id)
-    )
+                             debug = FALSE) {
 
     query_params <- list(includeType = includeType,
                          expansion = expansion,
@@ -65,12 +54,9 @@ cja_get_projects <- function(includeType = 'all',
 
     req <- cja_call_api(req_path = urlstructure,
                         body = NULL,
-                        debug = debug,
-                        client_id = client_id,
-                        client_secret = client_secret,
-                        org_id = org_id)
+                        debug = debug)
 
     res <- httr::content(req, as= 'text', encoding = 'UTF-8')
 
-    jsonlite::fromJSON(res)
+    tibble::as_tibble(jsonlite::fromJSON(res)$content)
 }

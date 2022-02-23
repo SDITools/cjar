@@ -4,16 +4,13 @@
 \alias{cja_auth}
 \alias{auth_jwt}
 \alias{auth_oauth}
-\title{Generate an access token for Adobe Analytics 2.0}
+\title{Generate an Access Token for the Adobe Analytics v2.0 API}
 \usage{
-cja_auth(type = cja_auth_with("jwt"), ...)
+cja_auth(type = "jwt", ...)
 
 auth_jwt(
-  client_id = Sys.getenv("CJA_CLIENT_ID"),
-  client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
+  file = Sys.getenv("CJA_AUTH_FILE"),
   private_key = Sys.getenv("CJA_PRIVATE_KEY"),
-  org_id = Sys.getenv("CJA_ORGANIZATION_ID"),
-  tech_id = Sys.getenv("CJA_TECHNICAL_ID"),
   jwt_token = NULL,
   ...
 )
@@ -25,22 +22,25 @@ auth_oauth(
 )
 }
 \arguments{
-\item{type}{Either 'jwt' or 'oauth'. Defaults to 'oauth'.}
+\item{type}{Either 'jwt' or 'oauth'. This can be set explicitly, but a best practice is
+to run \code{cja_auth_with()} to set the authorization type as an environment variable before
+running \code{cja_auth()}}
 
-\item{...}{Arguments passed to auth functions.}
+\item{...}{Additional arguments passed to auth functions.}
 
-\item{client_id}{Client ID}
+\item{file}{A JSON file containing service account credentials required for JWT
+authentication. This file can be downloaded directly from the Adobe Console,
+and should minimally have the fields \code{API_KEY}, \code{CLIENT_SECRET}, \code{ORG_ID},
+and \code{TECHNICAL_ACCOUNT_ID}.}
 
-\item{client_secret}{Client secret}
+\item{private_key}{Filename of the private key for JWT authentication.}
 
-\item{private_key}{File path to private key for token signature}
+\item{jwt_token}{\emph{(Optional)} A custom, encoded, signed JWT claim. If used,
+\code{client_id} and \code{client_secret} are still required.}
 
-\item{org_id}{Organization ID from integration console}
+\item{client_id}{The client ID, defined by a global variable or manually defined}
 
-\item{tech_id}{Technical account ID from integration console}
-
-\item{jwt_token}{Optional, a custom, encoded, signed JWT claim. If used,
-only \code{client_id} and \code{client_secret} are required.}
+\item{client_secret}{The client secret, defined by a global variable or manually defined}
 
 \item{use_oob}{if \code{FALSE}, use a local webserver for the OAuth dance.
 Otherwise, provide a URL to the user and prompt for a validation code.
@@ -48,11 +48,11 @@ Defaults to the value of the \code{httr_oob_default} default, or TRUE if
 \code{httpuv} is not installed.}
 }
 \value{
-The path of the cached token, invisibly
+The path of the cached token. This is returned invisibly.
 }
 \description{
-\code{auth_oauth} and \code{auth_jwt} should not be called directly, as these do not cache
-the token.
+\strong{Note:} \code{cja_auth()} is the primary function used for authorization. \code{auth_oauth()}
+and \code{auth_jwt()} should typically not be called directly.
 }
 \section{Functions}{
 \itemize{
@@ -61,4 +61,7 @@ the token.
 \item \code{auth_oauth}: Authorize via OAuth 2.0
 }}
 
+\seealso{
+\code{\link[=cja_auth_with]{cja_auth_with()}}
+}
 \concept{auth}

@@ -28,4 +28,6 @@ Imports:
     progress,
     vctrs,
     stringr,
-    rlang
+    rlang,
+    memoise,
+    openssl

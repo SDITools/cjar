@@ -14,13 +14,10 @@
 #' @param pageSize Number of results per page. If left null, the default size will be set to 100.
 #' @param pageNumber Page number (base 0 - first page is "0")
 #' @param debug Used to help troubleshoot api call issues. Shows the call and result in the console
-#' @param client_id Set in environment args, or pass directly in the function
-#' @param client_secret Set in environment args, or pass directly in the function
-#' @param org_id Set in environment args or pass directly in the function
 #'
 #' @details
 #'
-#' *startDate/endDate* format must be in datetime format
+#' *startDate/endDate* format
 #'
 #' *Action* available values are: 'CREATE', 'EDIT', 'DELETE', 'LOGIN_FAILED',
 #' 'LOGIN_SUCCESSFUL', 'API_REQUEST', 'LOGOUT', 'APPROVE', 'UNAPPROVE', 'SHARE', 'UNSHARE',
@@ -50,15 +47,7 @@ cja_get_audit_logs <- function(startDate = NULL,
                                description = NULL,
                                pageSize = 100,
                                pageNumber = 0,
-                               debug = FALSE,
-                               client_id = Sys.getenv("CJA_CLIENT_ID"),
-                               client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-                               org_id = Sys.getenv('CJA_ORGANIZATION_ID')) {
-  assertthat::assert_that(
-    assertthat::is.string(client_id),
-    assertthat::is.string(client_secret),
-    assertthat::is.string(org_id)
-  )
+                               debug = FALSE) {
   if (pageSize > 1000) {
     stop("The argument `pageSize` can not be more than 1000. Use `pageNumber` to get the next set of results if more than 1000 results are needed.")
   }
@@ -87,10 +76,7 @@ cja_get_audit_logs <- function(startDate = NULL,
 
   req <- cja_call_api(req_path = urlstructure,
                       body = NULL,
-                      debug = debug,
-                      client_id = client_id,
-                      client_secret = client_secret,
-                      org_id = org_id)
+                      debug = debug)
 
   res <- httr::content(req, as = "text",encoding = "UTF-8")
 

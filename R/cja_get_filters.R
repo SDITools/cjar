@@ -18,9 +18,6 @@
 #' @param sortDirection Sort direction ('ASC' or 'DESC'). 'ASC' is default.
 #' @param sortProperty Property to sort by (name, modified_date, performanceScore, id is currently allowed). 'id' is default
 #' @param debug Used to help troubleshoot api call issues. Shows the call and result in the console
-#' @param client_id Set in environment args, or pass directly here
-#' @param client_secret Set in environment args, or pass directly here
-#' @param org_id Set in environment args or pass directly here
 #'
 #' @details
 #'
@@ -55,15 +52,7 @@ cja_get_filters <- function(expansion = NULL,
                             page = 0,
                             sortDirection = 'ASC',
                             sortProperty = 'id',
-                            debug = FALSE,
-                            client_id = Sys.getenv("CJA_CLIENT_ID"),
-                            client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-                            org_id = Sys.getenv('CJA_ORGANIZATION_ID')) {
-    assertthat::assert_that(
-        assertthat::is.string(client_id),
-        assertthat::is.string(client_secret),
-        assertthat::is.string(org_id)
-    )
+                            debug = FALSE) {
 
   query_params <- list(expansion = expansion,
                        includeType = includeType,
@@ -87,10 +76,7 @@ cja_get_filters <- function(expansion = NULL,
 
     req <- cja_call_api(req_path = urlstructure,
                         body = NULL,
-                        debug = debug,
-                        client_id = client_id,
-                        client_secret = client_secret,
-                        org_id = org_id)
+                        debug = debug)
 
     res <- httr::content(req, as= 'text', encoding = 'UTF-8')
 

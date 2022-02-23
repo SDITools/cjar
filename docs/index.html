@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,20 +33,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">cjar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9007</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9008</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
+  <a href="reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
@@ -59,26 +58,26 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="cjar" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#cjar" class="anchor"></a>cjar</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="cjar">cjar<a class="anchor" aria-label="anchor" href="#cjar"></a>
+</h1></div>
 <!-- badges: start -->
 
-<!-- <img src="man/figures/logo.png" align="right" width = "200"/> -->
-<div id="an-r-client-for-cja-api" class="section level2">
-<h2 class="hasAnchor">
-<a href="#an-r-client-for-cja-api" class="anchor"></a>An R Client for CJA API</h2>
-<p>Connect to the CJA API, which powers CJA Workspace. The package was developed with the analyst in mind and will continue to be developed with the guiding principles of iterative, repeatable, timely analysis. New features are actively being developed and we value your feedback and contribution to the process. Please submit bugs, questions, and enhancement requests as <a href="https://github.com/searchdiscovery/cjar/issues">issues in this Github repository</a>.</p>
+<p><img src="reference/figures/cjar_logo_01.png" align="right" width="200"></p>
+<div class="section level2">
+<h2 id="an-r-client-for-cja-api">An R Client for CJA API<a class="anchor" aria-label="anchor" href="#an-r-client-for-cja-api"></a>
+</h2>
+<p>Connect to the CJA API, which powers CJA Workspace. The package was developed with the analyst in mind and will continue to be developed with the guiding principles of iterative, repeatable, timely analysis. New features are actively being developed and we value your feedback and contribution to the process. Please submit bugs, questions, and enhancement requests as <a href="https://github.com/searchdiscovery/cjar/issues" class="external-link">issues in this Github repository</a>.</p>
 <!-- ### Install the package (recommended) -->
 <!-- ``` -->
 <!-- # Install from CRAN -->
-<!-- install.packages('adobeanalyticsr') -->
+<!-- install.packages('cjar') -->
 <!-- # Load the package -->
-<!-- library(adobeanalyticsr)  -->
+<!-- library(cjar)  -->
 <!-- ``` -->
-<div id="install-the-development-version-of-the-package" class="section level3">
-<h3 class="hasAnchor">
-<a href="#install-the-development-version-of-the-package" class="anchor"></a>Install the development version of the package</h3>
+<div class="section level3">
+<h3 id="install-the-development-version-of-the-package">Install the development version of the package<a class="anchor" aria-label="anchor" href="#install-the-development-version-of-the-package"></a>
+</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install devtools from CRAN</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -88,22 +87,22 @@
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the package</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cjar) </span></code></pre></div>
 </div>
-<div id="current-setup-process-overview" class="section level3">
-<h3 class="hasAnchor">
-<a href="#current-setup-process-overview" class="anchor"></a>Current setup process overview</h3>
+<div class="section level3">
+<h3 id="current-setup-process-overview">Current setup process overview<a class="anchor" aria-label="anchor" href="#current-setup-process-overview"></a>
+</h3>
 <p>There are four setup steps required to start accessing your Customer Journey Analytics data. The following steps are each outlined in greater detail in the following sections:</p>
-<ol>
+<ol style="list-style-type: decimal">
 <li>Create an Adobe Console API Project</li>
 <li>Create and add the JWT arguments to your <code>.Renviron</code> file.</li>
 <li>Get your authorization token by using the function <code><a href="reference/cja_auth.html">cja_auth()</a></code>.</li>
 <li>Get the <code>Data View ID</code> by using the function <code><a href="reference/cja_get_dataviews.html">cja_get_dataviews()</a></code>.</li>
 </ol>
-<div id="1-create-an-adobe-console-api-project" class="section level4">
-<h4 class="hasAnchor">
-<a href="#1-create-an-adobe-console-api-project" class="anchor"></a>1. Create an Adobe Console API Project</h4>
+<div class="section level4">
+<h4 id="1-create-an-adobe-console-api-project">1. Create an Adobe Console API Project<a class="anchor" aria-label="anchor" href="#1-create-an-adobe-console-api-project"></a>
+</h4>
 <p>When using JWT authentication, you only need an Adobe Console API project for each organization you are needing to access.</p>
 <p>Once you are a developer for a CJA product profile, you can create an API client in the Adobe Developer Console.</p>
-<ol>
+<ol style="list-style-type: decimal">
 <li>Navigate to console.adobe.io.</li>
 <li>Check the organization name in the top right to make sure that you are logged in to the correct company.</li>
 <li>Click Create new project.</li>
@@ -122,11 +121,11 @@
 <li>Locate the config.zip file that automatically downloaded in step 6. Unzip the file and move the ‘private.zip’ file into your working directory. The location of this file will be needed as the value of the <strong>CJA_PRIVATE_KEY</strong> variable.</li>
 </ol>
 </div>
-<div id="2-set-up-the-renviron-file" class="section level4">
-<h4 class="hasAnchor">
-<a href="#2-set-up-the-renviron-file" class="anchor"></a>2. Set up the .Renviron file</h4>
+<div class="section level4">
+<h4 id="2-set-up-the-renviron-file">2. Set up the .Renviron file<a class="anchor" aria-label="anchor" href="#2-set-up-the-renviron-file"></a>
+</h4>
 <p>This file is essential to keeping your information secure. It also speeds up analysis by limiting the number of arguments you need to add to every function call.</p>
-<ol>
+<ol style="list-style-type: decimal">
 <li>If you do not have an <code>.Renviron</code> file (if you have never heard of this file you almost certainly don’t have one!), then create a new file and save it with the name <code>.Renviron</code>. You can do this from within the RStudio environment and save the file either in your <code>Home</code> directory (which is recommended; click on the <strong>Home</strong> button in the file navigator in RStudio and save it to that location) <em>or</em> within your project’s working directory.</li>
 <li>Get the following variables from the CJA project and config.zip file and then add them to the file (see <em>Creating an Adobe Console API Project</em> above) The format of variables in the <code>.Renviron</code> file is straightforward.</li>
 </ol>
@@ -137,21 +136,21 @@
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>CJA_ORGANIZATION_ID<span class="ot">=</span>XXXXXXXXXXXXX<span class="sc">@</span>AdobeOrg</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>CJA_PRIVATE_KEY<span class="ot">=</span>private.key</span></code></pre></div>
-<p>After adding all 5 variables to the <code>.Renviron</code> file and saving it, restart your R session (<strong>Session &gt; Restart R</strong> in RStudio) and reload <code>cjar</code> (<code><a href="https://rdrr.io/r/base/library.html">library(cjar)</a></code>).</p>
+<p>After adding all 5 variables to the <code>.Renviron</code> file and saving it, restart your R session (<strong>Session &gt; Restart R</strong> in RStudio) and reload <code>cjar</code> (<code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(cjar)</a></code>).</p>
 </div>
-<div id="3-get-your-access-token" class="section level4">
-<h4 class="hasAnchor">
-<a href="#3-get-your-access-token" class="anchor"></a>3. Get your access token</h4>
+<div class="section level4">
+<h4 id="3-get-your-access-token">3. Get your access token<a class="anchor" aria-label="anchor" href="#3-get-your-access-token"></a>
+</h4>
 <p>The token is actually a lonnnnng alphanumeric string that is the what ultimately enables you to access your data:</p>
-<ol>
+<ol style="list-style-type: decimal">
 <li>In the console, enter <code>aw_auth()</code> and press <em>Enter</em>.</li>
 <li>In the Console window you should see “Successfully authenticated with JWT: access token valid until ….”</li>
 <li>If you do not see this message then go back and repeat the previous steps to make sure you did not miss something.</li>
 </ol>
 </div>
-<div id="4-get-the-data-view-id" class="section level4">
-<h4 class="hasAnchor">
-<a href="#4-get-the-data-view-id" class="anchor"></a>4. Get the Data View ID</h4>
+<div class="section level4">
+<h4 id="4-get-the-data-view-id">4. Get the Data View ID<a class="anchor" aria-label="anchor" href="#4-get-the-data-view-id"></a>
+</h4>
 <p>All data in CJA is located in Data Views, similar to Report Suites in Adobe Analytics. Before pulling data it is advisable to locate the data view id of the data you are attempting to pull from.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pull a list of available data views</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -167,36 +166,48 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Ben Woodard <br><small class="roles"> Author, maintainer </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="authors.html#citation">Citing cjar</a></li>
 </ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Ben Woodard <br><small class="roles"> Author, maintainer </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Ben Woodard.</p>
+  <p></p>
+<p>Developed by Ben Woodard.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -204,6 +215,8 @@
 
   
 
+
+  
 
   </body>
 </html>

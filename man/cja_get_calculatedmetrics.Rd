@@ -19,16 +19,15 @@ cja_get_calculatedmetrics(
   page = 0,
   sortDirection = "DESC",
   sortProperty = NULL,
-  debug = FALSE,
-  client_id = Sys.getenv("CJA_CLIENT_ID"),
-  client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-  org_id = Sys.getenv("CJA_ORGANIZATION_ID")
+  debug = FALSE
 )
 }
 \arguments{
 \item{expansion}{Additional calculated metric metadata fields to include in the results:
-\code{reportSuiteName}, \code{modified}, \code{tags}, \code{definition}, \code{compatability}.
-See \strong{Details} for more information about the quirks of this argument.}
+"dataName" "approved" "favorite" "shares" "tags" "sharesFullName" "usageSummary"
+"usageSummaryWithRelevancyScore" "reportSuiteName" "siteTitle" "ownerFullName"
+"modified" "migratedIds" "isDeleted" "definition" "authorization" "compatibility"
+"legacyId" "internal" "dataGroup" "categories".}
 
 \item{includeType}{Include additional calculated metrics not owned by user. Available values are \code{all} (default),
 \code{shared}, \code{templates}, \code{unauthorized}, \code{deleted}, \code{internal}, and \code{curatedItem}. The \code{all} option takes precedence over \code{shared}}
@@ -73,12 +72,6 @@ and \code{modified_date}. Note that setting \code{expansion = modified} returns 
 though, the name of the argument is \code{modified_date}.}
 
 \item{debug}{Include the output and input of the api call in the console for debugging. Default is FALSE}
-
-\item{client_id}{Set in environment args, or pass directly here}
-
-\item{client_secret}{Set in environment args, or pass directly here}
-
-\item{org_id}{Set in environment args or pass directly here}
 }
 \value{
 A data frame of calculated metrics and their metadata.

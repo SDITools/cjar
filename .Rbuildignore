@@ -3,6 +3,8 @@
 ^\.Renviron
 ^README\.Rmd$
 ^.*\.key$
+^.*\.json$
 ^LICENSE\.md$
 ^docs
 ^testingdocs
+^data-raw$

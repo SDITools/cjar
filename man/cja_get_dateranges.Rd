@@ -11,10 +11,7 @@ cja_get_dateranges(
   page = 0,
   expansion = "definition",
   includeType = "all",
-  debug = FALSE,
-  client_id = Sys.getenv("CJA_CLIENT_ID"),
-  client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-  org_id = Sys.getenv("CJA_ORGANIZATION_ID")
+  debug = FALSE
 )
 }
 \arguments{
@@ -31,12 +28,6 @@ cja_get_dateranges(
 \item{includeType}{Include additional filters not owned by user. Default is "all". Options include: "all" (default), "shared", "templates"}
 
 \item{debug}{Used to help troubleshoot api call issues. Shows the call and result in the console}
-
-\item{client_id}{Set in environment args, or pass directly here}
-
-\item{client_secret}{Set in environment args, or pass directly here}
-
-\item{org_id}{Set in environment args or pass directly here}
 }
 \value{
 A data frame of dateranges and their corresponding metadata

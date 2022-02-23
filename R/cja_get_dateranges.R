@@ -9,9 +9,6 @@
 #' @param expansion Comma-delimited list of additional date range metadata fields to include on response.
 #' @param includeType Include additional filters not owned by user. Default is "all". Options include: "all" (default), "shared", "templates"
 #' @param debug Used to help troubleshoot api call issues. Shows the call and result in the console
-#' @param client_id Set in environment args, or pass directly here
-#' @param client_secret Set in environment args, or pass directly here
-#' @param org_id Set in environment args or pass directly here
 #'
 #' @details
 #'
@@ -29,6 +26,7 @@
 #' @export
 #' @import assertthat httr
 #' @importFrom purrr map_df
+#' @importFrom tibble as_tibble
 #'
 cja_get_dateranges <- function(locale = "en_US",
                                filterByIds = NULL,
@@ -36,23 +34,7 @@ cja_get_dateranges <- function(locale = "en_US",
                                page = 0,
                                expansion = 'definition',
                                includeType = 'all',
-                               debug = FALSE,
-                               client_id = Sys.getenv("CJA_CLIENT_ID"),
-                               client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-                               org_id = Sys.getenv('CJA_ORGANIZATION_ID')) {
-    assertthat::assert_that(
-        assertthat::is.string(client_id),
-        assertthat::is.string(client_secret),
-        assertthat::is.string(org_id)
-    )
-    #remove spaces from the list of expansion items
-    if(!is.na(paste(expansion,collapse=","))) {
-        expansion <- paste(expansion,collapse=",")
-    }
-    #remove spaces from the list of includeType items
-    if(!is.na(paste(includeType,collapse=","))) {
-        includeType <- paste(includeType,collapse=",")
-    }
+                               debug = FALSE) {
 
     query_params <- list(locale = locale,
                          filterByIds = filterByIds,
@@ -67,11 +49,9 @@ cja_get_dateranges <- function(locale = "en_US",
 
     req <- cja_call_api(req_path = urlstructure,
                         body = NULL,
-                        debug = debug,
-                        client_id = client_id,
-                        client_secret = client_secret,
-                        org_id = org_id)
+                        debug = debug)
+
     res <- httr::content(req, as= 'text', encoding = 'UTF-8')
 
-    jsonlite::fromJSON(res)
+    tibble::as_tibble(jsonlite::fromJSON(res)$content)
 }

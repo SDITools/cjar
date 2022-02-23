@@ -16,10 +16,7 @@ cja_get_audit_logs(
   description = NULL,
   pageSize = 100,
   pageNumber = 0,
-  debug = FALSE,
-  client_id = Sys.getenv("CJA_CLIENT_ID"),
-  client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-  org_id = Sys.getenv("CJA_ORGANIZATION_ID")
+  debug = FALSE
 )
 }
 \arguments{
@@ -46,12 +43,6 @@ cja_get_audit_logs(
 \item{pageNumber}{Page number (base 0 - first page is "0")}
 
 \item{debug}{Used to help troubleshoot api call issues. Shows the call and result in the console}
-
-\item{client_id}{Set in environment args, or pass directly in the function}
-
-\item{client_secret}{Set in environment args, or pass directly in the function}
-
-\item{org_id}{Set in environment args or pass directly in the function}
 }
 \value{
 A data frame of audit logs and corresponding metadata
@@ -60,7 +51,7 @@ A data frame of audit logs and corresponding metadata
 This function will pull a list of audit logs defined by the different defined parameters.
 }
 \details{
-\emph{startDate/endDate} format must be in datetime format
+\emph{startDate/endDate} format
 
 \emph{Action} available values are: 'CREATE', 'EDIT', 'DELETE', 'LOGIN_FAILED',
 'LOGIN_SUCCESSFUL', 'API_REQUEST', 'LOGOUT', 'APPROVE', 'UNAPPROVE', 'SHARE', 'UNSHARE',

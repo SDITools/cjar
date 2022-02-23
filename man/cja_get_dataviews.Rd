@@ -16,10 +16,7 @@ cja_get_dataviews(
   page = 0,
   sortDirection = "ASC",
   sortProperty = "id",
-  debug = FALSE,
-  client_id = Sys.getenv("CJA_CLIENT_ID"),
-  client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-  org_id = Sys.getenv("CJA_ORGANIZATION_ID")
+  debug = FALSE
 )
 }
 \arguments{
@@ -46,12 +43,6 @@ cja_get_dataviews(
 \item{sortProperty}{property to sort by (only modifiedDate and id are currently allowed). 'id' is default}
 
 \item{debug}{Used to help troubleshoot api call issues. Shows the call and result in the console}
-
-\item{client_id}{Set in the global environment using "AW_CLIENT_ID" or pass directly here}
-
-\item{client_secret}{Set in the global environment using "AW_CLIENT_SECRET" or pass directly here}
-
-\item{org_id}{Set in the global environment using "AW_ORGANIZATION_ID" or pass directly here}
 }
 \value{
 A data frame of dataview ids and their corresponding metadata

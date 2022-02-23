@@ -9,6 +9,5 @@
 #'
 "_PACKAGE"
 
-
 # Environment for caching tokens for the session
 .cjar <- new.env(parent = emptyenv())

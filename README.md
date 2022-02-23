@@ -9,7 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 <!-- badges: end -->
 
-<!-- <img src="man/figures/logo.png" align="right" width = "200"/> -->
+<img src="man/figures/cjar_logo_01.png" align="right" width = "200"/>
 
 ## An R Client for CJA API
 
@@ -24,9 +24,9 @@ repository](https://github.com/searchdiscovery/cjar/issues).
 <!-- ### Install the package (recommended) -->
 <!-- ``` -->
 <!-- # Install from CRAN -->
-<!-- install.packages('adobeanalyticsr') -->
+<!-- install.packages('cjar') -->
 <!-- # Load the package -->
-<!-- library(adobeanalyticsr)  -->
+<!-- library(cjar)  -->
 <!-- ``` -->
 
 ### Install the development version of the package
@@ -74,20 +74,25 @@ API client in the Adobe Developer Console.
 9.  Select the desired product profiles for the service account. Make
     sure that it contains the right permissions to access the API. Click
     Save configured API.
-10. Back on the project’s home page, click Add to project &gt; API.
+10. Back on the project’s home page, click Add to project > API.
 11. Click Adobe Experience Platform, then click Next.
 12. You already generated a keypair when creating the Adobe Analytics
     API, so you do not need to create another. Click Next.
 13. Select the desired product profiles for the service account. Make
     sure that it contains the right permissions to access the API. Click
     Save configured API.
-14. Copy and paste the Client ID, Client Secret (click “Retrieve client
-    secret”), Technical Account ID, and Organization ID and paste them
-    into a .Renviron file in the project or user directory.  
+14. Click on “Service Account (JWT)” under “CREDENTIALS” in the left
+    column. Locate the “Download JSON” button on the top right and click
+    it to download the service account JSON file. Alternatively, you can
+    manually create this file by copying and pasting the Client ID,
+    Client Secret (click “Retrieve client secret”), Technical Account
+    ID, and Organization ID into a `.json` file. Reference `?cja_auth`
+    for more inforamtion on the variables needed. Using the
+    preconfigured JSON file is the easiest method.
 15. Locate the config.zip file that automatically downloaded in step 6.
-    Unzip the file and move the ‘private.zip’ file into your working
-    directory. The location of this file will be needed as the value of
-    the **CJA\_PRIVATE\_KEY** variable.
+    Unzip the file and move the ‘private.zip’ to your desired location.
+    The location of this file will be needed as the value of the
+    **CJA_PRIVATE_KEY** variable.
 
 #### 2. Set up the .Renviron file
 
@@ -101,32 +106,31 @@ to every function call.
     within the RStudio environment and save the file either in your
     `Home` directory (which is recommended; click on the **Home** button
     in the file navigator in RStudio and save it to that location) *or*
-    within your project’s working directory.
-2.  Get the following variables from the CJA project and config.zip file
-    and then add them to the file (see *Creating an Adobe Console API
-    Project* above) The format of variables in the `.Renviron` file is
+    within your project’s working directory. You can also use the
+    [“usethis”](https://usethis.r-lib.org/reference/edit.html) package
+    to create the file by running the function
+    `edit_r_environ(scope = "user")`
+2.  Add the 2 variables, listed below, to the `.Renviron` file using the
+    file location path for both, the json (auth) file and the private
+    key file. The format of variables in the `.Renviron` file is
     straightforward.
 
 <!-- -->
 
     ## JWT creds ##
-    CJA_CLIENT_ID=XXXXXXXXXXXXXXXXXXXX
-    CJA_CLIENT_SECRET=XXX-XXXXXXXXXXXXXXXXXXXXXXX
-    CJA_TECHNICAL_ID=XXXXXXXXXXXXXXXXXXXX@techacct.adobe.com
-    CJA_ORGANIZATION_ID=XXXXXXXXXXXXX@AdobeOrg
-
+    CJA_AUTH_FILE=filelocation.json
     CJA_PRIVATE_KEY=private.key
 
-After adding all 5 variables to the `.Renviron` file and saving it,
-restart your R session (**Session &gt; Restart R** in RStudio) and
-reload `cjar` (`library(cjar)`).
+After adding all 2 variables to the `.Renviron` file and saving it,
+restart your R session (**Session \> Restart R** in RStudio) and reload
+`cjar` (`library(cjar)`).
 
 #### 3. Get your access token
 
 The token is actually a lonnnnng alphanumeric string that is the what
 ultimately enables you to access your data:
 
-1.  In the console, enter `aw_auth()` and press *Enter*.
+1.  In the console, enter `cja_auth()` and press *Enter*.
 2.  In the Console window you should see “Successfully authenticated
     with JWT: access token valid until ….”
 3.  If you do not see this message then go back and repeat the previous
@@ -135,8 +139,8 @@ ultimately enables you to access your data:
 #### 4. Get the Data View ID
 
 All data in CJA is located in Data Views, similar to Report Suites in
-Adobe Analytics. Before pulling data it is advisable to locate the data
-view id of the data you are attempting to pull from.
+Adobe Analytics. Before pulling data it is essential to locate the data
+view id you are attempting to pull from.
 
     #Pull a list of available data views
 

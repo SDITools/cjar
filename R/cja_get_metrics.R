@@ -7,9 +7,6 @@
 #' @param includeType Include additional segments not owned by user. Options include: "shared" "templates" "deleted" "internal"
 #' @param locale Locale - Default: "en_US"
 #' @param debug Used to help troubleshoot api call issues. Shows the call and result in the console
-#' @param client_id Set in the global environment using "AW_CLIENT_ID" or pass directly here
-#' @param client_secret Set in the global environment using "AW_CLIENT_SECRET" or pass directly here
-#' @param org_id Set in the global environment using "AW_ORGANIZATION_ID" or pass directly here
 #'
 #' @details
 #'
@@ -35,18 +32,12 @@ cja_get_metrics <- function(dataviewId = NULL,
                             expansion = 'description',
                             includeType = NULL,
                             locale = 'en_US',
-                            debug = FALSE,
-                            client_id = Sys.getenv("CJA_CLIENT_ID"),
-                            client_secret = Sys.getenv("CJA_CLIENT_SECRET"),
-                            org_id = Sys.getenv('CJA_ORGANIZATION_ID')) {
+                            debug = FALSE) {
     if (is.null(dataviewId)){
         stop ("The dataviewId argument is required.")
     }
     assertthat::assert_that(
-        assertthat::is.string(dataviewId),
-        assertthat::is.string(client_id),
-        assertthat::is.string(client_secret),
-        assertthat::is.string(org_id)
+        assertthat::is.string(dataviewId)
     )
 
     query_params <- list(expansion = expansion,
@@ -59,10 +50,7 @@ cja_get_metrics <- function(dataviewId = NULL,
 
     req <- cja_call_api(req_path = urlstructure,
                         body = NULL,
-                        debug = debug,
-                        client_id = client_id,
-                        client_secret = client_secret,
-                        org_id = org_id)
+                        debug = debug)
 
     res <- httr::content(req, as = "text",encoding = "UTF-8")
 
