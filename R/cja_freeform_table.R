@@ -74,7 +74,7 @@
 #' [cja_get_dimensions()], [cja_get_metrics()]
 #'
 #' Use [cja_get_me()] to get started.
-#' @param dataId CJA Data View ID (dv). Use [cja_get_dataviews()] to get a list of available `dataId` values.
+#' @param dataviewId CJA Data View ID (dv). Use [cja_get_dataviews()] to get a list of available `dataviewId` values.
 #' @param date_range A length-2 vector with a start date and an end date.
 #'   `POSIXt` objects are sent as is, for fine control over the date range.
 #'   Numeric values are automatically converted to dates.
@@ -133,7 +133,7 @@
 #' @importFrom vctrs vec_recycle
 #'
 #' @export
-cja_freeform_table <- function(dataId = NULL,
+cja_freeform_table <- function(dataviewId = NULL,
                                date_range = c(Sys.Date()-30, Sys.Date()-1),
                                dimensions = c('page', 'lasttouchchannel', 'mobiledevicetype'),
                                metrics = c("visits", "visitors"),
@@ -163,7 +163,7 @@ cja_freeform_table <- function(dataId = NULL,
   # Component lookup checks
   # The component checking is optional, in case speed is a priority
   if (check_components | prettynames) {
-    comp_lookup <- make_component_lookup(dataId,
+    comp_lookup <- make_component_lookup(dataviewId,
                                          metrics[is_calculated_metric(metrics)])
     invalid_components <- invalid_component_names(component = c(dimensions, metrics),
                                                   lookup = comp_lookup)
@@ -227,7 +227,7 @@ cja_freeform_table <- function(dataId = NULL,
     dimensions = dimensions,
     item_ids = NULL,
     metrics = metrics,
-    dataId = dataId,
+    dataId = dataviewId,
     global_filter = gf,
     settings = settings,
     debug = debug,

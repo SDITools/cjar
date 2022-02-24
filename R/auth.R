@@ -69,7 +69,6 @@ cja_auth <- function(type = 'jwt', ...) {
 #' @aliases cja_auth_with cja_auth_path cja_auth_name
 #' @export
 cja_auth_with <- function(type) {
-  type <- 'jwt'
   if (missing(type)) return(getOption("cjar.auth_type"))
 
   if (!is.null(type)) {

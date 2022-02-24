@@ -5,7 +5,7 @@
 \title{Get a freeform table}
 \usage{
 cja_freeform_table(
-  dataId = NULL,
+  dataviewId = NULL,
   date_range = c(Sys.Date() - 30, Sys.Date() - 1),
   dimensions = c("page", "lasttouchchannel", "mobiledevicetype"),
   metrics = c("visits", "visitors"),
@@ -27,7 +27,7 @@ cja_freeform_table(
 )
 }
 \arguments{
-\item{dataId}{CJA Data View ID (dv). Use \code{\link[=cja_get_dataviews]{cja_get_dataviews()}} to get a list of available \code{dataId} values.}
+\item{dataviewId}{CJA Data View ID (dv). Use \code{\link[=cja_get_dataviews]{cja_get_dataviews()}} to get a list of available \code{dataviewId} values.}
 
 \item{date_range}{A length-2 vector with a start date and an end date.
 \code{POSIXt} objects are sent as is, for fine control over the date range.
