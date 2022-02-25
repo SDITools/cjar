@@ -1,11 +1,16 @@
 Package: cjar
-Title: CJA API R Client
+Type: Package
+Title: R Client for 'Customer Journey Analytics' API
 Version: 0.1.0
 Authors@R: c( 
     person(given = "Ben", family = "Woodard", role = c("aut", "cre"), email = "ben.woodard@searchdiscovery.com"),
     person(given = "Charles", family = "Gallagher", role = c("ctb"), email = "charlesjgallagher15@gmail.com")
     )
-Description: Connect to the CJA API, which powers CJA Workspace. The package was developed with the analyst in mind and will continue to be developed with the guiding principles of iterative, repeatable, timely analysis. New features are actively being developed and we value your feedback and contribution to the process. 
+Description: Connect to the CJA API, which powers 'CJA Workspace'. The package 
+             was developed with the analyst in mind and will continue to be 
+             developed with the guiding principles of iterative, repeatable, 
+             timely analysis. New features are actively being developed and we 
+             value your feedback and contribution to the process. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
