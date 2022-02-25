@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">cjar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9009</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -116,7 +116,7 @@
 <li>Click Adobe Experience Platform, then click Next.</li>
 <li>You already generated a keypair when creating the Adobe Analytics API, so you do not need to create another. Click Next.</li>
 <li>Select the desired product profiles for the service account. Make sure that it contains the right permissions to access the API. Click Save configured API.</li>
-<li>Click on “Service Account (JWT)” under “CREDENTIALS” in the left column. Locate the “Download JSON” button on the top right and click it to download the service account JSON file. Alternatively, you can manually create this file by copying and pasting the Client ID, Client Secret (click “Retrieve client secret”), Technical Account ID, and Organization ID into a <code>.json</code> file. Reference <code><a href="reference/cja_auth.html">?cja_auth</a></code> for more inforamtion on the variables needed. Using the preconfigured JSON file is the easiest method.</li>
+<li>Click on “Service Account (JWT)” under “CREDENTIALS” in the left column. Locate the “Download JSON” button on the top right and click it to download the service account JSON file. Alternatively, you can manually create this file by copying and pasting the Client ID, Client Secret (click “Retrieve client secret”), Technical Account ID, and Organization ID into a <code>.json</code> file. Reference <code><a href="reference/cja_auth.html">?cja_auth</a></code> for more information on the variables needed. Using the preconfigured JSON file is the easiest method.</li>
 <li>Locate the config.zip file that automatically downloaded in step 6. Unzip the file and move the ‘private.zip’ to your desired location. The location of this file will be needed as the value of the <strong>CJA_PRIVATE_KEY</strong> variable.</li>
 </ol>
 </div>
@@ -132,14 +132,14 @@
 <!-- --><div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## JWT creds ##</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>CJA_AUTH_FILE<span class="ot">=</span>filelocation.json</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>CJA_PRIVATE_KEY<span class="ot">=</span>private.key</span></code></pre></div>
-<p>After adding all 2 variables to the <code>.Renviron</code> file and saving it, restart your R session (<strong>Session &gt; Restart R</strong> in RStudio) and reload <code>cjar</code> (<code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(cjar)</a></code>).</p>
+<p>After adding these 2 variables to the <code>.Renviron</code> file and saving it, restart your R session (<strong>Session &gt; Restart R</strong> in RStudio) and reload the package (<code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(cjar)</a></code>).</p>
 </div>
 <div class="section level4">
 <h4 id="3-get-your-access-token">3. Get your access token<a class="anchor" aria-label="anchor" href="#3-get-your-access-token"></a>
 </h4>
 <p>The token is actually a lonnnnng alphanumeric string that is the what ultimately enables you to access your data:</p>
 <ol style="list-style-type: decimal">
-<li>In the console, enter [<code><a href="reference/cja_auth.html">cja_auth()</a></code>] and press <em>Enter</em>.</li>
+<li>In the console, enter <code><a href="reference/cja_auth.html">cja_auth()</a></code> and press <em>Enter</em>.</li>
 <li>In the Console window you should see “Successfully authenticated with JWT: access token valid until ….”</li>
 <li>If you do not see this message then go back and repeat the previous steps to make sure you did not miss something.</li>
 </ol>

@@ -1,4 +1,4 @@
-# cjar 1.0.0
+# cjar 0.1.0
 
 * Initial CRAN Submission Version
 * added cja_auth() and other JWT authorization enabling functions
