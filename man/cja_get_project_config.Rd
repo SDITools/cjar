@@ -2,7 +2,7 @@
 % Please edit documentation in R/cja_get_project_config.R
 \name{cja_get_project_config}
 \alias{cja_get_project_config}
-\title{Get a projects configuration in CJA}
+\title{Get a project configuration in CJA}
 \usage{
 cja_get_project_config(
   id = NULL,

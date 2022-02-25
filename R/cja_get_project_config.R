@@ -1,4 +1,4 @@
-#' Get a projects configuration in CJA
+#' Get a project configuration in CJA
 #'
 #' Retrieves a project configuration JSON string.
 #'
@@ -25,21 +25,21 @@ cja_get_project_config <- function(id = NULL,
                                    expansion = 'definition',
                                    locale = "en_US",
                                    debug = FALSE) {
-    assertthat::assert_that(
-      assertthat::is.string(id)
-    )
-    query_params <- list(expansion = expansion,
-                         locale = locale)
+  assertthat::assert_that(
+    assertthat::is.string(id)
+  )
+  query_params <- list(expansion = expansion,
+                       locale = locale)
 
-    req_path <- glue::glue('projects/{id}')
+  req_path <- glue::glue('projects/{id}')
 
-    urlstructure <- paste(req_path, format_URL_parameters(query_params), sep = "?")
+  urlstructure <- paste(req_path, format_URL_parameters(query_params), sep = "?")
 
-    req <- cja_call_api(req_path = urlstructure,
-                        body = NULL,
-                        debug = debug)
+  req <- cja_call_api(req_path = urlstructure,
+                      body = NULL,
+                      debug = debug)
 
-    res <- httr::content(req, as= 'text', encoding = 'UTF-8')
+  res <- httr::content(req, as= 'text', encoding = 'UTF-8')
 
-    jsonlite::fromJSON(res)
+  jsonlite::fromJSON(res)
 }

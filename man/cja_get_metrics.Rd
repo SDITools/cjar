@@ -5,7 +5,7 @@
 \title{Get a list of metrics in CJA}
 \usage{
 cja_get_metrics(
-  dataviewId = NULL,
+  dataviewId = Sys.getenv("CJA_DATAVIEW_ID"),
   expansion = "description",
   includeType = NULL,
   locale = "en_US",
@@ -13,7 +13,9 @@ cja_get_metrics(
 )
 }
 \arguments{
-\item{dataviewId}{\emph{Required} The id of the dataview for which to retrieve metrics}
+\item{dataviewId}{\emph{Required} The id of the dataview for which to retrieve metrics. If an environment variable called \code{CJA_DATAVIEW_ID} exists
+in \code{.Renviron} or elsewhere and no \code{dataviewId} argument is provided, then the \code{CJA_DATAVIEW_ID} value will
+be used. Use \code{\link[=cja_get_dataviews]{cja_get_dataviews()}} to get a list of available \code{dataviewId}.}
 
 \item{expansion}{Comma-delimited list of additional segment metadata fields to include on response. See Details for all options available.}
 

@@ -1,8 +1,10 @@
 #' Get a list of dimensions in CJA
 #'
-#' Retrieves a list of dimensions available in a specified dataview
+#' Retrieves a list of dimensions available in a specified dataviewId
 #'
-#' @param dataviewId *Required* The id of the dataview for which to retrieve Dimensions
+#' @param dataviewId *Required* The id of the dataview for which to retrieve dimensions. If an environment variable called `CJA_DATAVIEW_ID` exists
+#' in `.Renviron` or elsewhere and no `dataviewId` argument is provided, then the `CJA_DATAVIEW_ID` value will
+#' be used. Use [cja_get_dataviews()] to get a list of available `dataviewId`.
 #' @param expansion Comma-delimited list of additional segment metadata fields to include on response. See Details for all options available.
 #' @param includeType Include additional segments not owned by user. Options include: "shared" "templates" "deleted" "internal"
 #' @param locale Locale - Default: "en_US"
@@ -28,12 +30,12 @@
 #' @import assertthat httr
 #' @importFrom stringr str_remove
 #'
-cja_get_dimensions <- function(dataviewId = NULL,
+cja_get_dimensions <- function(dataviewId = Sys.getenv("CJA_DATAVIEW_ID"),
                                expansion = 'description',
                                includeType = NULL,
                                locale = 'en_US',
                                debug = FALSE) {
-    if(is.null(dataviewId)){
+    if (dataviewId == ''){
         stop("The dataviewId argument is required.")
     }
     assertthat::assert_that(

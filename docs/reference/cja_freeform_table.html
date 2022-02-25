@@ -19,7 +19,7 @@ the results as a data frame."><!-- mathjax --><script src="https://cdnjs.cloudfl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cjar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9008</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9009</span>
       </span>
     </div>
 
@@ -52,7 +52,7 @@ the results as a data frame.</p>
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cja_freeform_table</span><span class="op">(</span>
-  dataId <span class="op">=</span> <span class="cn">NULL</span>,
+  dataviewId <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"CJA_DATAVIEW_ID"</span><span class="op">)</span>,
   date_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">30</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>,
   dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"page"</span>, <span class="st">"lasttouchchannel"</span>, <span class="st">"mobiledevicetype"</span><span class="op">)</span>,
   metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"visits"</span>, <span class="st">"visitors"</span><span class="op">)</span>,
@@ -76,8 +76,10 @@ the results as a data frame.</p>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>dataId</dt>
-<dd><p>CJA Data View ID (dv). Use <code><a href="cja_get_dataviews.html">cja_get_dataviews()</a></code> to get a list of available <code>dataId</code> values.</p></dd>
+    <dl><dt>dataviewId</dt>
+<dd><p>CJA Data View ID (dv). If an environment variable called <code>CJA_DATAVIEW_ID</code> exists
+in <code>.Renviron</code> or elsewhere and no <code>dataviewId</code> argument is provided, then the <code>CJA_DATAVIEW_ID</code> value will
+be used. Use <code><a href="cja_get_dataviews.html">cja_get_dataviews()</a></code> to get a list of available <code>dataviewId</code>. Required</p></dd>
 <dt>date_range</dt>
 <dd><p>A length-2 vector with a start date and an end date.
 <code>POSIXt</code> objects are sent as is, for fine control over the date range.

@@ -1,8 +1,8 @@
-#' CJA Get My Information
+#' Get my information
 #'
-#' This function will quickly pull the list of company ids that you have access to.
+#' This function will quickly pull the list of company ids that you have access to
 #'
-#' @param expansion Comma-delimited list of additional metada fields to include in the response. Options are 'admin'
+#' @param expansion Comma-delimited list of additional metadata fields to include in the response. Options are 'admin'
 #' @param debug Used to help troubleshoot api call issues. Shows the call and result in the console
 #'
 #' @return A list of the current user metadata

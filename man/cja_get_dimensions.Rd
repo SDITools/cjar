@@ -5,7 +5,7 @@
 \title{Get a list of dimensions in CJA}
 \usage{
 cja_get_dimensions(
-  dataviewId = NULL,
+  dataviewId = Sys.getenv("CJA_DATAVIEW_ID"),
   expansion = "description",
   includeType = NULL,
   locale = "en_US",
@@ -13,7 +13,9 @@ cja_get_dimensions(
 )
 }
 \arguments{
-\item{dataviewId}{\emph{Required} The id of the dataview for which to retrieve Dimensions}
+\item{dataviewId}{\emph{Required} The id of the dataview for which to retrieve dimensions. If an environment variable called \code{CJA_DATAVIEW_ID} exists
+in \code{.Renviron} or elsewhere and no \code{dataviewId} argument is provided, then the \code{CJA_DATAVIEW_ID} value will
+be used. Use \code{\link[=cja_get_dataviews]{cja_get_dataviews()}} to get a list of available \code{dataviewId}.}
 
 \item{expansion}{Comma-delimited list of additional segment metadata fields to include on response. See Details for all options available.}
 
@@ -27,7 +29,7 @@ cja_get_dimensions(
 A data frame of dimensions in a specified dataview
 }
 \description{
-Retrieves a list of dimensions available in a specified dataview
+Retrieves a list of dimensions available in a specified dataviewId
 }
 \details{
 \emph{Expansion} options can include the following:

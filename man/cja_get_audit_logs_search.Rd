@@ -2,7 +2,7 @@
 % Please edit documentation in R/cja_get_audit_logs_search.R
 \name{cja_get_audit_logs_search}
 \alias{cja_get_audit_logs_search}
-\title{CJA Get Audit Logs Search}
+\title{Get audit logs search}
 \usage{
 cja_get_audit_logs_search(body = NULL, debug = FALSE)
 }

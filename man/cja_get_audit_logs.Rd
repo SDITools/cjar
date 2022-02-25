@@ -2,7 +2,7 @@
 % Please edit documentation in R/cja_get_audit_logs.R
 \name{cja_get_audit_logs}
 \alias{cja_get_audit_logs}
-\title{CJA Get Audit Logs}
+\title{Get audit logs}
 \usage{
 cja_get_audit_logs(
   startDate = NULL,

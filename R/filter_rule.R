@@ -1,6 +1,6 @@
-#' Create the Filter Rule
+#' Create the filter rule
 #'
-#' This function creates the simple rule of a filter.
+#' This function creates the simple rule of a filter
 #'
 #' @param dimension This is the subject of the rule. The value should be the dimension
 #' id. Only the dimension or metric can be used at a time.
@@ -20,8 +20,9 @@
 #' to a rule the context for the attribution must be `visitors` (default) or `visits`
 #' @param validate Set to TRUE when metric or dimension validation is preferred. Default is FALSE.
 #' Validation will slow down the function response time but ensure a valid rule result.
-#' @param dataviewId CJA data view id.  If an environment variable called `CJA_DATAVIEW_ID` exists
-#' in `.Renviron` or elsewhere and no `dataviewId` argument is provided, then the `CJA_DATAVIEW_ID` value will
+#' @param dataviewId CJA data view id.  Required if the argument `validate` is set to TRUE.
+#' If an environment variable called `CJA_DATAVIEW_ID` exists in `.Renviron` or
+#' elsewhere and no `dataviewId` argument is provided, then the `CJA_DATAVIEW_ID` value will
 #' be used. Use [cja_get_dataviews()] to get a list of available `dataviewId`.
 #'
 #' @details

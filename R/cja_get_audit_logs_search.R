@@ -1,4 +1,4 @@
-#' CJA Get Audit Logs Search
+#' Get audit logs search
 #'
 #' This function will pull a list of audit logs.
 #' @param body The json string with the search functions included

@@ -1,6 +1,6 @@
 # General auth -------------------------------------------------
 
-#' Generate an Access Token for the Adobe Analytics v2.0 API
+#' Generate an access token for the Customer Journey Analytics API
 #'
 #' **Note:** `cja_auth()` is the primary function used for authorization. `auth_oauth()`
 #' and `auth_jwt()` should typically not be called directly.
@@ -239,20 +239,20 @@ get_env_vars <- function() {
   client_secret <- .cjar$client_secret
   org_id <- .cjar$org_id
 
-  if (is.null(client_id) | is.null(client_secret)) {
+  if (is.null(client_id) | is.null(client_secret) | is.null(org_id)) {
     client_id <- Sys.getenv("CJA_CLIENT_ID")
     client_secret <- Sys.getenv("CJA_CLIENT_SECRET")
     org_id <- Sys.getenv("CJA_ORG_ID")
   }
 
-  if (client_id == "" | client_secret == "") {
-    env_vars <- c(CJA_CLIENT_ID = client_id,
-                  CJA_CLIENT_SECRET = client_secret,
-                  CJA_ORG_ID = org_id)
+  if (client_id == "" | client_secret == "" | org_id == "") {
+    # env_vars <- c(client_id = client_id,
+    #               client_secret = client_secret,
+    #               org_id = org_id)
+    #
+    # missing_envs <- names(env_vars[env_vars == ""])
 
-    missing_envs <- names(env_vars[env_vars == ""])
-
-    stop("Cannot automatically authenticate due to missing environment variables: ", paste(missing_envs, collapse = ", "),
+    stop("Variable 'CJA_AUTH_FILE' not found but required for JWT authentication.\nSee `?cja_auth`",
          call. = FALSE)
   }
 

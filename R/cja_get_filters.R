@@ -4,7 +4,7 @@
 #'
 #' @param expansion Comma-delimited list of additional segment metadata fields to include on response. See Details for all options available
 #' @param includeType Include additional filters not owned by user. Default is "all". Options include: "shared" "templates" "deleted" "internal"
-#' @param dataIds Filter list to only include filters tied to the specified data group ID list (comma-delimited)
+#' @param dataviewIds Filter list to only include filters tied to the specified data group ID list (comma-delimited)
 #' @param ownerId Filter list to only include filters owned by the specified imsUserId
 #' @param filterByIds Filter list to only include filters in the specified list (comma-delimited list of IDs). This has filtered Ids from tags, approved, favorites and user specified Ids list.
 #' @param toBeUsedInRsid The report suite where the segment is intended to be used. This report suite will be used to determine things like compatibility and permissions.
@@ -39,7 +39,7 @@
 #'
 cja_get_filters <- function(expansion = NULL,
                             includeType = 'all',
-                            dataIds = NULL,
+                            dataviewIds = NULL,
                             ownerId = NULL,
                             filterByIds = NULL,
                             toBeUsedInRsid = NULL,
@@ -56,7 +56,7 @@ cja_get_filters <- function(expansion = NULL,
 
   query_params <- list(expansion = expansion,
                        includeType = includeType,
-                       dataIds = dataIds,
+                       dataIds = dataviewIds,
                        ownerId = ownerId,
                        filterByIds = filterByIds,
                        toBeUsedInRsid = toBeUsedInRsid,

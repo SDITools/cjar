@@ -1,4 +1,4 @@
-#' CJA Get Data View IDs
+#' Get data view ids
 #'
 #' This function will pull a list of data views ids that you have access to. These are similar to report suites in Adobe Analytics.
 #'
@@ -6,8 +6,8 @@
 #' @param parentDataGroupId Filters data views by a single parentDataGroupId
 #' @param externalIds Comma-delimited list of external ids to limit the response with
 #' @param externalParentIds Comma-delimited list of external parent ids to limit the response with.
-#' @param dataViewIds Comma-delimited list of data view ids to limit the response with.
-#' @param includeType Include additional DataViews not owned by user.
+#' @param dataviewIds Comma-delimited list of data view ids to limit the response with.
+#' @param includeType Include additional DataViews not owned by user. Options: "deleted"
 #' @param cached return cached results. TRUE (default) or FALSE
 #' @param limit number of results per page. 10 is default
 #' @param page Page number (base 0 - first page is 0). 0 is default
@@ -36,7 +36,7 @@ cja_get_dataviews <- function(expansion = c('name'),
                               parentDataGroupId = NULL,
                               externalIds = NULL,
                               externalParentIds = NULL,
-                              dataViewIds = NULL,
+                              dataviewIds = NULL,
                               includeType = NULL,
                               cached = TRUE,
                               limit = 1000,
@@ -53,7 +53,7 @@ cja_get_dataviews <- function(expansion = c('name'),
                          parentDataGroupId = parentDataGroupId,
                          externalIds = externalIds,
                          externalParentIds = externalParentIds,
-                         dataViewIds = dataViewIds,
+                         dataViewIds = dataviewIds,
                          includeType = includeType,
                          cached = cached,
                          limit = limit,

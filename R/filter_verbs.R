@@ -1,8 +1,8 @@
-#' Verbs available in filter rules.
+#' Verbs available to be used in filter rules.
 #'
 #' A dataset containing the list of available verbs which can be used in filters.
 #'
-#' @format A data frame with 32 rows and 4 variables:
+#' @format A data frame with 34 rows and 5 variables:
 #' \describe{
 #'   \item{type}{one of number, string, or exists}
 #'   \item{class}{gives the context of the type of value is expected, either

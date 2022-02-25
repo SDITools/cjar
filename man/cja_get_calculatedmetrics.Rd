@@ -7,7 +7,7 @@
 cja_get_calculatedmetrics(
   expansion = NULL,
   includeType = "all",
-  dataIds = NULL,
+  dataviewIds = NULL,
   ownerId = NULL,
   filterByIds = NULL,
   toBeUsedInRsid = NULL,
@@ -32,9 +32,9 @@ cja_get_calculatedmetrics(
 \item{includeType}{Include additional calculated metrics not owned by user. Available values are \code{all} (default),
 \code{shared}, \code{templates}, \code{unauthorized}, \code{deleted}, \code{internal}, and \code{curatedItem}. The \code{all} option takes precedence over \code{shared}}
 
-\item{dataIds}{Filter the list to only include calculated metrics tied to a specified RSID or
-list of RSIDs. Specify multiple RSIDs as a vector (i.e., "\verb{dataIds = c("dataviewid_1", dataviewid_2",...dataviewid_n")}").
-Use \code{\link{cja_get_dataviews}} to get a list of available \code{dataId} values.}
+\item{dataviewIds}{Filter the list to only include calculated metrics tied to a specified dataviewId or
+list of dataviewIds. Specify multiple dataviewIds as a vector (i.e., "\verb{dataviewIds = c("dataviewid_1", dataviewid_2",...dataviewid_n")}").
+Use \code{\link{cja_get_dataviews}} to get a list of available \code{dataviewId} values.}
 
 \item{ownerId}{Filter the list to only include calculated metrics owned by the specified loginId.}
 

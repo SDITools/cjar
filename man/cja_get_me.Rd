@@ -2,12 +2,12 @@
 % Please edit documentation in R/cja_get_me.R
 \name{cja_get_me}
 \alias{cja_get_me}
-\title{CJA Get My Information}
+\title{Get my information}
 \usage{
 cja_get_me(expansion = NULL, debug = FALSE)
 }
 \arguments{
-\item{expansion}{Comma-delimited list of additional metada fields to include in the response. Options are 'admin'}
+\item{expansion}{Comma-delimited list of additional metadata fields to include in the response. Options are 'admin'}
 
 \item{debug}{Used to help troubleshoot api call issues. Shows the call and result in the console}
 }
@@ -15,7 +15,7 @@ cja_get_me(expansion = NULL, debug = FALSE)
 A list of the current user metadata
 }
 \description{
-This function will quickly pull the list of company ids that you have access to.
+This function will quickly pull the list of company ids that you have access to
 }
 \examples{
 \dontrun{

@@ -16,7 +16,7 @@
 filter_val <- function(filter_body = NULL,
                        debug = FALSE){
   #validate arguments
-  if(is.null(filter_body)) {
+  if (is.null(filter_body)) {
     stop('The arguments `filter_body` must be included.')
   }
 

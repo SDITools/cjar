@@ -87,7 +87,7 @@ API client in the Adobe Developer Console.
     manually create this file by copying and pasting the Client ID,
     Client Secret (click “Retrieve client secret”), Technical Account
     ID, and Organization ID into a `.json` file. Reference `?cja_auth`
-    for more inforamtion on the variables needed. Using the
+    for more information on the variables needed. Using the
     preconfigured JSON file is the easiest method.
 15. Locate the config.zip file that automatically downloaded in step 6.
     Unzip the file and move the ‘private.zip’ to your desired location.
@@ -121,9 +121,9 @@ to every function call.
     CJA_AUTH_FILE=filelocation.json
     CJA_PRIVATE_KEY=private.key
 
-After adding all 2 variables to the `.Renviron` file and saving it,
+After adding these 2 variables to the `.Renviron` file and saving it,
 restart your R session (**Session \> Restart R** in RStudio) and reload
-`cjar` (`library(cjar)`).
+the package (`library(cjar)`).
 
 #### 3. Get your access token
 

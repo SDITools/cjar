@@ -4,7 +4,7 @@
 \alias{cja_auth}
 \alias{auth_jwt}
 \alias{auth_oauth}
-\title{Generate an Access Token for the Adobe Analytics v2.0 API}
+\title{Generate an access token for the Customer Journey Analytics API}
 \usage{
 cja_auth(type = "jwt", ...)
 

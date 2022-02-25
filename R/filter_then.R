@@ -1,6 +1,6 @@
 #' Create the filter sequence `then` object
 #'
-#' This function creates a then list object which restricts the time constraint of a filter to be added to a sequence filter.
+#' This function creates a 'then' list object which restricts the time constraint of a filter to be added to a sequence filter.
 #'
 #' @param limit The limitation of the restriction. Either `within` (default) or `after`
 #' @param count How many of the units should be used. `1` is set as default.

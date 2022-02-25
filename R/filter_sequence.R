@@ -1,6 +1,6 @@
-#' Create the Filter Sequence Container
+#' Create the filter sequence container
 #'
-#' This function combines rules into a sequence container.
+#' This function combines rules into a sequence container
 #'
 #' @param context Defines the level that the filter logic should operate on. Valid values for sequential filters is visitors and visits. See Details
 #' @param rules List of rules created using `filter_rule()` function. Must wrapped in a list() function.

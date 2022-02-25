@@ -2,14 +2,14 @@
 % Please edit documentation in R/cja_get_dataviews.R
 \name{cja_get_dataviews}
 \alias{cja_get_dataviews}
-\title{CJA Get Data View IDs}
+\title{Get data view ids}
 \usage{
 cja_get_dataviews(
   expansion = c("name"),
   parentDataGroupId = NULL,
   externalIds = NULL,
   externalParentIds = NULL,
-  dataViewIds = NULL,
+  dataviewIds = NULL,
   includeType = NULL,
   cached = TRUE,
   limit = 1000,
@@ -28,9 +28,9 @@ cja_get_dataviews(
 
 \item{externalParentIds}{Comma-delimited list of external parent ids to limit the response with.}
 
-\item{dataViewIds}{Comma-delimited list of data view ids to limit the response with.}
+\item{dataviewIds}{Comma-delimited list of data view ids to limit the response with.}
 
-\item{includeType}{Include additional DataViews not owned by user.}
+\item{includeType}{Include additional DataViews not owned by user. Options: "deleted"}
 
 \item{cached}{return cached results. TRUE (default) or FALSE}
 

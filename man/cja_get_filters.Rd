@@ -7,7 +7,7 @@
 cja_get_filters(
   expansion = NULL,
   includeType = "all",
-  dataIds = NULL,
+  dataviewIds = NULL,
   ownerId = NULL,
   filterByIds = NULL,
   toBeUsedInRsid = NULL,
@@ -28,7 +28,7 @@ cja_get_filters(
 
 \item{includeType}{Include additional filters not owned by user. Default is "all". Options include: "shared" "templates" "deleted" "internal"}
 
-\item{dataIds}{Filter list to only include filters tied to the specified data group ID list (comma-delimited)}
+\item{dataviewIds}{Filter list to only include filters tied to the specified data group ID list (comma-delimited)}
 
 \item{ownerId}{Filter list to only include filters owned by the specified imsUserId}
 

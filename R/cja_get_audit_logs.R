@@ -1,4 +1,4 @@
-#' CJA Get Audit Logs
+#' Get audit logs
 #'
 #' This function will pull a list of audit logs defined by the different defined parameters.
 #'

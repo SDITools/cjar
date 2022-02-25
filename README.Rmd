@@ -76,13 +76,13 @@ Once you are a developer for a CJA product profile, you can create an API client
 11. Click Adobe Experience Platform, then click Next.
 12. You already generated a keypair when creating the Adobe Analytics API, so you do not need to create another. Click Next.
 13. Select the desired product profiles for the service account. Make sure that it contains the right permissions to access the API. Click Save configured API.
-14. Click on "Service Account (JWT)" under "CREDENTIALS" in the left column. Locate the "Download JSON" button on the top right and click it to download the service account JSON file. Alternatively, you can manually create this file by copying and pasting the Client ID, Client Secret (click “Retrieve client secret”), Technical Account ID, and Organization ID into a `.json` file.  Reference `?cja_auth` for more inforamtion on the variables needed. Using the preconfigured JSON file is the easiest method.
+14. Click on "Service Account (JWT)" under "CREDENTIALS" in the left column. Locate the "Download JSON" button on the top right and click it to download the service account JSON file. Alternatively, you can manually create this file by copying and pasting the Client ID, Client Secret (click “Retrieve client secret”), Technical Account ID, and Organization ID into a `.json` file.  Reference `?cja_auth` for more information on the variables needed. Using the preconfigured JSON file is the easiest method.
 15. Locate the config.zip file that automatically downloaded in step 6. Unzip the file and move the 'private.zip' to your desired location. The location of this file will be needed as the value of the **CJA_PRIVATE_KEY** variable.
 
 
 #### 2. Set up the .Renviron file
 
-This file is essential to keeping your information secure. It also speeds up analysis by limiting the number of arguments you need to add to every function call.
+This file is essential to keeping your information secure. It also speeds up analysis by limiting the number of arguments you need to add to every function call. 
 
   1. If you do not have an `.Renviron` file (if you have never heard of this file you almost certainly don't have one!), then create a new file and save it with the name `.Renviron`. You can do this from within the RStudio environment and save the file either in your `Home` directory (which is recommended; click on the **Home** button in the file navigator in RStudio and save it to that location) _or_ within your project's working directory. You can also use the ["usethis"](https://usethis.r-lib.org/reference/edit.html) package to create the file by running the function `edit_r_environ(scope = "user")`
   2. Add the 2 variables, listed below, to the `.Renviron` file using the file location path for both, the json (auth) file and the private key file. The format of variables in the `.Renviron` file is straightforward.
@@ -93,7 +93,7 @@ CJA_AUTH_FILE=filelocation.json
 CJA_PRIVATE_KEY=private.key
 ```
       
-After adding all 2 variables to the `.Renviron` file and saving it, restart your R session (**Session > Restart R** in RStudio) and reload `cjar` (`library(cjar)`). 
+After adding these 2 variables to the `.Renviron` file and saving it, restart your R session (**Session > Restart R** in RStudio) and reload the package (`library(cjar)`). 
 
 
 #### 3. Get your access token

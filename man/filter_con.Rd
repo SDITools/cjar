@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_container.R
 \name{filter_con}
 \alias{filter_con}
-\title{Create the Filter Container}
+\title{Create the filter container}
 \usage{
 filter_con(
   context = "hits",
@@ -15,8 +15,8 @@ filter_con(
 \item{context}{Defines the level that the filter logic should operate on. Valid
 values are visitors, visits, and hits. See Details}
 
-\item{conjunction}{This defines the relationship of the rules.  \code{And} (default)
-and \code{or} are the two options.}
+\item{conjunction}{This defines the relationship of the rules.  The two options are "and" (default)
+and "or".}
 
 \item{rules}{List of rules and/or containers. Must be wrapped in a list() function.
 Adding a container list item will nest it within a containers.}
@@ -27,7 +27,7 @@ Adding a container list item will nest it within a containers.}
 a structured list of containers to be used to build the filter
 }
 \description{
-This function combines rules into a container.
+This function combines rules into a container
 }
 \details{
 \strong{Context}

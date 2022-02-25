@@ -74,7 +74,9 @@
 #' [cja_get_dimensions()], [cja_get_metrics()]
 #'
 #' Use [cja_get_me()] to get started.
-#' @param dataviewId CJA Data View ID (dv). Use [cja_get_dataviews()] to get a list of available `dataviewId` values.
+#' @param dataviewId CJA Data View ID (dv). If an environment variable called `CJA_DATAVIEW_ID` exists
+#' in `.Renviron` or elsewhere and no `dataviewId` argument is provided, then the `CJA_DATAVIEW_ID` value will
+#' be used. Use [cja_get_dataviews()] to get a list of available `dataviewId`. Required
 #' @param date_range A length-2 vector with a start date and an end date.
 #'   `POSIXt` objects are sent as is, for fine control over the date range.
 #'   Numeric values are automatically converted to dates.
@@ -133,7 +135,7 @@
 #' @importFrom vctrs vec_recycle
 #'
 #' @export
-cja_freeform_table <- function(dataviewId = NULL,
+cja_freeform_table <- function(dataviewId = Sys.getenv("CJA_DATAVIEW_ID"),
                                date_range = c(Sys.Date()-30, Sys.Date()-1),
                                dimensions = c('page', 'lasttouchchannel', 'mobiledevicetype'),
                                metrics = c("visits", "visitors"),
@@ -156,6 +158,9 @@ cja_freeform_table <- function(dataviewId = NULL,
   # Repeated dimensions will cause an infinite loop
   if (length(dimensions) > length(unique(dimensions))) {
     stop("List of dimensions is not unique")
+  }
+  if (dataviewId == ''){
+    stop("The dataviewId argument is required.")
   }
   # No harm in repeated metrics, simply take the unique ones
   metrics <- unique(metrics)

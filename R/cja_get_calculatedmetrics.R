@@ -49,9 +49,9 @@
 #' "legacyId" "internal" "dataGroup" "categories".
 #' @param includeType Include additional calculated metrics not owned by user. Available values are `all` (default),
 #' `shared`, `templates`, `unauthorized`, `deleted`, `internal`, and `curatedItem`. The `all` option takes precedence over `shared`
-#' @param dataIds Filter the list to only include calculated metrics tied to a specified RSID or
-#' list of RSIDs. Specify multiple RSIDs as a vector (i.e., "`dataIds = c("dataviewid_1", dataviewid_2",...dataviewid_n")`").
-#' Use \code{\link{cja_get_dataviews}} to get a list of available `dataId` values.
+#' @param dataviewIds Filter the list to only include calculated metrics tied to a specified dataviewId or
+#' list of dataviewIds. Specify multiple dataviewIds as a vector (i.e., "`dataviewIds = c("dataviewid_1", dataviewid_2",...dataviewid_n")`").
+#' Use \code{\link{cja_get_dataviews}} to get a list of available `dataviewId` values.
 #' @param ownerId Filter the list to only include calculated metrics owned by the specified loginId.
 #' @param filterByIds Filter the list to only include calculated metrics in the specified list as
 #' specified by a single string or as a vector of strings.
@@ -86,7 +86,7 @@
 #'
 cja_get_calculatedmetrics <- function(expansion = NULL,
                                       includeType = 'all',
-                                      dataIds = NULL,
+                                      dataviewIds = NULL,
                                       ownerId = NULL,
                                       filterByIds = NULL,
                                       toBeUsedInRsid = NULL,
@@ -106,7 +106,7 @@ cja_get_calculatedmetrics <- function(expansion = NULL,
 
   query_params <- list(expansion = expansion,
                        includeType = includeType,
-                       dataIds = dataIds,
+                       dataIds = dataviewIds,
                        ownerId = ownerId,
                        filterByIds = filterByIds,
                        toBeUsedInRsid = toBeUsedInRsid,

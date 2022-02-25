@@ -3,9 +3,9 @@
 \docType{data}
 \name{filter_verbs}
 \alias{filter_verbs}
-\title{Verbs available in filter rules.}
+\title{Verbs available to be used in filter rules.}
 \format{
-A data frame with 32 rows and 4 variables:
+A data frame with 34 rows and 5 variables:
 \describe{
 \item{type}{one of number, string, or exists}
 \item{class}{gives the context of the type of value is expected, either

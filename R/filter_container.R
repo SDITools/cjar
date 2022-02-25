@@ -1,11 +1,11 @@
-#' Create the Filter Container
+#' Create the filter container
 #'
-#' This function combines rules into a container.
+#' This function combines rules into a container
 #'
 #' @param context Defines the level that the filter logic should operate on. Valid
 #' values are visitors, visits, and hits. See Details
-#' @param conjunction  This defines the relationship of the rules.  `And` (default)
-#' and `or` are the two options.
+#' @param conjunction  This defines the relationship of the rules.  The two options are "and" (default)
+#' and "or".
 #' @param rules List of rules and/or containers. Must be wrapped in a list() function.
 #' Adding a container list item will nest it within a containers.
 #' @param exclude Exclude the entire container

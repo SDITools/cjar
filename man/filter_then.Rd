@@ -17,7 +17,7 @@ filter_then(limit = "within", count = 1, unit = "year")
 a structured list of time restrictions to be used to build the sequential filter
 }
 \description{
-This function creates a then list object which restricts the time constraint of a filter to be added to a sequence filter.
+This function creates a 'then' list object which restricts the time constraint of a filter to be added to a sequence filter.
 }
 \details{
 \subsection{Combining \code{filter_then} arguments}{

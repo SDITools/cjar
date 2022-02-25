@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_rule.R
 \name{filter_rule}
 \alias{filter_rule}
-\title{Create the Filter Rule}
+\title{Create the filter rule}
 \usage{
 filter_rule(
   dimension = NULL,
@@ -45,15 +45,16 @@ to a rule the context for the attribution must be \code{visitors} (default) or \
 \item{validate}{Set to TRUE when metric or dimension validation is preferred. Default is FALSE.
 Validation will slow down the function response time but ensure a valid rule result.}
 
-\item{dataviewId}{CJA data view id.  If an environment variable called \code{CJA_DATAVIEW_ID} exists
-in \code{.Renviron} or elsewhere and no \code{dataviewId} argument is provided, then the \code{CJA_DATAVIEW_ID} value will
+\item{dataviewId}{CJA data view id.  Required if the argument \code{validate} is set to TRUE.
+If an environment variable called \code{CJA_DATAVIEW_ID} exists in \code{.Renviron} or
+elsewhere and no \code{dataviewId} argument is provided, then the \code{CJA_DATAVIEW_ID} value will
 be used. Use \code{\link[=cja_get_dataviews]{cja_get_dataviews()}} to get a list of available \code{dataviewId}.}
 }
 \value{
 A structured list defining the rule for a filter
 }
 \description{
-This function creates the simple rule of a filter.
+This function creates the simple rule of a filter
 }
 \details{
 \strong{Attribution Models}

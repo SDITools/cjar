@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_sequence.R
 \name{filter_seq}
 \alias{filter_seq}
-\title{Create the Filter Sequence Container}
+\title{Create the filter sequence container}
 \usage{
 filter_seq(
   context = "visits",
@@ -27,7 +27,7 @@ filter_seq(
 a structured list of containers to be used to build the filter
 }
 \description{
-This function combines rules into a sequence container.
+This function combines rules into a sequence container
 }
 \details{
 \strong{Context}

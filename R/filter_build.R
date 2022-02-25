@@ -75,7 +75,7 @@
 #' @importFrom glue glue
 #' @export
 #'
-filter_build <- function(dataviewId =  Sys.getenv("CJA_DATAVIEW_ID"),
+filter_build <- function(dataviewId = Sys.getenv("CJA_DATAVIEW_ID"),
                          name = NULL,
                          description = NULL,
                          containers = NULL,
@@ -91,8 +91,8 @@ filter_build <- function(dataviewId =  Sys.getenv("CJA_DATAVIEW_ID"),
                          locale = 'en_US',
                          expansion = NULL){
   #validate arguments
-  if (is.null(dataviewId)) {
-    stop("The argument, `dataviewId`, is required")
+  if (dataviewId == ''){
+    stop("The dataviewId argument is required.")
   }
   if (is.null(name) || is.null(description)) {
     stop('The arguments, `name` and `description`, must be included.')
@@ -106,8 +106,8 @@ filter_build <- function(dataviewId =  Sys.getenv("CJA_DATAVIEW_ID"),
     if (exclude == FALSE) {
       if (length(rules) == 1){
         if (!is.null(rules[[1]]$val$`allocation-model`)) {
-        if (context == 'visits' && rules[[1]]$val$`allocation-model`$func == 'allocation-dedupedInstance'){
-          rules[[1]]$val$`allocation-model`$context = 'sessions'
+          if (context == 'visits' && rules[[1]]$val$`allocation-model`$func == 'allocation-dedupedInstance'){
+            rules[[1]]$val$`allocation-model`$context = 'sessions'
           }
         }
         filter <- list(
@@ -122,7 +122,7 @@ filter_build <- function(dataviewId =  Sys.getenv("CJA_DATAVIEW_ID"),
             func = 'segment',
             version = version
           ),
-          rsid = dataviewId
+          dataId = dataviewId
         )
       } else {
         filter <- list(
@@ -140,7 +140,7 @@ filter_build <- function(dataviewId =  Sys.getenv("CJA_DATAVIEW_ID"),
             func = 'segment',
             version = version
           ),
-          rsid = dataviewId
+          dataId = dataviewId
         )
       }
     } #/exclude FALSE
@@ -156,12 +156,12 @@ filter_build <- function(dataviewId =  Sys.getenv("CJA_DATAVIEW_ID"),
               pred = list(
                 func = 'without',
                 pred = rules[[1]]
-                )
+              )
             ),
             func = 'segment',
             version = version
           ),
-          rsid = dataviewId
+          dataId = dataviewId
         )
       } else {
         filter <-  list(
@@ -186,45 +186,45 @@ filter_build <- function(dataviewId =  Sys.getenv("CJA_DATAVIEW_ID"),
             func = 'segment',
             version = version
           ),
-          rsid = dataviewId
+          dataId = dataviewId
         )
       }
     } #/exclude TRUE
   } else if (is.null(rules) && !is.null(containers) && is.null(sequences)){  #Containers
     if (length(containers) == 1) {
-     filter <- list(
-       name = name,
-       description = description,
+      filter <- list(
+        name = name,
+        description = description,
         definition = list(
-         container = list(
-           func = 'container',
-           context = context,
-           pred = containers[[1]]
-           ),
-         func = 'segment',
-         version = version
-         ),
-       rsid = dataviewId
-       )
-      } else {
-        filter <-  list(
-          name = name,
-          description = description,
-          definition = list(
-            func = 'segment',
-            version = version,
-            container = list(
-              func = 'container',
-              context = context,
-              pred = list(
-                func = conjunction,
-                preds = containers
-              )
-            )
+          container = list(
+            func = 'container',
+            context = context,
+            pred = containers[[1]]
           ),
-          rsid = dataviewId
-        )
-      }
+          func = 'segment',
+          version = version
+        ),
+        dataId = dataviewId
+      )
+    } else {
+      filter <-  list(
+        name = name,
+        description = description,
+        definition = list(
+          func = 'segment',
+          version = version,
+          container = list(
+            func = 'container',
+            context = context,
+            pred = list(
+              func = conjunction,
+              preds = containers
+            )
+          )
+        ),
+        dataId = dataviewId
+      )
+    }
   } else if(is.null(rules) && is.null(containers) && !is.null(sequences)) {
     sequence_dir <- dplyr::case_when(sequence == 'in_order' ~ 'sequence',
                                      sequence == 'after' ~ 'sequence-prefix',
@@ -266,7 +266,7 @@ filter_build <- function(dataviewId =  Sys.getenv("CJA_DATAVIEW_ID"),
           func = 'segment',
           version = version
         ),
-        rsid = dataviewId
+        dataId = dataviewId
       )
     } else if (sequence_dir %in% c('sequence-prefix', 'sequence-suffix')) {
       list(
@@ -285,7 +285,7 @@ filter_build <- function(dataviewId =  Sys.getenv("CJA_DATAVIEW_ID"),
           func = 'segment',
           version = version
         ),
-        rsid = dataviewId
+        dataId = dataviewId
       )
     }
   } else if (is.null(rules) & is.null(containers) & is.null(sequences)) {
@@ -295,7 +295,7 @@ filter_build <- function(dataviewId =  Sys.getenv("CJA_DATAVIEW_ID"),
   body <- filter
 
   if (!create_filter) {
-   req <- jsonlite::toJSON(body, auto_unbox = T)
+    req <- jsonlite::toJSON(body, auto_unbox = T)
   } else if (create_filter) {
     #defined parts of the post request
     req_path <- 'filters'
@@ -306,7 +306,8 @@ filter_build <- function(dataviewId =  Sys.getenv("CJA_DATAVIEW_ID"),
     urlstructure <- paste(req_path, format_URL_parameters(query_params), sep = "?")
     #post request
     req <- cja_call_data(req_path = urlstructure,
-                        body = body)
+                         debug = debug,
+                         body = body)
   }
- req
+  req
 }
