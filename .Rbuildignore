@@ -8,3 +8,5 @@
 ^docs
 ^testingdocs
 ^data-raw$
+^cran-comments\.md$
+^pkgdown

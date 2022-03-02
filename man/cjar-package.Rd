@@ -18,6 +18,7 @@ repeatable, timely analysis.
 Other contributors:
 \itemize{
   \item Charles Gallagher \email{charlesjgallagher15@gmail.com} [contributor]
+  \item Search Discovery, LLC [copyright holder]
 }
 
 }

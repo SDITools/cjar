@@ -9,9 +9,9 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 <!-- badges: end -->
 
-<img src="man/figures/cjar_logo_01.png" align="right" width = "200"/>
+<img src="man/figures/logo.png" align="right" width = "200"/>
 
-## An R Client for CJA API
+## An R Client for the CJA API
 
 Connect to the CJA API, which powers CJA Workspace. The package was
 developed with the analyst in mind and will continue to be developed
@@ -21,13 +21,13 @@ contribution to the process. Please submit bugs, questions, and
 enhancement requests as [issues in this Github
 repository](https://github.com/searchdiscovery/cjar/issues).
 
-<!-- ### Install the package (recommended) -->
-<!-- ``` -->
-<!-- # Install from CRAN -->
-<!-- install.packages('cjar') -->
-<!-- # Load the package -->
-<!-- library(cjar)  -->
-<!-- ``` -->
+### Install the package (recommended)
+
+    # Install from CRAN
+    install.packages('cjar')
+
+    # Load the package
+    library(cjar)
 
 ### Install the development version of the package
 
