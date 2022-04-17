@@ -1,5 +1,7 @@
 # cjar 0.1.1
 
+* hotfix: calculated metrics as metrics in cja_freeform_table() is now handled  properly
+
 # cjar 0.1.0
 
 * Initial CRAN Submission Version
