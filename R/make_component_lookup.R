@@ -5,9 +5,8 @@
 #' @return Logical, `TRUE` if metric is custom and `FALSE` otherwise
 #' @noRd
 is_calculated_metric <- function(metric) {
-  grepl('cm[1-9]*_*', metric)
+  grepl('cm*_*', metric)
 }
-
 
 #' Make a component lookup table
 #'
