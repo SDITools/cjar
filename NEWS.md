@@ -1,4 +1,4 @@
-# cjar (development version)
+# cjar 0.1.1
 
 # cjar 0.1.0
 
