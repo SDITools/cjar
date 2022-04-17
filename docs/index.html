@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="R Client for Customer Journey Analytics (CJA) API">
-<meta property="og:description" content="Connect to the CJA API, which powers CJA Workspace. The package 
+<meta property="og:description" content="Connect to the CJA API, which powers CJA Workspace &lt;https://github.com/AdobeDocs/cja-apis&gt;. The package 
              was developed with the analyst in mind and will continue to be 
              developed with the guiding principles of iterative, repeatable, 
              timely analysis. New features are actively being developed and we 
@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">cjar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
@@ -74,11 +74,17 @@
 </h1></div>
 <!-- badges: start -->
 
-<p><img src="reference/figures/cjar_logo_01.png" align="right" width="200"></p>
+<p><img src="reference/figures/logo.png" align="right" width="200"></p>
 <div class="section level2">
-<h2 id="an-r-client-for-cja-api">An R Client for CJA API<a class="anchor" aria-label="anchor" href="#an-r-client-for-cja-api"></a>
+<h2 id="an-r-client-for-the-cja-api">An R Client for the CJA API<a class="anchor" aria-label="anchor" href="#an-r-client-for-the-cja-api"></a>
 </h2>
-<p>Connect to the CJA API, which powers CJA Workspace. The package was developed with the analyst in mind and will continue to be developed with the guiding principles of iterative, repeatable, timely analysis. New features are actively being developed and we value your feedback and contribution to the process. Please submit bugs, questions, and enhancement requests as <a href="https://github.com/searchdiscovery/cjar/issues" class="external-link">issues in this Github repository</a>.</p>
+<p>Connect to the CJA API, which powers CJA Workspace. The package was
+developed with the analyst in mind and will continue to be developed
+with the guiding principles of iterative, repeatable, timely analysis.
+New features are actively being developed and we value your feedback and
+contribution to the process. Please submit bugs, questions, and
+enhancement requests as <a href="https://github.com/searchdiscovery/cjar/issues" class="external-link">issues in this
+Github repository</a>.</p>
 <div class="section level3">
 <h3 id="install-the-package-recommended">Install the package (recommended)<a class="anchor" aria-label="anchor" href="#install-the-package-recommended"></a>
 </h3>
@@ -103,70 +109,120 @@
 <div class="section level3">
 <h3 id="current-setup-process-overview">Current setup process overview<a class="anchor" aria-label="anchor" href="#current-setup-process-overview"></a>
 </h3>
-<p>There are four setup steps required to start accessing your Customer Journey Analytics data. The following steps are each outlined in greater detail in the following sections:</p>
+<p>There are four setup steps required to start accessing your Customer
+Journey Analytics data. The following steps are each outlined in greater
+detail in the following sections:</p>
 <ol style="list-style-type: decimal">
 <li>Create an Adobe Console API Project</li>
-<li>Create and add the JWT arguments to your <code>.Renviron</code> file.</li>
-<li>Get your authorization token by using the function <code><a href="reference/cja_auth.html">cja_auth()</a></code>.</li>
-<li>Get the <code>Data View ID</code> by using the function <code><a href="reference/cja_get_dataviews.html">cja_get_dataviews()</a></code>.</li>
+<li>Create and add the JWT arguments to your <code>.Renviron</code>
+file.</li>
+<li>Get your authorization token by using the function
+<code><a href="reference/cja_auth.html">cja_auth()</a></code>.</li>
+<li>Get the <code>Data View ID</code> by using the function
+<code><a href="reference/cja_get_dataviews.html">cja_get_dataviews()</a></code>.</li>
 </ol>
 <div class="section level4">
 <h4 id="1-create-an-adobe-console-api-project">1. Create an Adobe Console API Project<a class="anchor" aria-label="anchor" href="#1-create-an-adobe-console-api-project"></a>
 </h4>
-<p>When using JWT authentication, you only need an Adobe Console API project for each organization you are needing to access.</p>
-<p>Once you are a developer for a CJA product profile, you can create an API client in the Adobe Developer Console.</p>
+<p>When using JWT authentication, you only need an Adobe Console API
+project for each organization you are needing to access.</p>
+<p>Once you are a developer for a CJA product profile, you can create an
+API client in the Adobe Developer Console.</p>
 <ol style="list-style-type: decimal">
 <li>Navigate to console.adobe.io.</li>
-<li>Check the organization name in the top right to make sure that you are logged in to the correct company.</li>
+<li>Check the organization name in the top right to make sure that you
+are logged in to the correct company.</li>
 <li>Click Create new project.</li>
 <li>Click Add API.</li>
 <li>Click Customer Journey Analytics, then click Next.</li>
 <li>Click Generate Keypair.</li>
-<li>A config.zip file is automatically downloaded to your local machine. Keep this config folder in a secure location, as it contains your only copy of your private key. See steps … for what to do with the private.key file.</li>
+<li>A config.zip file is automatically downloaded to your local machine.
+Keep this config folder in a secure location, as it contains your only
+copy of your private key. See steps … for what to do with the
+private.key file.</li>
 <li>Click Next.</li>
-<li>Select the desired product profiles for the service account. Make sure that it contains the right permissions to access the API. Click Save configured API.</li>
+<li>Select the desired product profiles for the service account. Make
+sure that it contains the right permissions to access the API. Click
+Save configured API.</li>
 <li>Back on the project’s home page, click Add to project &gt; API.</li>
 <li>Click Adobe Experience Platform, then click Next.</li>
-<li>You already generated a keypair when creating the Adobe Analytics API, so you do not need to create another. Click Next.</li>
-<li>Select the desired product profiles for the service account. Make sure that it contains the right permissions to access the API. Click Save configured API.</li>
-<li>Click on “Service Account (JWT)” under “CREDENTIALS” in the left column. Locate the “Download JSON” button on the top right and click it to download the service account JSON file. Alternatively, you can manually create this file by copying and pasting the Client ID, Client Secret (click “Retrieve client secret”), Technical Account ID, and Organization ID into a <code>.json</code> file. Reference <code><a href="reference/cja_auth.html">?cja_auth</a></code> for more information on the variables needed. Using the preconfigured JSON file is the easiest method.</li>
-<li>Locate the config.zip file that automatically downloaded in step 6. Unzip the file and move the ‘private.zip’ to your desired location. The location of this file will be needed as the value of the <strong>CJA_PRIVATE_KEY</strong> variable.</li>
+<li>You already generated a keypair when creating the Adobe Analytics
+API, so you do not need to create another. Click Next.</li>
+<li>Select the desired product profiles for the service account. Make
+sure that it contains the right permissions to access the API. Click
+Save configured API.</li>
+<li>Click on “Service Account (JWT)” under “CREDENTIALS” in the left
+column. Locate the “Download JSON” button on the top right and click it
+to download the service account JSON file. Alternatively, you can
+manually create this file by copying and pasting the Client ID, Client
+Secret (click “Retrieve client secret”), Technical Account ID, and
+Organization ID into a <code>.json</code> file. Reference
+<code><a href="reference/cja_auth.html">?cja_auth</a></code> for more information on the variables needed.
+Using the preconfigured JSON file is the easiest method.</li>
+<li>Locate the config.zip file that automatically downloaded in step 6.
+Unzip the file and move the ‘private.zip’ to your desired location. The
+location of this file will be needed as the value of the
+<strong>CJA_PRIVATE_KEY</strong> variable.</li>
 </ol>
 </div>
 <div class="section level4">
 <h4 id="2-set-up-the-renviron-file">2. Set up the .Renviron file<a class="anchor" aria-label="anchor" href="#2-set-up-the-renviron-file"></a>
 </h4>
-<p>This file is essential to keeping your information secure. It also speeds up analysis by limiting the number of arguments you need to add to every function call.</p>
+<p>This file is essential to keeping your information secure. It also
+speeds up analysis by limiting the number of arguments you need to add
+to every function call.</p>
 <ol style="list-style-type: decimal">
-<li>If you do not have an <code>.Renviron</code> file (if you have never heard of this file you almost certainly don’t have one!), then create a new file and save it with the name <code>.Renviron</code>. You can do this from within the RStudio environment and save the file either in your <code>Home</code> directory (which is recommended; click on the <strong>Home</strong> button in the file navigator in RStudio and save it to that location) <em>or</em> within your project’s working directory. You can also use the <a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">“usethis”</a> package to create the file by running the function <code>edit_r_environ(scope = "user")</code>
+<li>If you do not have an <code>.Renviron</code> file (if you have never
+heard of this file you almost certainly don’t have one!), then create a
+new file and save it with the name <code>.Renviron</code>. You can do
+this from within the RStudio environment and save the file either in
+your <code>Home</code> directory (which is recommended; click on the
+<strong>Home</strong> button in the file navigator in RStudio and save
+it to that location) <em>or</em> within your project’s working
+directory. You can also use the <a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">“usethis”</a>
+package to create the file by running the function
+<code>edit_r_environ(scope = "user")</code>
 </li>
-<li>Add the 2 variables, listed below, to the <code>.Renviron</code> file using the file location path for both, the json (auth) file and the private key file. The format of variables in the <code>.Renviron</code> file is straightforward.</li>
+<li>Add the 2 variables, listed below, to the <code>.Renviron</code>
+file using the file location path for both, the json (auth) file and the
+private key file. The format of variables in the <code>.Renviron</code>
+file is straightforward.</li>
 </ol>
 <!-- --><div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## JWT creds ##</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>CJA_AUTH_FILE<span class="ot">=</span>filelocation.json</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>CJA_PRIVATE_KEY<span class="ot">=</span>private.key</span></code></pre></div>
-<p>After adding these 2 variables to the <code>.Renviron</code> file and saving it, restart your R session (<strong>Session &gt; Restart R</strong> in RStudio) and reload the package (<code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(cjar)</a></code>).</p>
+<p>After adding these 2 variables to the <code>.Renviron</code> file and
+saving it, restart your R session (<strong>Session &gt; Restart
+R</strong> in RStudio) and reload the package
+(<code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(cjar)</a></code>).</p>
 </div>
 <div class="section level4">
 <h4 id="3-get-your-access-token">3. Get your access token<a class="anchor" aria-label="anchor" href="#3-get-your-access-token"></a>
 </h4>
-<p>The token is actually a lonnnnng alphanumeric string that is the what ultimately enables you to access your data:</p>
+<p>The token is actually a lonnnnng alphanumeric string that is the what
+ultimately enables you to access your data:</p>
 <ol style="list-style-type: decimal">
-<li>In the console, enter <code><a href="reference/cja_auth.html">cja_auth()</a></code> and press <em>Enter</em>.</li>
-<li>In the Console window you should see “Successfully authenticated with JWT: access token valid until ….”</li>
-<li>If you do not see this message then go back and repeat the previous steps to make sure you did not miss something.</li>
+<li>In the console, enter <code><a href="reference/cja_auth.html">cja_auth()</a></code> and press
+<em>Enter</em>.</li>
+<li>In the Console window you should see “Successfully authenticated
+with JWT: access token valid until ….”</li>
+<li>If you do not see this message then go back and repeat the previous
+steps to make sure you did not miss something.</li>
 </ol>
 </div>
 <div class="section level4">
 <h4 id="4-get-the-data-view-id">4. Get the Data View ID<a class="anchor" aria-label="anchor" href="#4-get-the-data-view-id"></a>
 </h4>
-<p>All data in CJA is located in Data Views, similar to Report Suites in Adobe Analytics. Before pulling data it is essential to locate the data view id you are attempting to pull from.</p>
+<p>All data in CJA is located in Data Views, similar to Report Suites in
+Adobe Analytics. Before pulling data it is essential to locate the data
+view id you are attempting to pull from.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pull a list of available data views</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dv <span class="ot">&lt;-</span> <span class="fu">cja_get_dataviews</span>(<span class="at">expansion =</span> <span class="fu">c</span>(<span class="st">'name'</span>, <span class="st">'description'</span>)) </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#note: see function documentation for all availabe expansion metadata available.</span></span></code></pre></div>
-<p>Once you have the data view ID you want then you can begin pulling data using the different functions.</p>
+<p>Once you have the data view ID you want then you can begin pulling
+data using the different functions.</p>
 </div>
 </div>
 </div>
@@ -174,7 +230,14 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+    <div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=cjar" class="external-link">View on CRAN</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
@@ -216,7 +279,8 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer>
