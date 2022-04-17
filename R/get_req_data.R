@@ -81,7 +81,6 @@ get_req_data <- function(current_dim,
   # Increment progress bar
   increment_global_counter()
 
-
   dimensions_so_far <- dimensions[seq(pos_current_dim, length(dimensions))]
 
   # Base case
@@ -157,7 +156,7 @@ unpack_metrics <- function(df, metric_names) {
 
       data_df <- lapply(purrr::transpose(data_list), purrr::flatten_dbl) %>%
         stats::setNames(metric_names) %>%
-        as.data.frame()
+        as.data.frame(check.names = FALSE)
 
       df <- cbind(df, data_df)
     }
