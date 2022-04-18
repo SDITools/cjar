@@ -1,5 +1,8 @@
 # cjar 0.1.2
 
+* hotfix: fixing a bug round the custom component id naming conflict which prevented the 
+'metrics/' suffix from being added to the metric id
+
 # cjar 0.1.1
 
 * hotfix: calculated metrics as metrics in cja_freeform_table() is now handled  properly
