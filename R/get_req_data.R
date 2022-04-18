@@ -161,8 +161,6 @@ unpack_metrics <- function(df, metric_names) {
       df <- cbind(df, data_df)
     }
   }
-
-
   df
 }
 
@@ -201,7 +199,6 @@ fix_missing_metrics <- function(df, n_metrics, dimensions = "value") {
     metric_list_col <- list(rep(NA, n_metrics))
     df$data <- metric_list_col
   }
-
   as.data.frame(df)
 }
 
