@@ -6,3 +6,5 @@
 *.key
 *.json
 /testingdocs
+*.DS_Store
+*/.DS_Store
