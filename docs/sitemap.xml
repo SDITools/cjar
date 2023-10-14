@@ -19,6 +19,9 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/annotation_build.html</loc>
+  </url>
+  <url>
     <loc>/reference/aw_auth.html</loc>
   </url>
   <url>
@@ -32,6 +35,9 @@
   </url>
   <url>
     <loc>/reference/cja_freeform_table.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cja_get_annotations.html</loc>
   </url>
   <url>
     <loc>/reference/cja_get_audit_logs.html</loc>
