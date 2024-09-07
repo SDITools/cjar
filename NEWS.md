@@ -1,3 +1,7 @@
+# cjar 0.1.3
+
+* changing maintainer to Further Worldwide
+
 # cjar 0.1.2
 
 * hotfix: fixing a bug round the custom component id naming conflict which prevented the 
