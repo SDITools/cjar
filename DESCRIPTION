@@ -38,3 +38,7 @@ Imports:
     rlang,
     memoise,
     openssl
+RdMacros: lifecycle
+VignetteBuilder: knitr
+BugReports: https://github.com/sditools/cjar/issues
+URL: https://github.com/sditools/cjar
