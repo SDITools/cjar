@@ -46,7 +46,7 @@ cja_get_dimensions <- function(dataviewId = Sys.getenv("CJA_DATAVIEW_ID"),
                          includeType = includeType,
                          locale = locale)
 
-    req_path <- glue::glue('datagroups/data/{dataviewId}/dimensions')
+    req_path <- glue::glue('data/dataviews/{dataviewId}/dimensions')
 
     urlstructure <- paste(req_path, format_URL_parameters(query_params), sep = "?")
 
