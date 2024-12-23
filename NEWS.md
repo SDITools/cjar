@@ -1,3 +1,9 @@
+# cjar 0.2.0
+
+* added auth_s2s() and overall auth support for Server to Server OAuth authentication support which 
+replaces JWT authentication which ends on January 27, 2025.
+* added changes to the endpoints to pull dimensions and metrics
+
 # cjar 0.1.2
 
 * hotfix: fixing a bug round the custom component id naming conflict which prevented the 

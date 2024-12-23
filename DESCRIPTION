@@ -1,7 +1,7 @@
 Package: cjar
 Type: Package
 Title: R Client for 'Customer Journey Analytics' ('CJA') API
-Version: 0.1.2
+Version: 1.0.0
 Authors@R: c( 
     person(given = "Ben", family = "Woodard", role = c("aut", "cre"), email = "ben.woodard@searchdiscovery.com"),
     person(given = "Charles", family = "Gallagher", role = c("ctb"), email = "charlesjgallagher15@gmail.com"))
