@@ -56,7 +56,7 @@ cja_auth <- function(type = 's2s', ...) {
 #' `cja_auth_with` sets the type of authorization for the session. This is used
 #' as the default by `cja_auth()` when no specific option is given.
 #'
-#' @param type The authorization type: 'oauth' or 'jwt'
+#' @param type The authorization type: 's2s'
 #' @param path The location for the cached authorization token. It should be a
 #' directory, rather than a filename. If this option is not set, the current
 #' working directory is used instead. If the location does not exist, it will
@@ -71,7 +71,7 @@ cja_auth <- function(type = 's2s', ...) {
 #' @rdname cja_auth_with
 #' @aliases cja_auth_with cja_auth_path cja_auth_name
 #' @export
-cja_auth_with <- function(type) {
+cja_auth_with <- function(type = 's2s') {
   if (missing(type)) return(getOption("cjar.auth_type"))
 
   if (!is.null(type)) {
