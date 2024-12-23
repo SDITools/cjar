@@ -4,6 +4,7 @@
 \alias{cja_auth}
 \alias{auth_jwt}
 \alias{auth_oauth}
+\alias{auth_s2s}
 \title{Generate an access token for the Customer Journey Analytics API}
 \usage{
 cja_auth(type = "jwt", ...)
@@ -14,6 +15,8 @@ auth_jwt(
   jwt_token = NULL,
   ...
 )
+
+auth_s2s(file = Sys.getenv("CJA_AUTH_FILE"), s2s_token = NULL, ...)
 
 auth_oauth(
   client_id = Sys.getenv("CJA_CLIENT_ID"),
@@ -30,12 +33,15 @@ running \code{cja_auth()}}
 
 \item{file}{A JSON file containing service account credentials required for JWT
 authentication. This file can be downloaded directly from the Adobe Console,
-and should minimally have the fields \code{API_KEY}, \code{CLIENT_SECRET}, \code{ORG_ID},
+and should minimally have the fields \code{API_KEY} or \code{CLIENT_ID}, \code{CLIENT_SECRET}, \code{ORG_ID},
 and \code{TECHNICAL_ACCOUNT_ID}.}
 
 \item{private_key}{Filename of the private key for JWT authentication.}
 
 \item{jwt_token}{\emph{(Optional)} A custom, encoded, signed JWT claim. If used,
+\code{client_id} and \code{client_secret} are still required.}
+
+\item{s2s_token}{\emph{(Optional)} A custom, encoded, signed JWT claim. If used,
 \code{client_id} and \code{client_secret} are still required.}
 
 \item{client_id}{The client ID, defined by a global variable or manually defined}
@@ -56,11 +62,13 @@ and \code{auth_jwt()} should typically not be called directly.
 }
 \section{Functions}{
 \itemize{
-\item \code{auth_jwt}: Authenticate with JWT token
+\item \code{auth_jwt()}: Authenticate with JWT token
 
-\item \code{auth_oauth}: Authorize via OAuth 2.0
+\item \code{auth_s2s()}: Authenticate with S2S token
+
+\item \code{auth_oauth()}: Authorize via OAuth 2.0
+
 }}
-
 \seealso{
 \code{\link[=cja_auth_with]{cja_auth_with()}}
 }

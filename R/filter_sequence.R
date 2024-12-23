@@ -33,11 +33,10 @@
 #' Sequential filters can be difficult to get right. Referencing this article
 #' can help: https://experienceleague.adobe.com/docs/analytics-platform/using/cja-components/cja-filters/filters-overview.html?lang=en
 #'
-#' @example
-#' \dontrun
-#' # basic use case
+#' @examples
+#' \dontrun{
 #' filter_seq(context = 'visits', rules = list(rule1, rule2),
-#' sequence = 'in_order', exclude = FALSE)
+#' sequence = 'in_order', exclude = FALSE)}
 #'
 #' @return a structured list of containers to be used to build the filter
 #'

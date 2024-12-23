@@ -4,21 +4,19 @@ Title: R Client for 'Customer Journey Analytics' ('CJA') API
 Version: 0.1.2
 Authors@R: c( 
     person(given = "Ben", family = "Woodard", role = c("aut", "cre"), email = "ben.woodard@searchdiscovery.com"),
-    person(given = "Charles", family = "Gallagher", role = c("ctb"), email = "charlesjgallagher15@gmail.com"),
-    person(given = "Search Discovery, LLC", role = c("cph"))
-    )
-Description: Connect to the 'CJA' API, which powers 'CJA Workspace' <https://github.com/AdobeDocs/cja-apis>. The package 
-             was developed with the analyst in mind and will continue to be 
-             developed with the guiding principles of iterative, repeatable, 
-             timely analysis. New features are actively being developed and we 
-             value your feedback and contribution to the process. 
+    person(given = "Charles", family = "Gallagher", role = c("ctb"), email = "charlesjgallagher15@gmail.com"))
+Description: Programatically connect and pull data from the 'CJA' API, which powers 'CJA Workspace' <https://github.com/AdobeDocs/cja-apis>. 
+             The package was developed with the analyst in mind and will 
+             continue to be developed with the guiding principles of iterative, 
+             repeatable, timely analysis. New features are actively being 
+             developed and we value your feedback and contribution to the process. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
     R (>= 3.2.0)
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.2
 Imports: 
     assertthat,
     httr,
@@ -26,7 +24,6 @@ Imports:
     purrr,
     R6,
     dplyr,
-    tidyr,
     jsonlite,
     glue,
     jose,
@@ -37,4 +34,5 @@ Imports:
     stringr,
     rlang,
     memoise,
-    openssl
+    openssl,
+    httr2
