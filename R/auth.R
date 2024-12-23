@@ -31,7 +31,7 @@
 #' @family auth
 #' @aliases cja_auth auth_jwt auth_oauth
 #' @export
-cja_auth <- function(type = 'jwt', ...) {
+cja_auth <- function(type = 's2s', ...) {
 
   if (is.null(type)) {
     stop("Authentication type missing, please set an auth type with `cja_auth_with`")
