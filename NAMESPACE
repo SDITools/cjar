@@ -2,6 +2,7 @@
 
 export(auth_jwt)
 export(auth_oauth)
+export(auth_s2s)
 export(cja_auth)
 export(cja_auth_name)
 export(cja_auth_path)
