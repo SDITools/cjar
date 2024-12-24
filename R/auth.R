@@ -189,7 +189,7 @@ token_path <- function(...) {
 #'
 #' @param token An `httr` `reponse` object or `oauth2.0_token` object
 #'
-#' @return Either 'oauth' or 'jwt'
+#' @return Either 's2s' or 'oauth'
 #'
 #' @noRd
 token_type <- function(token) {
@@ -244,33 +244,51 @@ get_token_config <- function(client_id,
 #'
 #' @return List of length two with elements `client_id` and `client_secret`
 #' @noRd
-get_env_vars <- function() {
-  client_id <- .cjar$client_id
-  client_secret <- .cjar$client_secret
-  org_id <- .cjar$org_id
+get_env_vars <- function(type = cja_auth_with('s2s')) {
+  if(type == 'oauth' || type == 'jwt') {
+    client_id <- .cjar$client_id
+    client_secret <- .cjar$client_secret
+    org_id <- .cjar$org_id
 
-  if (is.null(client_id) | is.null(client_secret) | is.null(org_id)) {
-    client_id <- Sys.getenv("CJA_CLIENT_ID")
-    client_secret <- Sys.getenv("CJA_CLIENT_SECRET")
-    org_id <- Sys.getenv("CJA_ORG_ID")
+    if (is.null(client_id) | is.null(client_secret) | is.null(org_id)) {
+      client_id <- Sys.getenv("CJA_CLIENT_ID")
+      client_secret <- Sys.getenv("CJA_CLIENT_SECRET")
+      org_id <- Sys.getenv("CJA_ORG_ID")
+    }
+
+    if (client_id == "" | client_secret == "" | org_id == "") {
+      # env_vars <- c(client_id = client_id,
+      #               client_secret = client_secret,
+      #               org_id = org_id)
+      #
+      # missing_envs <- names(env_vars[env_vars == ""])
+
+      stop("Variable 'CJA_AUTH_FILE' not found but required for JWT authentication.\nSee `?cja_auth`",
+           call. = FALSE)
+    }
+
+    list(
+      client_id = client_id,
+      client_secret = client_secret,
+      org_id = org_id
+    )
+  } else if(type == 's2s') {
+    client_id <- .cjar$client_id
+    client_secret <- .cjar$client_secret
+    org_id <- .cjar$org_id
+
+    if (is.null(client_id) | is.null(client_secret) | is.null(org_id)) {
+      secrets <- jsonlite::fromJSON(Sys.getenv("CJA_AUTH_FILE"))
+      client_id <- secrets$CLIENT_ID
+      client_secret <-  secrets$CLIENT_SECRETS
+      org_id <- secrets$ORG_ID
+    }
+    list(
+      client_id = client_id,
+      client_secret = client_secret,
+      org_id = org_id
+    )
   }
-
-  if (client_id == "" | client_secret == "" | org_id == "") {
-    # env_vars <- c(client_id = client_id,
-    #               client_secret = client_secret,
-    #               org_id = org_id)
-    #
-    # missing_envs <- names(env_vars[env_vars == ""])
-
-    stop("Variable 'CJA_AUTH_FILE' not found but required for JWT authentication.\nSee `?cja_auth`",
-         call. = FALSE)
-  }
-
-  list(
-    client_id = client_id,
-    client_secret = client_secret,
-    org_id = org_id
-  )
 }
 
 
